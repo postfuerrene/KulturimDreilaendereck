@@ -770,7 +770,7 @@ function buildDetail(w){
     const pc=w.praesenz;
     body=`<div class="praesenz">
       <div class="block-h">Themen dieser Sitzung</div>
-      <ul class="praesenz-themen">${pc.themen.map(t=>`<li><span style="color:${tk.color};font-weight:600;">→</span>&ensp;${t}</li>`).join('')}</ul>
+      <ul class="praesenz-themen">${pc.themen.map(t=>`<li>${t}</li>`).join('')}</ul>
       ${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}
       ${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}
       ${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}
