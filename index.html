@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kultur im Dreiländereck · WiSe 26/27</title>
+<style>
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype-variations');font-weight:300 700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Lora';src:url('fonts/Lora-VariableFont_wght.ttf') format('truetype-variations');font-weight:400 700;font-style:normal;font-display:swap;}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:#F7F3EF;color:#2B2B2B;font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+::selection{background:#C46A4A;color:#F7F3EF;}
+::-webkit-scrollbar{width:7px;height:7px;}
+::-webkit-scrollbar-thumb{background:rgba(43,43,43,0.18);border-radius:4px;}
+a{color:inherit;text-decoration:none;}
+button{font-family:'Lora',serif;cursor:pointer;border:none;background:none;}
+
+.topbar{position:sticky;top:0;z-index:40;background:rgba(247,243,239,0.94);backdrop-filter:blur(6px) saturate(120%);border-bottom:1px solid rgba(43,43,43,0.11);}
+.topbar-inner{max-width:1240px;margin:0 auto;padding:13px clamp(18px,4vw,48px);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.logo-area{display:flex;align-items:center;gap:12px;margin-right:auto;}
+.logo-area img{width:34px;height:34px;object-fit:contain;}
+.logo-text{line-height:1.15;}
+.logo-title{font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:-0.01em;display:block;}
+.logo-sub{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;display:block;}
+.topbar-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ql-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:4px;font-size:12px;font-family:'Lora',serif;font-weight:500;transition:background .15s;border:1px solid transparent;}
+.ql-primary{background:#EFDCD2;color:#2B2B2B;border-color:#D8C4BA;}
+.ql-primary:hover{background:#E0CBBF;}
+.ql-secondary{background:transparent;color:#2B2B2B;border-color:rgba(43,43,43,0.22);}
+.ql-secondary:hover{background:rgba(43,43,43,0.06);}
+.next-btn{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;background:#2B2B2B;color:#F7F3EF;border-radius:4px;font-size:12px;transition:background .15s;}
+.next-btn:hover{background:#3A3A3A;}
+.next-dot{width:7px;height:7px;border-radius:50%;background:#C46A4A;flex:none;}
+.next-label{text-transform:uppercase;letter-spacing:0.16em;font-size:10px;color:#C7B9AE;}
+
+.hero{position:relative;overflow:hidden;}
+.hero-bg{position:absolute;top:-140px;right:-160px;width:520px;height:520px;object-fit:contain;opacity:0.11;pointer-events:none;}
+.hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(36px,5.5vw,68px) clamp(18px,4vw,48px) clamp(16px,2.5vw,28px);}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;}
+.accent-bar{display:block;width:44px;height:2px;background:#C46A4A;margin:14px 0 20px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,5.5vw,62px);line-height:1.05;letter-spacing:-0.015em;max-width:15ch;}
+.hero-lede{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,2vw,22px);line-height:1.45;color:#6B6763;max-width:46ch;margin:20px 0 14px;}
+.hero-meta{font-size:13px;color:#6B6763;}
+
+.dash{max-width:1240px;margin:0 auto;padding:clamp(18px,2.5vw,26px) clamp(18px,4vw,48px) 0;}
+.dash-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:stretch;}
+
+.feature-card{grid-column:span 2;position:relative;overflow:hidden;border-radius:4px;padding:clamp(24px,3vw,38px);display:flex;flex-direction:column;}
+.mode-chip{display:inline-flex;align-items:center;padding:5px 13px;border-radius:40px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.15em;white-space:nowrap;}
+.feature-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,3.2vw,36px);line-height:1.1;letter-spacing:-0.01em;margin:20px 0 12px;}
+.feature-lead{font-size:15px;line-height:1.55;color:#3A3A3A;margin-bottom:24px;}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;background:#2B2B2B;color:#F7F3EF;border-radius:4px;font-size:13px;font-family:'Lora',serif;transition:background .15s;width:fit-content;}
+.cta-btn:hover{background:#3A3A3A;}
+
+.donut-card{grid-column:span 1;background:#fff;border:1px solid rgba(43,43,43,0.10);border-radius:4px;padding:clamp(22px,3vw,30px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.donut-wrap{position:relative;width:130px;height:130px;}
+.donut-wrap svg{transform:rotate(-90deg);}
+.donut-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.donut-pct{font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1;color:#2B2B2B;}
+.donut-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:#2B2B2B;margin-top:16px;}
+.donut-sub{font-size:12px;color:#6B6763;margin-top:2px;}
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px;}
+.stat-card{background:#fff;border:1px solid rgba(43,43,43,0.10);border-radius:4px;padding:20px 22px;}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:36px;line-height:1;color:#2B2B2B;}
+.stat-name{font-size:13px;color:#2B2B2B;margin-top:10px;}
+.stat-sub{font-size:11px;color:#6B6763;margin-top:2px;}
+
+.timeline-card{background:#fff;border:1px solid rgba(43,43,43,0.10);border-radius:4px;padding:22px clamp(22px,3vw,30px);margin-top:16px;}
+.timeline-bar{display:flex;gap:3px;height:9px;margin-top:14px;}
+.seg{border-radius:2px;height:100%;flex:1;cursor:pointer;}
+.timeline-dates{display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#6B6763;}
+
+.weeks-section{max-width:1240px;margin:0 auto;padding:clamp(36px,5vw,64px) clamp(18px,4vw,48px) clamp(56px,7vw,100px);}
+.section-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;}
+.section-bar{display:block;width:44px;height:2px;background:#C46A4A;margin:12px 0 14px;}
+.section-h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,3.6vw,38px);line-height:1.1;letter-spacing:-0.01em;margin-bottom:28px;}
+
+.week-grid{display:grid;grid-template-columns:minmax(280px,390px) 1fr;gap:clamp(18px,2.5vw,30px);align-items:start;}
+.week-list{display:flex;flex-direction:column;gap:8px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow-y:auto;}
+.week-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#fff;border:1px solid rgba(43,43,43,0.10);border-radius:4px;text-align:left;transition:border-color .15s,background .15s;cursor:pointer;width:100%;}
+.week-row:hover{border-color:#C46A4A;}
+.week-row.active{border-color:#C46A4A;background:#FBF5F1;}
+.week-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-size:12px;font-weight:500;}
+.week-info{flex:1 1 auto;min-width:0;}
+.week-kw-line{display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;}
+.week-kw-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;}
+.week-current-tag{font-size:8px;text-transform:uppercase;letter-spacing:0.11em;color:#C46A4A;border:1px solid #C46A4A;border-radius:3px;padding:1px 6px;}
+.week-title{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.2;color:#2B2B2B;}
+.week-date{font-size:11px;color:#6B6763;white-space:nowrap;flex:none;}
+.week-chevron{flex:none;color:#C46A4A;opacity:0;transition:opacity .15s;}
+.week-row.active .week-chevron,.week-row:hover .week-chevron{opacity:1;}
+
+.detail-panel{background:#fff;border:1px solid rgba(43,43,43,0.10);border-radius:4px;padding:clamp(26px,4vw,48px);min-width:0;}
+.detail-header{border-bottom:1px solid rgba(43,43,43,0.10);padding-bottom:24px;margin-bottom:8px;display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px;}
+.detail-series{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;margin-bottom:10px;}
+.detail-accent-bar{display:block;width:44px;height:2px;margin-bottom:14px;}
+.detail-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:#6B6763;font-size:13px;margin-bottom:6px;}
+.detail-kw{font-weight:500;color:#2B2B2B;}
+.detail-h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,3.6vw,40px);line-height:1.08;letter-spacing:-0.01em;}
+.detail-body{display:flex;flex-direction:column;gap:clamp(22px,3vw,34px);padding-top:24px;}
+
+.block-leitfrage{background:#EFDCD2;border-radius:4px;padding:clamp(20px,3vw,32px);}
+.block-leitfrage-label{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#C46A4A;margin-bottom:12px;}
+.block-leitfrage-q{font-family:'Cormorant Garamond',serif;font-size:clamp(21px,3vw,30px);line-height:1.22;color:#2B2B2B;}
+
+.block-heading{font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:#6B6763;margin-bottom:13px;}
+.resource-list{display:flex;flex-direction:column;gap:8px;}
+.resource-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid rgba(43,43,43,0.12);border-radius:4px;transition:background .15s;text-decoration:none;color:#2B2B2B;}
+.resource-item:hover{background:rgba(43,43,43,0.03);}
+.resource-icon{width:38px;height:38px;border-radius:4px;display:flex;align-items:center;justify-content:center;flex:none;}
+.resource-icon.video{background:#2B2B2B;color:#F7F3EF;}
+.resource-icon.pdf{background:#EFDCD2;color:#C46A4A;}
+.resource-info{flex:1 1 auto;min-width:0;}
+.resource-name{font-size:14px;font-weight:500;line-height:1.3;}
+.resource-meta{font-size:12px;color:#6B6763;margin-top:2px;}
+.resource-arrow{flex:none;color:#aaa;transition:color .15s;}
+.resource-item:hover .resource-arrow{color:#C46A4A;}
+
+.video-embed{width:100%;border-radius:4px;background:#111;overflow:hidden;}
+.video-embed video{width:100%;display:block;max-height:340px;}
+
+.block-reflexion{display:flex;flex-direction:column;gap:10px;}
+.reflexion-q{display:flex;gap:14px;padding:16px 18px;background:#F7F3EF;border:1px solid rgba(43,43,43,0.10);border-radius:4px;}
+.reflexion-num{width:24px;height:24px;border-radius:50%;background:#2B2B2B;color:#F7F3EF;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex:none;margin-top:3px;}
+.reflexion-text{font-size:15px;line-height:1.55;}
+
+.block-kulturatlas{border-radius:4px;padding:clamp(20px,3vw,30px);}
+.block-kulturatlas-label{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;margin-bottom:12px;}
+.block-kulturatlas-text{font-size:15px;line-height:1.6;color:#2B2B2B;}
+.ka-link{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 18px;background:#2B2B2B;color:#F7F3EF;border-radius:4px;font-size:13px;font-family:'Lora',serif;text-decoration:none;transition:background .15s;}
+.ka-link:hover{background:#3A3A3A;}
+
+.praesenz-block{background:#F7F3EF;border:1px solid rgba(43,43,43,0.10);border-radius:4px;padding:clamp(20px,3vw,32px);}
+.praesenz-themen{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.praesenz-referat{margin-top:18px;padding:14px 18px;background:#fff;border-radius:4px;font-size:14px;}
+.praesenz-methoden{margin-top:10px;font-size:13px;color:#6B6763;}
+.praesenz-ort{margin-top:10px;font-size:13px;color:#6B6763;font-weight:500;}
+
+@media(max-width:860px){
+  .week-grid{grid-template-columns:1fr;}
+  .week-list{position:static;max-height:none;overflow:visible;}
+  .feature-card{grid-column:span 1;}
+  .dash-top{grid-template-columns:1fr;}
+}
+@media(max-width:540px){
+  .topbar-links{gap:5px;}
+  .ql-btn,.next-btn{padding:7px 10px;font-size:11px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="logo-area">
+      <img src="assets/enso-terrakotta.png" alt="IBZ Marienthal" />
+      <div class="logo-text">
+        <span class="logo-title">Kultur im Dreiländereck</span>
+        <span class="logo-sub">WiSe 2026 / 2027</span>
+      </div>
+    </div>
+    <div class="topbar-links">
+      <a class="ql-btn ql-primary" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Kulturatlas-Padlet
+      </a>
+      <a class="ql-btn ql-secondary" href="mailto:seidel@sankt-marienthal.eu">Kontakt</a>
+      <button class="next-btn" id="next-termin-btn">
+        <span class="next-dot"></span>
+        <span class="next-label">Nächster Termin</span>
+        <span id="next-termin-label">—</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <img class="hero-bg" src="assets/enso-terrakotta.png" alt="" aria-hidden="true" />
+  <div class="hero-inner">
+    <div class="eyebrow">Hochschule Zittau / Görlitz · Internationale Wirtschaftskommunikation</div>
+    <span class="accent-bar"></span>
+    <h1>Kultur im Dreiländereck</h1>
+    <p class="hero-lede">Kulturelle Identitäten, Erinnerungsorte und grenzüberschreitende Begegnungen im deutsch-polnisch-tschechischen Raum.</p>
+    <div class="hero-meta">Dozent: René Seidel · seidel@sankt-marienthal.eu · 05.10.2026 – 29.01.2027</div>
+  </div>
+</section>
+
+<div class="dash">
+  <div class="dash-top">
+    <div class="feature-card" id="feature-card" style="background:#EFDCD2;">
+      <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:auto;">
+        <span class="mode-chip" id="feature-chip" style="background:#2B2B2B;color:#F7F3EF;">Selbststudium</span>
+        <div style="margin-left:auto;text-align:right;">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.16em;color:#6B6763;">Diese Woche</div>
+          <div id="feature-kwdate" style="font-family:'Cormorant Garamond',serif;font-size:19px;color:#2B2B2B;margin-top:2px;">KW —</div>
+        </div>
+      </div>
+      <h2 class="feature-title" id="feature-title">Lade Kurs…</h2>
+      <p class="feature-lead" id="feature-lead"></p>
+      <button class="cta-btn" id="feature-cta">
+        Zur Woche
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <div class="donut-card">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;margin-bottom:16px;">Semesterfortschritt</div>
+      <div class="donut-wrap">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="52" fill="none" stroke="#E6DED4" stroke-width="11"/>
+          <circle cx="65" cy="65" r="52" fill="none" stroke="#C46A4A" stroke-width="11" stroke-linecap="round"
+            id="donut-arc" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="donut-center"><span class="donut-pct" id="donut-pct">0 %</span></div>
+      </div>
+      <div class="donut-title" id="donut-weeks">— Wochen</div>
+      <div class="donut-sub">von 14 Wochen · WiSe 26/27</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-val">14</div><div class="stat-name">Semesterwochen</div><div class="stat-sub">inkl. Pause</div></div>
+    <div class="stat-card"><div class="stat-val">5</div><div class="stat-name">Selbststudiumswochen</div><div class="stat-sub">mit Video &amp; Lektüre</div></div>
+    <div class="stat-card"><div class="stat-val">6</div><div class="stat-name">Präsenztermine</div><div class="stat-sub">je 2 × 90 min</div></div>
+    <div class="stat-card"><div class="stat-val" id="stat-klatlas">5</div><div class="stat-name">Kulturatlas-Aufträge</div><div class="stat-sub">Padlet-Einträge</div></div>
+  </div>
+
+  <div class="timeline-card">
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+      <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:#6B6763;">Semesterverlauf</span>
+      <span style="margin-left:auto;font-size:11px;color:#6B6763;display:flex;align-items:center;gap:5px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#C46A4A;display:inline-block;"></span>Aktuelle Woche
+      </span>
+    </div>
+    <div class="timeline-bar" id="timeline-bar"></div>
+    <div class="timeline-dates"><span>05.10.2026</span><span>29.01.2027</span></div>
+  </div>
+</div>
+
+<div class="weeks-section">
+  <div class="section-eyebrow">Wochenübersicht</div>
+  <span class="section-bar"></span>
+  <h2 class="section-h2">Klicken Sie sich durch das Semester</h2>
+  <div class="week-grid">
+    <div class="week-list" id="week-list"></div>
+    <div class="detail-panel" id="detail-panel">
+      <div style="padding:40px;text-align:center;color:#6B6763;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;">Wählen Sie eine Woche aus der Liste.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const WEEKS = [
+  {kw:41,kwLabel:'KW 41',date:'05.10.2026',dateShort:'05.10.',mode:'praesenz',series:'Einstieg',
+   title:'Einstieg und Auftakt',lead:'Organisatorische Auftaktsitzung: Vorstellung des Moduls, Gruppenbildung und Einführung in das Kulturatlas-Portfolio.',
+   praesenz:{themen:['Vorstellung des Moduls, Ablauf und hybrider Modus','Auswertung der Lernbedarfsanalyse','Gruppenbildung (3 Gruppen) + Referatsvergabe','Einführung Kulturatlas-Portfolio: Struktur, Padlet, Erwartungen'],hinweis:'Keine Referate – organisatorische Sitzung.'}},
+
+  {kw:42,kwLabel:'KW 42',date:'12.10.2026',dateShort:'12.10.',mode:'selbststudium',series:'TK 1 · Identität & Traditionen',
+   title:'Kollektive Identität',lead:'Was macht uns zu wem wir sind – als Gruppe, als Region? Assmann, Bhabha und das Konzept des Third Space im Grenzraum.',
+   leitfrage:'Wie entstehen kollektive Identitäten, und welche Rolle spielt der Grenzraum dabei?',
+   video:{path:'KW 42/Kollektive_Identität.mp4',label:'Input-Video: Kollektive Identität',meta:'Lektion 1 · TK 1.1'},
+   pdfs:[
+     {path:'KW 42/Kollektive-Identitat-und-Zugehorigkeit.pdf',label:'Kollektive Identität und Zugehörigkeit',meta:'Skript · Lektüre 1'},
+     {path:'KW 42/Third Space Homi Bhabha.pdf',label:'Third Space – Homi Bhabha',meta:'Lektüre 2'},
+     {path:'KW 42/Assmann_Das_kulturelle_Gedaechtnis_2002.pdf',label:'Assmann: Das kulturelle Gedächtnis (2002)',meta:'Lektüre 3 (Vertiefung)'}
+   ],
+   reflexionen:['Welche Merkmale definieren die kollektive Identität des Dreiländerecks (D/PL/CZ)? Nennen Sie drei konkrete Beispiele.','Inwiefern lässt sich das Dreiländereck als „Third Space" (Bhabha) verstehen? Wo sehen Sie Hybridität im Alltag?','Assmann unterscheidet kulturelles und kommunikatives Gedächtnis. Welchem Typ ordnen Sie aktuelle Erinnerungspraktiken in Ihrer Heimatregion zu?'],
+   kulturatlas:'Recherchieren Sie ein Beispiel für kollektive Identitätsmarkierungen im Dreiländereck (z. B. Grenzdenkmäler, zweisprachige Ortsschilder, regionale Feste). Erstellen Sie einen Padlet-Eintrag mit Titel, Kategorie, Beschreibung (5–7 Sätze), Einordnung, Ort und Quelle.',
+   katColor:'#D4E8D8'},
+
+  {kw:43,kwLabel:'KW 43',date:'19.10.2026',dateShort:'19.10.',mode:'praesenz',series:'TK 1 · Identität & Traditionen',
+   title:'Individuelle und kollektive Identität',lead:'Grundbegriffe, Theorien kollektiver Identität (Assmann, Tajfel/Turner), Hybridität und Border-Languaging im Grenzraum.',
+   praesenz:{themen:['Grundbegriffe: Identität, kollektive, soziale und kulturelle Identität','Theorien kollektiver Identität (Assmann, Tajfel/Turner)','Homi Bhabha: Third Space / Dritte Orte in Grenzregionen','Hybridität und Border-Languaging'],referat:'🎤 Referat 1a – Zwischen Grenzen und Begegnung (Gruppe 1)',methoden:'Concept Map · Kulturatlas-Kurzpräsentation · Think-Pair-Share'}},
+
+  {kw:44,kwLabel:'KW 44',date:'26.10.2026',dateShort:'26.10.',mode:'selbststudium',series:'TK 1 · Identität & Traditionen',
+   title:'Traditionen im Wandel',lead:'Wie wandeln sich Traditionen in Lausitz, Nordböhmen und Niederschlesien – und was bleibt? Brüche, Kontinuitäten, Migration.',
+   leitfrage:'Welche Traditionen des Dreiländerecks haben Migration, Krieg und Systemwechsel überlebt – und warum?',
+   video:{path:'KW 44/Traditionen_im_Wandel.mp4',label:'Input-Video: Traditionen im Wandel',meta:'Lektion 2 · TK 1.2'},
+   pdfs:[
+     {path:'KW 44/Traditionen-im-Wandel.pdf',label:'Traditionen im Wandel (Skript)',meta:'Lektüre 1'},
+     {path:'KW 44/gh-65-24-2010.pdf',label:'Traditionsverläufe in der Grenzregion',meta:'Lektüre 2'}
+   ],
+   reflexionen:['Beschreiben Sie eine Tradition aus der Region, die sich durch politische Zäsuren (1945, 1989) verändert hat. Worin bestand der Wandel?','Welche Rolle spielt die Kirche als Trägerin von Tradition im Dreiländereck? Unterscheiden Sie den deutschen, polnischen und tschechischen Kontext.','Inwiefern kann kulinarische Tradition als „weicher" Indikator für kulturelle Kontinuität gelten?'],
+   kulturatlas:'Recherchieren Sie ein Fest, einen Brauch oder ein Handwerk aus der Region (Lausitz, Nordböhmen oder Niederschlesien). Erstellen Sie einen Padlet-Eintrag mit Fokus auf Wandel und Kontinuität.',
+   katColor:'#D4E8D8'},
+
+  {kw:45,kwLabel:'KW 45',date:'02.11.2026',dateShort:'02.11.',mode:'praesenz',series:'TK 1 · Identität & Traditionen',
+   title:'Traditionen + Abschluss TK 1',lead:'Historische Entwicklung von Traditionen, Brüche und Kontinuitäten, Abschluss TK 1 mit Postersession.',
+   praesenz:{themen:['Historische Entwicklung von Traditionen: Lausitz, Nordböhmen, Niederschlesien','Brüche und Kontinuitäten: Feiertage, Feste, Esskultur, Handwerk','Einfluss von Migration, Krieg, Systemwechseln','Abschluss TK 1: Postersession + Reflexionsrunde'],referat:'🎤 Referat 1b – Traditionen im Wandel (Gruppe 2)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Diskussion · Postersession'}},
+
+  {kw:46,kwLabel:'KW 46',date:'09.11.2026',dateShort:'09.11.',mode:'selbststudium',series:'TK 2 · Erinnerung & Kulturorte',
+   title:'Erinnerungsorte und Kulturorte',lead:'Pierre Nora und die Lieux de Mémoire: Was macht einen Ort zum Erinnerungsort? Nationale Narrative im Dreiländereck.',
+   leitfrage:'Was ist der Unterschied zwischen Geschichte und Erinnerung – und warum ist diese Unterscheidung im Dreiländereck besonders bedeutsam?',
+   video:{path:'KW 46/Erinnerungsorte_im_Dreiländereck.mp4',label:'Input-Video: Erinnerungsorte im Dreiländereck',meta:'Lektion 3 · TK 2.1'},
+   pdfs:[
+     {path:'KW 46/Erinnerungsorte-und-Kulturorte.pdf',label:'Erinnerungsorte und Kulturorte (Skript)',meta:'Lektüre 1'},
+     {path:'KW 46/Nora_Between_Memory_and_History.pdf',label:'Nora: Between Memory and History',meta:'Lektüre 2 (Klassiker)'}
+   ],
+   reflexionen:['Nennen Sie drei Erinnerungsorte im Dreiländereck und erklären Sie, welche nationale Erinnerungskultur sie repräsentieren.','Pierre Nora unterscheidet „milieux de mémoire" und „lieux de mémoire". Erläutern Sie den Unterschied anhand eines Beispiels aus der Region.','Wie verändert digitale Medien (z. B. Dokumentarfilme, Webseiten, Podcasts) die Form des kollektiven Erinnerns?'],
+   kulturatlas:'Recherchieren Sie einen Gedenkort oder ein Erinnerungsprojekt im Dreiländereck. Analysieren Sie: Wessen Erinnerung wird hier gepflegt? Welches nationale Narrativ steht dahinter? Padlet-Eintrag erstellen.',
+   katColor:'#D8DCF0'},
+
+  {kw:47,kwLabel:'KW 47',date:'16.11.2026',dateShort:'16.11.',mode:'praesenz',series:'TK 2 · Erinnerung & Kulturorte',
+   title:'Gedenk- und Erinnerungsorte',lead:'Konzept der Erinnerungsorte, unterschiedliche nationale Narrative zu Krieg und Vertreibung, Formen des Erinnerns im Dreiländereck.',
+   praesenz:{themen:['Konzept der Erinnerungsorte (Pierre Nora: Lieux de Mémoire)','Unterschiede nationaler Narrative: Krieg, Holocaust, Vertreibung, Sozialismus','Formen des Erinnerns: Mahnmale, Museen, digitale Plattformen','Zentrale Gedenkorte im Dreiländereck'],referat:'🎤 Referat 2a – Geteilte Geschichte – gemeinsame Erinnerung? (Gruppe 3)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Perspektivenwechsel · Jigsaw'}},
+
+  {kw:48,kwLabel:'KW 48',date:'23.11.2026',dateShort:'23.11.',mode:'selbststudium',series:'TK 2 · Erinnerung & Kulturorte',
+   title:'Kulturkontakte und grenzüberschreitende Kulturarbeit',lead:'Kulturkontakte als Motor gesellschaftlichen Wandels: ViaThea, Neisse Filmfestival, Europaschule und Begegnungsorte im Grenzraum.',
+   leitfrage:'Welche Institutionen und Projekte gestalten aktiv grenzüberschreitende Kulturarbeit – und wer profitiert davon?',
+   video:{path:'KW 48/Kulturkontakte__Dreiländereck.mp4',label:'Input-Video: Kulturkontakte im Dreiländereck',meta:'Lektion 4 · TK 2.2'},
+   pdfs:[
+     {path:'KW 48/Kulturkontakte-und-grenzuberschreitende-Kulturarbeit.pdf',label:'Kulturkontakte und grenzüberschreitende Kulturarbeit (Skript)',meta:'Lektüre 1'},
+     {path:'KW 48/brozura 30 let web.pdf',label:'Broschüre: 30 Jahre grenzüberschreitende Zusammenarbeit',meta:'Lektüre 2'},
+     {path:'KW 48/ssoar-2013-engel_et_al-Grenzen_der_Grenzuberschreitung_Zur_Ubersetzungsleistung.pdf',label:'Engel et al.: Grenzen der Grenzüberschreitung (2013)',meta:'Lektüre 3 (Vertiefung)'}
+   ],
+   reflexionen:['Beschreiben Sie ein grenzüberschreitendes Kulturprojekt im Dreiländereck. Welche Herausforderungen gibt es bei der Umsetzung?','Welche Rolle spielt Sprache als Barriere und Brücke in der grenzüberschreitenden Kulturarbeit?','Analysieren Sie die Europaschule als Modell: Welche Kompetenzen vermittelt sie – und welche blinden Flecken hat das Modell?'],
+   kulturatlas:'Analysieren Sie einen Begegnungsort oder ein Kulturprojekt im Dreiländereck (z. B. ViaThea, Grenzpendler-Alltag, Europaschule). Padlet-Eintrag mit Kategorie „Begegnung" erstellen.',
+   katColor:'#D8DCF0'},
+
+  {kw:49,kwLabel:'KW 49',date:'30.11.2026',dateShort:'30.11.',mode:'praesenz',series:'TK 2 · Erinnerung & Kulturorte',
+   title:'Kulturorte + Abschluss TK 2',lead:'Kulturelle Infrastruktur, grenzüberschreitende Projekte, World Café und Postersession zum Abschluss von TK 2.',
+   praesenz:{themen:['Kulturelle Infrastruktur: Theater, Museen, Bibliotheken, Begegnungszentren','Analyse grenzüberschreitender Kulturprojekte: Neisse Filmfestival, ViaThea u. a.','Rolle institutioneller und zivilgesellschaftlicher Träger','Abschluss TK 2: Postersession + Reflexionsrunde'],referat:'🎤 Referat 2b – Kultur verbindet? (Gruppe 1)',methoden:'Kulturatlas-Kurzpräsentation · World Café · Postersession'}},
+
+  {kw:50,kwLabel:'KW 50',date:'07.12.2026',dateShort:'07.12.',mode:'selbststudium',series:'TK 3 · Interkulturelle Politik',
+   title:'Interkulturelle Politik im Grenzraum',lead:'Akteure und Institutionen: Euroregion Neiße, INTERREG, grenzüberschreitende Kulturpolitik und ihre politischen Spannungsfelder.',
+   leitfrage:'Wer hat die Macht, interkulturelle Begegnung im Dreiländereck zu gestalten – und wessen Interessen stehen dahinter?',
+   video:{path:'KW 50/Politik_im_Grenzraum.mp4',label:'Input-Video: Interkulturelle Politik im Grenzraum',meta:'Lektion 5 · TK 3'},
+   pdfs:[
+     {path:'KW 50/Interkulturelle-Politik-im-Grenzraum.pdf',label:'Interkulturelle Politik im Grenzraum (Skript)',meta:'Lektüre 1'},
+     {path:'KW 50/greg,+Teufel.pdf',label:'Gregor & Teufel: Interkulturelle Verflechtungen',meta:'Lektüre 2'}
+   ],
+   reflexionen:['Welche Aufgaben übernimmt die Euroregion Neiße im Bereich Kulturförderung? Nennen Sie konkrete Beispiele.','Inwiefern kann INTERREG als Instrument kulturpolitischer Steuerung verstanden werden? Welche Schwächen hat das System?','Vorbereitung IBZ-Exkursion: Welche Fragen möchten Sie den Experten vor Ort (Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille) stellen?'],
+   kulturatlas:'Recherchieren Sie eine Institution interkultureller Politik im Dreiländereck (z. B. Euroregion Neiße, INTERREG-Projekt). Analysieren Sie Aufgaben, Reichweite und Finanzierung. Padlet-Eintrag erstellen.',
+   katColor:'#E8E0D8'},
+
+  {kw:51,kwLabel:'KW 51',date:'14.12.2026',dateShort:'14.12.',mode:'praesenz',series:'TK 3 · Interkulturelle Politik',
+   title:'Kulturnetzwerk + Exkursion IBZ St. Marienthal',lead:'Letzter Präsenztermin vor Weihnachten. Expertengespräche vor Ort in Ostritz mit Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille.',
+   praesenz:{themen:['Interkulturelle Politik im Grenzraum: Akteure, Institutionen, Spannungsfelder','Fallanalyse eines grenzüberschreitenden Kulturprojekts','Expertengespräche vor Ort'],referat:'🎤 Referat 3a – Wer gestaltet Begegnung? (Gruppe 2) · 🎤 Referat 3b – Begegnung in der Praxis (Gruppe 3)',methoden:'Expertengespräche · Buzz Groups · Live-Padlet-Eintrag · Abschlussreflexion',ort:'📍 Stiftung IBZ St. Marienthal, Ostritz'}},
+
+  {kw:52,kwLabel:'KW 52–1',date:'21.12.–03.01.',dateShort:'21.12.–03.01.',mode:'pause',series:'Pause',
+   title:'Weihnachtspause',lead:'Vorlesungsfreie Zeit. Gute Erholung!'},
+
+  {kw:2,kwLabel:'KW 2',date:'04.01.2027',dateShort:'04.01.',mode:'selbststudium',series:'Synthese',
+   title:'Synthese und Prüfungsvorbereitung',lead:'Was hält das Dreiländereck zusammen? Rückblick und Gesamtsynthese. Kulturatlas finalisieren, Begriffe und Theorien wiederholen.',
+   leitfrage:'Was hält das Dreiländereck kulturell zusammen – und was hält es auseinander?',
+   video:{path:'KW2/Synthese.mp4',label:'Input-Video: Synthese',meta:'Abschlusslektion'},
+   pdfs:[],
+   reflexionen:['Verbinden Sie die drei Themenkomplexe (Identität, Erinnerung, Politik) zu einer These über das Dreiländereck.','Welches Konzept aus dem Kurs hat Ihre Perspektive auf Kultur im Grenzraum am stärksten verändert – und warum?','Welche blinden Flecken hat der Kurs Ihrer Meinung nach gelassen? Welche Perspektiven fehlen?'],
+   kulturatlas:'Kulturatlas finalisieren: Vollständigkeit aller Einträge prüfen, Quellen ergänzen, Querverweise zu anderen Gruppeneinträgen herstellen.',
+   katColor:'#E6DED4'},
+
+  {kw:3,kwLabel:'KW 3',date:'19.01.2027',dateShort:'19.01.',mode:'praesenz',series:'Synthese',
+   title:'Gesamtsynthese und Prüfungsvorbereitung',lead:'Abschlusspräsentation Kulturatlas, gemeinsame Gesamtschau und strukturierte Prüfungsvorbereitung.',
+   praesenz:{themen:['Abschlusspräsentation Kulturatlas: alle Gruppen','Gemeinsame Gesamtschau: Clustering, Querverweise, Synthese','Was hält das Dreiländereck zusammen? Verknüpfung TK 1 + TK 2 + TK 3','Strukturierte Prüfungsvorbereitung + Fragerunde'],referat:'Keine Referate – Syntheseleistung aller Gruppen',methoden:'Galerierundgang · Planspiel „Kulturgipfel Dreiländereck" · Fragerunde'}}
+];
+
+const SERIES_COLS = {
+  'TK 1 · Identität & Traditionen':'#C46A4A',
+  'TK 2 · Erinnerung & Kulturorte':'#5A6FA0',
+  'TK 3 · Interkulturelle Politik':'#7A7060',
+  'Einstieg':'#8A9A7A','Synthese':'#9A7060','Pause':'#B0B0A8'
+};
+
+const SEMESTER_START = new Date('2026-10-05');
+const SEMESTER_END   = new Date('2027-01-29');
+
+function getProgress(){const n=new Date();if(n<SEMESTER_START)return 0;if(n>SEMESTER_END)return 1;return(n-SEMESTER_START)/(SEMESTER_END-SEMESTER_START);}
+
+function getCurrentIdx(){
+  const n=new Date();
+  for(let i=0;i<WEEKS.length;i++){
+    const d=parseDateDE(WEEKS[i].date);
+    const dn=i+1<WEEKS.length?parseDateDE(WEEKS[i+1].date):SEMESTER_END;
+    if(d&&dn&&n>=d&&n<dn)return i;
+  }
+  const idx=WEEKS.findIndex(w=>w.mode==='selbststudium');
+  return idx>=0?idx:0;
+}
+
+function parseDateDE(s){
+  if(!s)return null;
+  const p=s.split('.');
+  if(p.length<3)return null;
+  const yr=parseInt(p[2]);
+  if(isNaN(yr))return null;
+  return new Date(yr,parseInt(p[1])-1,parseInt(p[0]));
+}
+
+const ARROW=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>`;
+const PDF_ICO=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
+const PLAY=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+const CHECK=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+const CHEV=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`;
+
+function renderTimeline(){
+  const bar=document.getElementById('timeline-bar');
+  const curIdx=getCurrentIdx();
+  bar.innerHTML=WEEKS.map((w,i)=>{
+    const col=SERIES_COLS[w.series]||'#C46A4A';
+    let style=`background:${col};`;
+    if(i>curIdx)style+=`opacity:0.28;`;
+    else if(i===curIdx)style+=`outline:2px solid #C46A4A;outline-offset:2px;`;
+    return `<div class="seg" title="${w.kwLabel} · ${w.title}" style="${style}" data-idx="${i}"></div>`;
+  }).join('');
+  bar.querySelectorAll('.seg').forEach(s=>s.addEventListener('click',()=>selectWeek(parseInt(s.dataset.idx))));
+}
+
+function renderDonut(){
+  const p=getProgress();
+  const pct=Math.round(p*100);
+  const R=52,C=2*Math.PI*R;
+  document.getElementById('donut-arc').setAttribute('stroke-dashoffset',(C*(1-p)).toFixed(2));
+  document.getElementById('donut-pct').textContent=pct+' %';
+  document.getElementById('donut-weeks').textContent=Math.round(p*WEEKS.length)+' Wochen';
+}
+
+function renderFeature(idx){
+  const w=WEEKS[idx];
+  const col=SERIES_COLS[w.series]||'#C46A4A';
+  const bgs={selbststudium:'#EFDCD2',praesenz:'#EEF0E8',pause:'#EAEAE8'};
+  const chips={selbststudium:'background:#2B2B2B;color:#F7F3EF;',praesenz:'background:rgba(43,43,43,0.55);color:#F7F3EF;',pause:'background:#E0DDD8;color:#6B6763;'};
+  const labels={selbststudium:'Selbststudium',praesenz:'Präsenzsitzung',pause:'Vorlesungsfrei'};
+  document.getElementById('feature-card').style.background=bgs[w.mode]||'#EFDCD2';
+  const chip=document.getElementById('feature-chip');
+  chip.style.cssText=chips[w.mode]||chips.selbststudium;
+  chip.textContent=labels[w.mode]||w.mode;
+  document.getElementById('feature-kwdate').textContent=`${w.kwLabel} · ${w.date}`;
+  document.getElementById('feature-title').textContent=w.title;
+  const lead=document.getElementById('feature-lead');
+  lead.textContent=w.lead;
+  lead.style.fontStyle=w.mode==='selbststudium'?'italic':'normal';
+  document.getElementById('feature-cta').onclick=()=>{selectWeek(idx);document.querySelector('.weeks-section').scrollIntoView({behavior:'smooth'});};
+}
+
+let activeIdx=-1;
+
+function renderWeekList(selIdx){
+  activeIdx=selIdx;
+  const curIdx=getCurrentIdx();
+  const list=document.getElementById('week-list');
+  list.innerHTML=WEEKS.map((w,i)=>{
+    const col=SERIES_COLS[w.series]||'#C46A4A';
+    const isCur=i===curIdx,isPast=i<curIdx,isSel=i===selIdx;
+    const numBg=isSel?col:isPast?col+'40':'rgba(43,43,43,0.08)';
+    const numCol=isSel||isPast?'#fff':'#6B6763';
+    const numContent=isPast?CHECK:`<span>${w.kwLabel.replace('KW ','')}</span>`;
+    const modeLabel=w.mode==='praesenz'?'Präsenz':w.mode==='pause'?'Pause':'Selbststudium';
+    return `<button class="week-row${isSel?' active':''}${isPast&&!isSel?' past':''}" onclick="selectWeek(${i})" aria-pressed="${isSel}">
+      <div class="week-num" style="background:${numBg};color:${numCol};">${numContent}</div>
+      <div class="week-info">
+        <div class="week-kw-line">
+          <span class="week-kw-label" style="color:${col};">${w.kwLabel} · ${modeLabel}</span>
+          ${isCur?`<span class="week-current-tag">Aktuell</span>`:''}
+        </div>
+        <div class="week-title">${w.title}</div>
+      </div>
+      <div class="week-date">${w.dateShort}</div>
+      <div class="week-chevron">${CHEV}</div>
+    </button>`;
+  }).join('');
+}
+
+function renderDetail(idx){
+  const w=WEEKS[idx];
+  const col=SERIES_COLS[w.series]||'#C46A4A';
+  const modeLabel=w.mode==='praesenz'?'Präsenzsitzung':w.mode==='pause'?'Vorlesungsfrei':'Selbststudium';
+  const modeChip=w.mode==='praesenz'?'background:#EEF0E8;color:#4A5A3A;border:1px solid #C8D0B8;':w.mode==='pause'?'background:#EAEAE8;color:#6B6763;border:1px solid #D0D0CA;':'background:#EFDCD2;color:#C46A4A;border:1px solid #D8C4BA;';
+
+  let body='';
+
+  if(w.mode==='pause'){
+    body=`<div style="text-align:center;padding:32px 0;"><div style="font-size:48px;margin-bottom:14px;">🎄</div><div style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;">Weihnachtspause</div><div style="font-size:14px;color:#6B6763;">Vorlesungsfreie Zeit · 21.12.2026 – 03.01.2027</div></div>`;
+  } else if(w.mode==='praesenz'&&w.praesenz){
+    const pc=w.praesenz;
+    body=`<div class="praesenz-block">
+      <div class="block-heading">Themen dieser Sitzung</div>
+      <ul class="praesenz-themen">${pc.themen.map(t=>`<li style="display:flex;gap:10px;font-size:15px;"><span style="color:${col};flex:none;margin-top:4px;">→</span><span>${t}</span></li>`).join('')}</ul>
+      ${pc.referat?`<div class="praesenz-referat" style="border-left:3px solid ${col};">${pc.referat}</div>`:''}
+      ${pc.methoden?`<div class="praesenz-methoden"><strong style="color:#2B2B2B;">Methoden:</strong> ${pc.methoden}</div>`:''}
+      ${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}
+      ${pc.hinweis?`<div style="margin-top:12px;font-size:13px;color:#6B6763;font-style:italic;">${pc.hinweis}</div>`:''}
+    </div>`;
+  } else {
+    if(w.leitfrage){
+      body+=`<div class="block-leitfrage"><div class="block-leitfrage-label">Leitfrage der Woche</div><div class="block-leitfrage-q">${w.leitfrage}</div></div>`;
+    }
+    if(w.video){
+      body+=`<div>
+        <div class="block-heading">Input-Video</div>
+        <div class="video-embed">
+          <video controls preload="metadata" style="width:100%;max-height:330px;background:#111;">
+            <source src="${w.video.path}" type="video/mp4">
+            <p style="color:#aaa;padding:20px;font-size:14px;">Video nicht gefunden. <a href="${w.video.path}" style="color:#C46A4A;">Direkt öffnen →</a></p>
+          </video>
+        </div>
+        <div style="padding:10px 0 0;font-size:13px;color:#6B6763;">${w.video.label} · <em>${w.video.meta}</em></div>
+      </div>`;
+    }
+    if(w.pdfs&&w.pdfs.length){
+      body+=`<div>
+        <div class="block-heading">Lektüre &amp; Materialien</div>
+        <div class="resource-list">${w.pdfs.map(p=>`
+          <a class="resource-item" href="${p.path}" target="_blank" rel="noopener">
+            <div class="resource-icon pdf">${PDF_ICO}</div>
+            <div class="resource-info"><div class="resource-name">${p.label}</div><div class="resource-meta">${p.meta}</div></div>
+            <div class="resource-arrow">${ARROW}</div>
+          </a>`).join('')}
+        </div>
+      </div>`;
+    }
+    if(w.reflexionen&&w.reflexionen.length){
+      body+=`<div>
+        <div class="block-heading">Reflexionsfragen</div>
+        <div class="block-reflexion">${w.reflexionen.map((q,i)=>`
+          <div class="reflexion-q">
+            <div class="reflexion-num">${i+1}</div>
+            <div class="reflexion-text">${q}</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+    }
+    if(w.kulturatlas){
+      body+=`<div class="block-kulturatlas" style="background:${w.katColor||'#E6DED4'};">
+        <div class="block-kulturatlas-label">🗺 Kulturatlas-Auftrag</div>
+        <div class="block-kulturatlas-text">${w.kulturatlas}</div>
+        <a class="ka-link" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">Zum Kulturatlas-Padlet ${ARROW}</a>
+      </div>`;
+    }
+  }
+
+  document.getElementById('detail-panel').innerHTML=`
+    <div class="detail-header">
+      <div style="flex:1 1 auto;min-width:0;">
+        <div class="detail-series" style="color:${col};">${w.series}</div>
+        <span class="detail-accent-bar" style="background:${col};"></span>
+        <div class="detail-meta"><span class="detail-kw">${w.kwLabel}</span><span>·</span><span>${w.date}</span></div>
+        <h3 class="detail-h3">${w.title}</h3>
+      </div>
+      <span class="mode-chip" style="${modeChip}">${modeLabel}</span>
+    </div>
+    <div class="detail-body">${body}</div>`;
+
+  if(window.innerWidth<860){
+    document.getElementById('detail-panel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+
+function selectWeek(idx){
+  renderWeekList(idx);
+  renderDetail(idx);
+  const rows=document.querySelectorAll('.week-row');
+  if(rows[idx])rows[idx].scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderNextTermin(){
+  const now=new Date();
+  const up=WEEKS.find(w=>{const d=parseDateDE(w.date);return d&&d>now&&w.mode!=='pause';});
+  const lbl=document.getElementById('next-termin-label');
+  if(up){
+    lbl.textContent=`${up.kwLabel} · ${up.dateShort}`;
+    document.getElementById('next-termin-btn').addEventListener('click',()=>{
+      const i=WEEKS.indexOf(up);selectWeek(i);
+      document.querySelector('.weeks-section').scrollIntoView({behavior:'smooth'});
+    });
+  } else {
+    lbl.textContent='Semester beendet';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderTimeline();
+  renderDonut();
+  const cur=getCurrentIdx();
+  renderFeature(cur);
+  renderWeekList(cur);
+  renderDetail(cur);
+  renderNextTermin();
+});
+</script>
+</body>
+</html>
