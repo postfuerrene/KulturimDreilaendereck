@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" fill="currentColor" aria-label="IK Logo – Kultur im Dreiländereck">
+  <defs>
+    <clipPath id="kclip">
+      <rect x="258" y="0" width="492" height="750"/>
+    </clipPath>
+  </defs>
+  <!-- Linker vertikaler Balken (I) -->
+  <rect x="5" y="0" width="108" height="750"/>
+  <!-- Rechter vertikaler Balken (I) -->
+  <rect x="150" y="0" width="108" height="750"/>
+  <!-- K: 3 Chevron-Streifen oben-rechts + 3 unten-rechts, geclippt auf rechte Hälfte -->
+  <g clip-path="url(#kclip)">
+    <!-- Oberer Arm: 3 Streifen (rotate -38° um Scheitelpunkt 258,375) -->
+    <rect x="258" y="302" width="700" height="71" transform="rotate(-38,258,375)"/>
+    <rect x="258" y="192" width="700" height="71" transform="rotate(-38,258,375)"/>
+    <rect x="258" y="82"  width="700" height="71" transform="rotate(-38,258,375)"/>
+    <!-- Unterer Arm: 3 Streifen (rotate +38°) -->
+    <rect x="258" y="377" width="700" height="71" transform="rotate(38,258,375)"/>
+    <rect x="258" y="487" width="700" height="71" transform="rotate(38,258,375)"/>
+    <rect x="258" y="597" width="700" height="71" transform="rotate(38,258,375)"/>
+  </g>
+</svg>

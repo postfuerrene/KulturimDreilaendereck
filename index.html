@@ -387,7 +387,7 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
 <nav class="topbar" role="navigation">
   <div class="topbar-inner">
     <a class="logo" href="#" aria-label="Zur Startseite">
-      <img src="assets/enso-terrakotta.png" alt="">
+      <img src="assets/logo-ikd.svg" alt="IK Logo" style="width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;">
       <div class="logo-text">
         <span class="logo-name">Kultur im Dreiländereck</span>
         <span class="logo-sub">WiSe 2026 / 2027</span>
@@ -728,11 +728,13 @@ function getProgress(){
 }
 function getCurrentIdx(){
   const n=new Date();
+  if(n<SEMESTER_START)return 0; // Vor Semesterstart → KW41 (Einstieg)
+  if(n>SEMESTER_END)return WEEKS.length-1;
   for(let i=0;i<WEEKS.length-1;i++){
     const a=parseDateDE(WEEKS[i].date),b=parseDateDE(WEEKS[i+1].date);
     if(a&&b&&n>=a&&n<b)return i;
   }
-  return WEEKS.findIndex(w=>w.mode==='selbststudium')||0;
+  return 0;
 }
 function parseDateDE(s){
   if(!s)return null;
@@ -884,7 +886,7 @@ function renderWeekList(selIdx){
       <div class="winfo">
         <div class="wkw-line">
           <span class="wkw" style="color:${tk.color};">${w.label} · ${modeLabel(w.mode).split('sitzung')[0]}</span>
-          ${isCur?'<span class="wcurrent-tag">Aktuell</span>':''}
+          ${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}
         </div>
         <div class="wtitle">${w.title}</div>
       </div>
@@ -912,7 +914,9 @@ function selectWeek(idx){
 // ── MOBILE ───────────────────────────────────────────────────
 let mobileView='home';
 
+function isMobile(){return window.innerWidth<769;}
 function setMobileView(v){
+  if(!isMobile())return; // Nie auf Desktop ausführen – verhindert Footer-Bug
   mobileView=v;
   ['home','weeks','detail'].forEach(n=>{
     const el=document.getElementById(`view-${n}`);
@@ -950,7 +954,7 @@ function renderMobileWeekList(){
       <div class="winfo">
         <div class="wkw-line">
           <span class="wkw" style="color:${tk.color};">${w.label} · ${modeLabel(w.mode).split('sitzung')[0]}</span>
-          ${isCur?'<span class="wcurrent-tag">Aktuell</span>':''}
+          ${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}
         </div>
         <div class="wtitle">${w.title}</div>
       </div>
