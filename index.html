@@ -490,7 +490,7 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
   <div class="stats-grid">
     <div class="stat-card"><div class="stat-val">16</div><div class="stat-name">Semesterwochen</div><div class="stat-sub">inkl. Pause</div></div>
     <div class="stat-card"><div class="stat-val">7</div><div class="stat-name">Selbststudiumswochen</div><div class="stat-sub">mit Video &amp; Lektüre</div></div>
-    <div class="stat-card"><div class="stat-val">8</div><div class="stat-name">Präsenztermine</div><div class="stat-sub">Mi · 08:00–11:30 Uhr</div></div>
+    <div class="stat-card"><div class="stat-val">7</div><div class="stat-name">Präsenztermine</div><div class="stat-sub">Mi · 08:00–11:30 Uhr</div></div>
     <div class="stat-card"><div class="stat-val" id="stat-ka">6</div><div class="stat-name">Kulturatlas-Aufträge</div><div class="stat-sub">Padlet-Einträge</div></div>
   </div>
 </div>
@@ -534,7 +534,7 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
   <div class="mob-stats">
     <div class="mob-stat"><div class="mob-stat-val" id="mob-pct">0%</div><div class="mob-stat-name">Fortschritt</div><div class="mob-stat-sub">Semester</div></div>
     <div class="mob-stat"><div class="mob-stat-val">5</div><div class="mob-stat-name">Selbststudium</div><div class="mob-stat-sub">Wochen mit Material</div></div>
-    <div class="mob-stat"><div class="mob-stat-val">8</div><div class="mob-stat-name">Präsenztermine</div><div class="mob-stat-sub">Mi · G II/B260</div></div>
+    <div class="mob-stat"><div class="mob-stat-val">7</div><div class="mob-stat-name">Präsenztermine</div><div class="mob-stat-sub">Mi · G II/B260</div></div>
     <div class="mob-stat"><div class="mob-stat-val">5</div><div class="mob-stat-name">Kulturatlas</div><div class="mob-stat-sub">Padlet-Aufträge</div></div>
   </div>
 
@@ -665,10 +665,9 @@ const WEEKS = [
    refs:['Nennen Sie drei Erinnerungsorte im Dreiländereck und erklären Sie, welche nationale Erinnerungskultur sie repräsentieren.','Pierre Nora unterscheidet „milieux de mémoire" und „lieux de mémoire". Erläutern Sie den Unterschied anhand eines Beispiels aus der Region.','Wie verändert digitale Medien (z. B. Dokumentarfilme, Webseiten, Podcasts) die Form des kollektiven Erinnerns?'],
    ka:'Recherchieren Sie einen Gedenkort oder ein Erinnerungsprojekt im Dreiländereck. Analysieren Sie: Wessen Erinnerung wird gepflegt? Welches nationale Narrativ steht dahinter? Padlet-Eintrag erstellen.'},
 
-  {kw:47,label:'KW 47',date:'18.11.2026',short:'18.11.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
-   title:'Gedenk- und Erinnerungsorte',
-   lead:'Konzept der Erinnerungsorte, unterschiedliche nationale Narrative zu Krieg und Vertreibung, Formen des Erinnerns.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Konzept der Erinnerungsorte (Pierre Nora: Lieux de Mémoire)','Unterschiede nationaler Narrative: Krieg, Holocaust, Vertreibung, Sozialismus','Formen des Erinnerns: Mahnmale, Museen, digitale Plattformen','Zentrale Gedenkorte im Dreiländereck'],referat:'🎤 Referat 2a – Geteilte Geschichte – gemeinsame Erinnerung? (Gruppe 3)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Perspektivenwechsel · Jigsaw'}},
+  {kw:47,label:'KW 47',date:'18.11.2026',short:'18.11.',mode:'pause',tk:'Pause',
+   title:'Buß- und Bettag – Vorlesungsfrei',
+   lead:'Gesetzlicher Feiertag in Sachsen. Kein Unterricht.'},
 
   {kw:48,label:'KW 48',date:'25.11.2026',short:'25.11.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
    title:'Kulturkontakte und grenzüberschreitende Kulturarbeit',
@@ -778,10 +777,11 @@ function buildDetail(w){
 
   let body='';
   if(w.mode==='pause'){
+    const isXmas=w.kw===52;
     body=`<div style="text-align:center;padding:40px 0;">
-      <div style="font-size:56px;margin-bottom:16px;">🎄</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;">Weihnachtspause</div>
-      <div style="font-size:14px;color:var(--ink-muted);">Vorlesungsfreie Zeit · 21.12.2026 – 03.01.2027</div>
+      <div style="font-size:56px;margin-bottom:16px;">${isXmas?'🎄':'🕊️'}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;">${w.title}</div>
+      <div style="font-size:14px;color:var(--ink-muted);">${w.lead}</div>
     </div>`;
   } else if(w.mode==='praesenz'&&w.praesenz){
     const pc=w.praesenz;
@@ -1062,7 +1062,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     const mLabel=modeLabel(w.mode);
     let body='';
     if(w.mode==='pause'){
-      body=`<div style="text-align:center;padding:40px 0;"><div style="font-size:56px;margin-bottom:16px;">🎄</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;">Weihnachtspause</div><div style="font-size:14px;color:var(--ink-muted);">23.12.2026 – 05.01.2027</div></div>`;
+      const isXmas=w.kw===52;
+      body=`<div style="text-align:center;padding:40px 0;"><div style="font-size:56px;margin-bottom:16px;">${isXmas?'🎄':'🕊️'}</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;">${w.title}</div><div style="font-size:14px;color:var(--ink-muted);">${w.lead}</div></div>`;
     } else if(w.mode==='praesenz'&&w.praesenz){
       const pc=w.praesenz;
       body=`<div class="praesenz">${(pc.raum||pc.zeiten||pc.ort)?`<div class="praesenz-meta">${pc.ort?`<span>📍 ${pc.ort}</span>`:(pc.raum?`<span>📍 Raum ${pc.raum}</span>`:'')}&ensp;${pc.zeiten?`<span>🕗 ${pc.zeiten}</span>`:''}</div>`:''}<div class="block-h">Themen</div><ul class="praesenz-themen">${pc.themen.map(t=>`<li>${t}</li>`).join('')}</ul>${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}${pc.hinweis?`<div class="praesenz-note" style="margin-top:8px;">${pc.hinweis}</div>`:''}</div>`;
