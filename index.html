@@ -79,6 +79,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 100%);
   padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px) clamp(32px,4vw,56px);
 }
+.hero::before{
+  content:'';position:absolute;right:-60px;top:-40px;width:460px;height:440px;
+  background:var(--navy);opacity:.08;pointer-events:none;
+  -webkit-mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+  mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+}
 .hero-inner{position:relative;z-index:1;max-width:1320px;margin:0 auto;}
 .hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy-mid);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;}
 .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--terra);border-radius:2px;flex:none;}
@@ -121,6 +127,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .fc-lead{font-size:13px;line-height:1.6;opacity:.85;margin-bottom:18px;}
 .fc-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--ink);border-radius:var(--r-pill);font-size:13px;font-family:inherit;color:#fff;border:none;box-shadow:var(--shadow-sm);transition:var(--transition);}
 .fc-cta:hover{background:#000;}
+.fc-cta:active{transform:scale(0.97);}
 .fc-cta svg{flex:none;}
 
 /* ── WOCHEN SECTION ── */
@@ -151,20 +158,21 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   padding:16px 20px;background:none;
   border:none;
   text-align:left;cursor:pointer;width:100%;
-  transition:background var(--transition),box-shadow var(--transition);
+  transition:background var(--transition),box-shadow var(--transition),transform 140ms cubic-bezier(.4,0,.2,1);
 }
 .wrow:hover{background:var(--cream);}
+.wrow:active{transform:scale(0.98);}
 .wrow.active{background:#EFF6FF;}
 .wrow.past{opacity:0.55;}
 .wrow.is-pause{opacity:1;}
 
 
 /* Accordion body */
-.wacc-body{
-  display:none;border-top:1px solid var(--cream-dark);
-  padding:clamp(24px,4vw,44px);
-  animation:fadeUp .22s ease both;
-}
+.wacc-body-wrap{display:grid;grid-template-rows:minmax(0,0fr);transition:grid-template-rows 260ms cubic-bezier(.77,0,.175,1);}
+.wacc-body-wrap.open{grid-template-rows:minmax(0,1fr);}
+.wacc-body-wrap > .wacc-body{overflow:hidden;min-height:0;}
+.wacc-body{border-top:1px solid var(--cream-dark);padding:clamp(24px,4vw,44px);}
+@media(prefers-reduced-motion:reduce){.wacc-body-wrap{transition:none;}}
 .wnum{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;line-height:1;min-width:38px;text-align:center;flex:none;color:var(--ink-muted);}
 .wrow.active .wnum{color:var(--ink);}
 .wrow-divider{width:1px;height:40px;background:var(--cream-dark);flex:none;}
@@ -244,6 +252,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   text-decoration:none;transition:var(--transition);box-shadow:var(--shadow-sm);
 }
 .ka-btn:hover{border-color:var(--ink-muted);background:var(--cream);color:var(--ink);}
+.ka-btn:active{transform:scale(0.97);}
 
 /* Präsenz */
 .praesenz{background:var(--cream);border-radius:var(--r);padding:clamp(18px,2.5vw,28px);border:1px solid var(--cream-dark);}
@@ -302,6 +311,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     background:linear-gradient(150deg,#EFF6FF 0%,#DBEAFE 100%);
     padding:28px 20px 24px;position:relative;overflow:hidden;
   }
+  .mob-hero::before{
+    content:'';position:absolute;right:-40px;top:-30px;width:220px;height:210px;
+    background:var(--navy);opacity:.08;pointer-events:none;
+    -webkit-mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+    mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+  }
   .mob-hero-inner{position:relative;z-index:1;}
   .mob-greeting{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy-mid);margin-bottom:8px;font-weight:600;}
   .mob-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1.1;letter-spacing:-0.015em;margin-bottom:6px;}
@@ -314,6 +329,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   .mob-fc-title{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.15;margin-bottom:6px;}
   .mob-fc-lead{font-size:12px;line-height:1.55;opacity:.85;margin-bottom:16px;}
   .mob-fc-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:var(--r-pill);font-size:13px;font-family:inherit;font-weight:500;background:var(--ink);color:#fff;border:none;box-shadow:var(--shadow-sm);transition:var(--transition);}
+  .mob-fc-cta:active{transform:scale(0.97);}
 
   /* Mobile progress */
   .mob-progress{margin:14px 14px 0;background:var(--white);border-radius:var(--r);padding:16px 18px 14px;box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);}
@@ -341,10 +357,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     background:var(--white);
     border:none;border-bottom:1px solid var(--cream-dark);
     text-align:left;cursor:pointer;width:100%;
-    transition:background var(--transition);
+    transition:background var(--transition),transform 140ms cubic-bezier(.4,0,.2,1);
     font-family:inherit;
   }
-  .mob-wrow:active{background:var(--cream);}
+  .mob-wrow:active{background:var(--cream);transform:scale(0.98);}
   .mob-wrow.is-pause{opacity:0.45;}
   .mob-wnum{
     font-family:'Cormorant Garamond',serif;
@@ -476,6 +492,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   font-family:inherit;color:var(--ink-mid);
 }
 .quiz-wrap .qoption:hover:not(:disabled){border-color:var(--navy);background:#EFF6FF;color:var(--ink);}
+.quiz-wrap .qoption:active:not(:disabled){transform:scale(0.98);}
 .quiz-wrap .qoption:disabled{cursor:default;}
 .quiz-wrap .qoption.correct{border-color:rgba(5,150,105,0.60);background:rgba(240,253,244,0.80);color:#065F46;}
 .quiz-wrap .qoption.wrong{border-color:rgba(220,38,38,0.45);background:rgba(254,242,242,0.80);color:#991B1B;}
@@ -493,10 +510,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 
 /* Feedback */
 .quiz-wrap .feedback{
-  margin-top:10px;font-size:12px;line-height:1.55;
-  padding:9px 12px;border-radius:var(--r-sm);display:none;
+  margin-top:0;font-size:12px;line-height:1.55;
+  padding:0 12px;border-radius:var(--r-sm);
+  max-height:0;opacity:0;overflow:hidden;
+  transform:translateY(-4px);
+  transition:max-height 220ms cubic-bezier(.77,0,.175,1),opacity 180ms ease-out,transform 180ms ease-out,padding 220ms ease-out,margin-top 220ms ease-out;
 }
-.quiz-wrap .feedback.show{display:block;}
+.quiz-wrap .feedback.show{margin-top:10px;padding:9px 12px;max-height:200px;opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){.quiz-wrap .feedback{transform:none;transition:opacity 180ms ease-out,max-height 220ms ease-out,padding 220ms ease-out,margin-top 220ms ease-out;}}
 .quiz-wrap .feedback.correct{background:rgba(240,253,244,0.80);color:#065F46;border:1px solid rgba(5,150,105,0.25);}
 .quiz-wrap .feedback.wrong{background:rgba(254,242,242,0.80);color:#991B1B;border:1px solid rgba(220,38,38,0.20);}
 
@@ -1007,20 +1028,37 @@ function renderWeekList(selIdx){
         </div>
         <div class="wchev" style="transform:rotate(${isSel?90:0}deg);">${CHEV}</div>
       </button>
-      <div class="wacc-body" id="wacc-body-${i}">${isSel?buildDetail(w):''}</div>
+      <div class="wacc-body-wrap${isSel?' open':''}" id="wacc-bodywrap-${i}">
+        <div class="wacc-body">${buildDetail(w)}</div>
+      </div>
     </div>`;
   }).join('');
-  if(selIdx!==null&&selIdx!==undefined){
-    const body=document.getElementById(`wacc-body-${selIdx}`);
-    if(body)body.style.display='block';
+}
+
+// Toggles one accordion row's open state via CSS (grid-template-rows), without
+// touching the rest of the list, so the height reveal can actually transition.
+function setRowOpen(idx,open){
+  const item=document.getElementById(`wacc-item-${idx}`);
+  if(!item)return;
+  const btn=item.querySelector('.wrow');
+  const wrap=document.getElementById(`wacc-bodywrap-${idx}`);
+  item.classList.toggle('active',open);
+  if(btn){
+    btn.classList.toggle('active',open);
+    btn.setAttribute('aria-expanded',String(open));
+    const chev=btn.querySelector('.wchev');
+    if(chev)chev.style.transform=`rotate(${open?90:0}deg)`;
   }
+  if(wrap)wrap.classList.toggle('open',open);
 }
 
 let curSel=getCurrentIdx();
 function selectWeek(idx){
   const closing=curSel===idx;
+  const prev=curSel;
   curSel=closing?null:idx;
-  renderWeekList(curSel);
+  if(prev!==null&&prev!==idx)setRowOpen(prev,false);
+  setRowOpen(idx,!closing);
   if(!closing){
     setTimeout(()=>{
       const item=document.getElementById(`wacc-item-${idx}`);
