@@ -171,7 +171,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .wacc-body-wrap{display:grid;grid-template-rows:minmax(0,0fr);transition:grid-template-rows 260ms cubic-bezier(.77,0,.175,1);}
 .wacc-body-wrap.open{grid-template-rows:minmax(0,1fr);}
 .wacc-body-wrap > .wacc-body{overflow:hidden;min-height:0;}
-.wacc-body{border-top:1px solid var(--cream-dark);padding:clamp(24px,4vw,44px);}
+.wacc-body{border-top:1px solid var(--cream-dark);padding:clamp(24px,4vw,44px);position:relative;z-index:0;}
+.wacc-body::before{
+  content:'';position:absolute;right:-30px;top:-10px;width:300px;height:290px;z-index:-1;
+  background:var(--navy);opacity:.05;pointer-events:none;
+  -webkit-mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+  mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+}
 @media(prefers-reduced-motion:reduce){.wacc-body-wrap{transition:none;}}
 .wnum{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;line-height:1;min-width:38px;text-align:center;flex:none;color:var(--ink-muted);}
 .wrow.active .wnum{color:var(--ink);}
@@ -377,7 +383,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   .mob-wrow.active .mob-wrow-divider{background:var(--navy);}
 
   /* Mobile detail view */
-  #view-detail{background:transparent;min-height:calc(100dvh - 80px);}
+  #view-detail{background:transparent;min-height:calc(100dvh - 80px);position:relative;overflow:hidden;}
+  #view-detail::before{
+    content:'';position:absolute;right:-50px;top:40px;width:260px;height:250px;z-index:-1;
+    background:var(--navy);opacity:.06;pointer-events:none;
+    -webkit-mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+    mask:url('assets/pattern-noise-circle.svg') center/contain no-repeat;
+  }
   .mob-detail-back{display:flex;align-items:center;gap:8px;padding:14px 20px;font-size:13px;font-weight:500;color:var(--navy);cursor:pointer;border-bottom:1px solid var(--cream-dark);background:var(--white);}
   .mob-detail-content{padding:20px 18px;}
   .mob-detail-h3{font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.1;letter-spacing:-0.01em;margin-bottom:5px;}
