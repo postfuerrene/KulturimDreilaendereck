@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1C1F3A">
+<meta name="theme-color" content="#2563EB">
 <title>Kultur im Dreiländereck · WiSe 26/27</title>
 <style>
 @font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype-variations');font-weight:300 700;font-style:normal;font-display:swap;}
@@ -11,28 +11,28 @@
 
 /* ── TOKENS ── */
 :root{
-  /* Cobalt-Blau als Primärfarbe, Amber als Akzent — mutig für Studierende */
-  --navy:#002D6B;          /* tiefes Cobalt statt Navy */
-  --navy-mid:#003D8F;
-  --terra:#E8950A;         /* warmes Amber statt Terrakotta */
-  --terra-light:#FFF4D6;
-  --cream:#F7F5F0;
-  --cream-dark:#ECEAE3;
+  /* Light, freundlich, modern */
+  --navy:#2563EB;          /* klares Blau als Primary */
+  --navy-mid:#1D4ED8;
+  --terra:#F59E0B;         /* warmes Amber als Akzent */
+  --terra-light:#FEF3C7;
+  --cream:#F5F7FA;         /* helles Seiten-Hintergrundgrau */
+  --cream-dark:#E9ECF1;
   --white:#FFFFFF;
-  --ink:#0A1A3A;
-  --ink-mid:#3A4A6A;
-  --ink-muted:#7A8AA0;
-  /* TK-Farben — gesättigter, stärker */
-  --tk1:#D64E1F;   /* kräftiges Rot-Orange  · TK1 Identität */
-  --tk2:#0055B3;   /* reines Cobalt         · TK2 Erinnerung */
-  --tk3:#1E7A44;   /* saftiges Grün         · TK3 Interkultur */
-  --tkS:#6B4FA0;   /* kräftiges Violett     · Synthese */
-  --tkE:#0A6E8A;   /* petrol                · Einstieg */
-  --shadow-sm:0 1px 3px rgba(0,45,107,0.12),0 1px 2px rgba(0,45,107,0.07);
-  --shadow-md:0 4px 16px rgba(0,45,107,0.13),0 2px 6px rgba(0,45,107,0.07);
-  --shadow-lg:0 12px 40px rgba(0,45,107,0.16),0 4px 12px rgba(0,45,107,0.10);
-  --r:12px;
-  --r-sm:8px;
+  --ink:#111827;
+  --ink-mid:#374151;
+  --ink-muted:#9CA3AF;
+  /* TK-Farben — lebhaft aber freundlich */
+  --tk1:#DC2626;   /* warmes Rot       · TK1 Identität */
+  --tk2:#2563EB;   /* Blau             · TK2 Erinnerung */
+  --tk3:#059669;   /* Grün             · TK3 Interkultur */
+  --tkS:#7C3AED;   /* Violett          · Synthese */
+  --tkE:#0891B2;   /* Cyan             · Einstieg */
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.10),0 4px 12px rgba(0,0,0,0.06);
+  --r:16px;
+  --r-sm:10px;
   --r-pill:999px;
   --transition:.18s cubic-bezier(.4,0,.2,1);
 }
@@ -40,235 +40,280 @@
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--cream);color:var(--ink);font-family:'Lora',Georgia,serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:72px;}
-@media(min-width:768px){body{padding-bottom:0;}}
-::selection{background:var(--terra);color:#fff;}
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-thumb{background:rgba(28,31,58,0.15);border-radius:4px;}
-:focus-visible{outline:2px solid var(--terra);outline-offset:3px;}
-a,button{transition:var(--transition);}
-button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
+body{background:#EFF3F8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:72px;}
 
-/* ── HERO / TOPBAR ── */
+/* ── PHOTO BACKGROUND ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(160deg,
+      rgba(239,246,255,0.78) 0%,
+      rgba(219,234,254,0.68) 40%,
+      rgba(237,233,254,0.72) 100%
+    ),
+    url('assets/bg.jpg') center 30% / cover no-repeat;
+}
+@media(min-width:768px){body{padding-bottom:0;}}
+::selection{background:var(--navy);color:#fff;}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:4px;}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px;}
+a,button{transition:var(--transition);}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+/* ── TOPBAR ── */
 .topbar{
   position:sticky;top:0;z-index:50;
-  background:rgba(28,31,58,0.97);
+  background:rgba(255,255,255,0.95);
   backdrop-filter:blur(12px) saturate(140%);
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid var(--cream-dark);
+  box-shadow:0 1px 0 rgba(0,0,0,0.04);
 }
 .topbar-inner{
   max-width:1320px;margin:0 auto;
-  padding:12px clamp(16px,4vw,48px);
+  padding:10px clamp(16px,4vw,48px);
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;
 }
 .logo{display:flex;align-items:center;gap:10px;margin-right:auto;text-decoration:none;}
-.logo img{width:30px;height:30px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;}
+.logo img{width:30px;height:30px;object-fit:contain;filter:none;opacity:1;}
 .logo-text{line-height:1.1;}
-.logo-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;display:block;letter-spacing:-0.01em;}
-.logo-sub{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.45);display:block;}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);display:block;letter-spacing:-0.01em;}
+.logo-sub{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);display:block;}
 .topbar-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--r-sm);font-size:12px;font-family:'Lora',serif;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15);transition:var(--transition);}
-.btn-ghost:hover{background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.3);}
-.btn-terra{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-family:'Lora',serif;background:var(--terra);color:#fff;transition:var(--transition);}
-.btn-terra:hover{background:#b55a3a;}
-.btn-next{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--r-sm);font-size:11px;font-family:'Lora',serif;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.12);transition:var(--transition);}
-.btn-next:hover{background:rgba(255,255,255,0.14);}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--r-sm);font-size:12px;font-family:inherit;color:var(--ink-mid);border:1px solid var(--cream-dark);transition:var(--transition);}
+.btn-ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--ink-muted);}
+.btn-terra{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-family:inherit;background:var(--navy);color:#fff;transition:var(--transition);}
+.btn-terra:hover{background:var(--navy-mid);}
+.btn-next{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--r-sm);font-size:11px;font-family:inherit;background:var(--terra-light);color:var(--ink-mid);border:1px solid #FDE68A;transition:var(--transition);}
+.btn-next:hover{background:#FDE68A;}
 .next-dot{width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.3);}}
-.next-kw{font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(255,255,255,0.4);}
+.next-kw{font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-muted);}
 
 /* ── HERO ── */
 .hero{
   position:relative;overflow:hidden;
-  background:linear-gradient(135deg,var(--navy) 0%,#2D3060 50%,#1A2545 100%);
-  padding:clamp(48px,7vw,96px) clamp(16px,4vw,48px) clamp(36px,5vw,72px);
+  background:linear-gradient(135deg,#EFF6FF 0%,#DBEAFE 45%,#EDE9FE 100%);
+  padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px) clamp(32px,4vw,56px);
 }
 .hero::before{
-  content:'';position:absolute;inset:0;
-  background:url('assets/enso-offwhite.png') right -80px top -80px / 560px 560px no-repeat;
-  opacity:0.06;pointer-events:none;
+  content:'';position:absolute;right:-120px;top:-120px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(37,99,235,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;left:-60px;bottom:-60px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,0.10) 0%,transparent 70%);
+  pointer-events:none;
 }
 .hero-inner{position:relative;z-index:1;max-width:1320px;margin:0 auto;}
-.hero-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:rgba(255,255,255,0.45);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
-.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--terra);flex:none;}
-.hero h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(42px,7vw,80px);line-height:1.0;letter-spacing:-0.025em;color:#fff;max-width:14ch;margin-bottom:20px;}
-.hero h1 em{color:var(--terra);font-style:normal;}
-.hero-lede{font-size:clamp(15px,2vw,18px);line-height:1.6;color:rgba(255,255,255,0.6);max-width:48ch;margin-bottom:32px;}
-.hero-meta-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-pill);font-size:12px;color:rgba(255,255,255,0.7);}
+.hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;}
+.hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--terra);border-radius:2px;flex:none;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);max-width:16ch;margin-bottom:18px;}
+.hero h1 em{color:var(--navy);font-style:normal;}
+.hero-lede{font-size:clamp(14px,1.8vw,17px);line-height:1.65;color:var(--ink-mid);max-width:52ch;margin-bottom:28px;}
+.hero-meta-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r-pill);font-size:12px;color:var(--ink-mid);box-shadow:var(--shadow-sm);}
 
 /* ── PROGRESS HIGHWAY ── */
-.highway-wrap{background:var(--navy);padding:0 clamp(16px,4vw,48px);}
-.highway{max-width:1320px;margin:0 auto;padding:16px 0 20px;}
-.highway-label{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.35);margin-bottom:10px;display:flex;justify-content:space-between;}
-.highway-track{display:flex;gap:3px;height:6px;border-radius:4px;overflow:hidden;}
+.highway-wrap{background:var(--white);border-bottom:1px solid var(--cream-dark);padding:0 clamp(16px,4vw,48px);}
+.highway{max-width:1320px;margin:0 auto;padding:12px 0 16px;}
+.highway-label{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:8px;display:flex;justify-content:space-between;}
+.highway-track{display:flex;gap:3px;height:5px;border-radius:4px;overflow:hidden;}
 .hwy-seg{flex:1;border-radius:2px;cursor:pointer;transition:opacity var(--transition),transform .15s;}
-.hwy-seg:hover{opacity:1 !important;transform:scaleY(1.4);}
+.hwy-seg:hover{opacity:1 !important;transform:scaleY(1.5);}
 .hwy-seg.is-current{animation:hwy-pulse 2s ease-in-out infinite;}
 @keyframes hwy-pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
 
 /* ── DASHBOARD ── */
-.dash{max-width:1320px;margin:0 auto;padding:clamp(24px,4vw,40px) clamp(16px,4vw,48px) 0;}
-.dash-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.dash{max-width:1320px;margin:0 auto;padding:clamp(20px,3.5vw,36px) clamp(16px,4vw,48px) 0;}
+.dash-grid{display:grid;grid-template-columns:1fr;gap:14px;}
 
 /* Feature card */
 .feature-card{
-  grid-column:span 2;
-  border-radius:var(--r);padding:clamp(24px,3.5vw,40px);
+  grid-column:span 1;
+  border-radius:var(--r);padding:clamp(22px,3.5vw,36px);
   position:relative;overflow:hidden;
   display:flex;flex-direction:column;
   box-shadow:var(--shadow-md);
-  min-height:240px;
+  min-height:220px;
 }
-.feature-card::after{content:'';position:absolute;right:-40px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none;}
+.feature-card::after{content:'';position:absolute;right:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.08);pointer-events:none;}
 .fc-top{display:flex;align-items:flex-start;gap:12px;justify-content:space-between;margin-bottom:auto;}
-.fc-chip{padding:5px 13px;border-radius:var(--r-pill);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;}
+.fc-chip{padding:4px 12px;border-radius:var(--r-pill);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;}
 .fc-kw{text-align:right;font-size:11px;line-height:1.3;}
-.fc-kw-label{text-transform:uppercase;letter-spacing:0.15em;font-size:9px;opacity:.55;}
+.fc-kw-label{text-transform:uppercase;letter-spacing:0.15em;font-size:9px;opacity:.6;}
 .fc-kw-val{font-family:'Cormorant Garamond',serif;font-size:18px;margin-top:2px;}
-.fc-body{margin-top:20px;}
-.fc-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.1;letter-spacing:-0.01em;margin-bottom:10px;}
-.fc-lead{font-size:14px;line-height:1.6;opacity:.75;margin-bottom:22px;font-style:italic;}
-.fc-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:rgba(0,0,0,0.18);border-radius:var(--r-sm);font-size:13px;font-family:'Lora',serif;color:inherit;border:1px solid rgba(255,255,255,0.2);transition:var(--transition);}
-.fc-cta:hover{background:rgba(0,0,0,0.28);}
+.fc-body{margin-top:18px;}
+.fc-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(22px,2.8vw,30px);line-height:1.15;letter-spacing:-0.01em;margin-bottom:8px;}
+.fc-lead{font-size:13px;line-height:1.6;opacity:.75;margin-bottom:18px;}
+.fc-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(18,18,18,0.78);border-radius:var(--r-pill);font-size:13px;font-family:inherit;color:#fff;border:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.12);transition:var(--transition);}
+.fc-cta:hover{background:rgba(18,18,18,0.92);box-shadow:0 6px 20px rgba(0,0,0,0.22),inset 0 1px 0 rgba(255,255,255,0.12);}
 .fc-cta svg{flex:none;}
 
 /* Donut card */
 .donut-card{
   grid-column:span 1;
   background:var(--white);border-radius:var(--r);
-  padding:clamp(22px,3vw,30px);
+  padding:clamp(20px,2.5vw,28px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  box-shadow:var(--shadow-sm);
+  box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);
 }
-.donut-heading{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:18px;}
-.donut-ring{position:relative;width:120px;height:120px;}
+.donut-heading{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-muted);margin-bottom:16px;font-weight:600;}
+.donut-ring{position:relative;width:110px;height:110px;}
 .donut-ring svg{transform:rotate(-90deg);}
 .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.donut-pct{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;color:var(--ink);}
-.donut-pct-label{font-size:10px;color:var(--ink-muted);margin-top:1px;}
-.donut-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-top:14px;}
+.donut-pct{font-size:26px;font-weight:700;line-height:1;color:var(--ink);}
+.donut-pct-label{font-size:10px;color:var(--ink-muted);margin-top:2px;}
+.donut-title{font-size:14px;font-weight:600;color:var(--ink);margin-top:12px;}
 .donut-sub{font-size:11px;color:var(--ink-muted);margin-top:3px;}
 
 /* Stat cards */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px;}
-.stat-card{background:var(--white);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow-sm);}
-.stat-val{font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:var(--ink);}
-.stat-name{font-size:13px;color:var(--ink);margin-top:8px;font-weight:500;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px;}
+.stat-card{background:var(--white);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);}
+.stat-val{font-size:36px;font-weight:700;line-height:1;color:var(--ink);}
+.stat-name{font-size:13px;color:var(--ink-mid);margin-top:6px;font-weight:500;}
 .stat-sub{font-size:11px;color:var(--ink-muted);margin-top:2px;}
 
 /* ── WOCHEN SECTION ── */
-.weeks-section{max-width:1320px;margin:0 auto;padding:clamp(36px,5vw,60px) clamp(16px,4vw,48px) clamp(60px,8vw,110px);}
-.section-header{margin-bottom:28px;}
-.section-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:0.22em;color:var(--ink-muted);display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--terra);flex:none;}
-.section-h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);}
+.weeks-section{max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,52px) clamp(16px,4vw,48px) clamp(48px,6vw,80px);}
+.section-header{margin-bottom:24px;}
+.section-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--navy);display:flex;align-items:center;gap:10px;margin-bottom:8px;font-weight:600;}
+.section-eyebrow::before{content:'';width:20px;height:2px;background:var(--terra);border-radius:2px;flex:none;}
+.section-h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,3.5vw,38px);line-height:1.1;letter-spacing:-0.015em;color:var(--ink);}
 
-/* Main layout */
-.week-layout{display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start;}
+/* Accordion week list */
+.week-list{display:flex;flex-direction:column;gap:5px;}
 
-/* Week list */
-.week-list{position:sticky;top:70px;max-height:calc(100vh - 90px);overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-right:4px;}
-.week-list::-webkit-scrollbar{width:4px;}
-.week-list::-webkit-scrollbar-thumb{background:rgba(28,31,58,0.12);border-radius:4px;}
-
-.wrow{
-  display:flex;align-items:center;gap:11px;
-  padding:13px 15px;background:var(--white);
-  border:1.5px solid transparent;border-radius:var(--r-sm);
-  text-align:left;cursor:pointer;width:100%;
-  transition:var(--transition);box-shadow:var(--shadow-sm);
+/* Accordion item wrapper */
+.wacc-item{
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-radius:var(--r-sm);
+  border:1px solid rgba(255,255,255,0.60);
+  box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,0.80);
+  overflow:hidden;
+  transition:border-color var(--transition),box-shadow var(--transition);
 }
-.wrow:hover{border-color:var(--terra);transform:translateX(2px);}
-.wrow.active{border-color:var(--terra);background:#FDF7F4;box-shadow:0 4px 16px rgba(196,106,74,0.15);}
-.wrow.past{opacity:0.6;}
-.wrow.is-pause{opacity:0.5;}
-.wnum{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-size:12px;font-weight:600;}
+.wacc-item.active{border-color:rgba(234,179,8,0.55);box-shadow:0 4px 24px rgba(234,179,8,0.18),inset 0 0 0 1px rgba(255,255,255,0.30);}
+.wacc-item.is-pause{opacity:0.75;}
+
+/* Accordion trigger row */
+.wrow{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 20px;background:none;
+  border:none;
+  text-align:left;cursor:pointer;width:100%;
+  transition:background var(--transition),box-shadow var(--transition);
+}
+.wrow:hover{background:var(--cream);}
+.wrow.active{
+  background:linear-gradient(135deg,rgba(255,240,80,0.50) 0%,rgba(234,179,8,0.28) 100%);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.65);
+}
+.wrow.past{opacity:0.55;}
+.wrow.is-pause{opacity:1;}
+
+
+/* Accordion body */
+.wacc-body{
+  display:none;border-top:1px solid var(--cream-dark);
+  padding:clamp(24px,4vw,44px);
+  animation:fadeUp .22s ease both;
+}
+.wnum{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;line-height:1;min-width:38px;text-align:center;flex:none;color:var(--ink-muted);}
+.wrow.active .wnum{color:var(--ink);}
+.wrow-divider{width:1px;height:40px;background:var(--cream-dark);flex:none;}
+.wrow.active .wrow-divider{background:rgba(234,179,8,0.50);}
 .winfo{flex:1 1 auto;min-width:0;}
-.wkw-line{display:flex;align-items:center;gap:7px;margin-bottom:2px;flex-wrap:wrap;}
-.wkw{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;}
-.wcurrent-tag{font-size:8px;padding:1px 6px;border-radius:var(--r-pill);background:var(--terra);color:#fff;font-weight:600;letter-spacing:0.06em;}
-.wtitle{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.2;color:var(--ink);}
-.wdate{font-size:10px;color:var(--ink-muted);white-space:nowrap;flex:none;}
-.wchev{flex:none;color:var(--terra);opacity:0;transition:opacity var(--transition);}
-.wrow.active .wchev,.wrow:hover .wchev{opacity:1;}
+.wtitle{font-size:15px;font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:3px;}
+.wmeta{font-size:12px;color:var(--ink-muted);}
+.wcurrent-tag{display:inline-block;font-size:8px;padding:2px 7px;border-radius:var(--r-pill);background:var(--navy);color:#fff;font-weight:600;letter-spacing:0.04em;margin-left:6px;vertical-align:middle;}
+.wchev{flex:none;color:var(--ink-muted);transition:transform .2s,color .2s;}
+.wrow.active .wchev{color:var(--ink);}
 
 /* ── DETAIL PANEL ── */
-.detail{background:var(--white);border-radius:var(--r);padding:clamp(28px,4.5vw,52px);box-shadow:var(--shadow-md);min-width:0;}
+.detail{min-width:0;}
 
-.detail-header{padding-bottom:24px;border-bottom:1px solid var(--cream-dark);margin-bottom:8px;}
+.detail-header{padding-bottom:20px;border-bottom:1px solid var(--cream-dark);margin-bottom:8px;}
 .detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-.d-series{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:8px;}
-.d-bar{height:2px;width:40px;border-radius:2px;margin-bottom:14px;}
-.d-meta{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink-muted);margin-bottom:6px;}
+.d-series{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;margin-bottom:6px;font-weight:700;}
+.d-bar{height:3px;width:32px;border-radius:2px;margin-bottom:12px;}
+.d-meta{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink-muted);margin-bottom:5px;}
 .d-kw{font-weight:700;color:var(--ink);}
-.d-h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-0.02em;}
-.d-chip{padding:6px 14px;border-radius:var(--r-pill);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;flex:none;align-self:flex-start;margin-top:4px;}
+.d-h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,3.5vw,38px);line-height:1.08;letter-spacing:-0.015em;}
+.d-chip{padding:5px 13px;border-radius:var(--r-pill);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;white-space:nowrap;flex:none;align-self:flex-start;margin-top:2px;}
 
-.detail-body{display:flex;flex-direction:column;gap:28px;padding-top:24px;}
+.detail-body{display:flex;flex-direction:column;gap:24px;padding-top:20px;}
 
 /* Leitfrage */
-.leitfrage{border-radius:var(--r);padding:clamp(20px,3vw,32px);position:relative;overflow:hidden;}
-.leitfrage::before{content:'\201C';position:absolute;top:-10px;right:16px;font-family:'Cormorant Garamond',serif;font-size:120px;color:rgba(0,0,0,0.07);line-height:1;pointer-events:none;}
-.lf-label{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--terra);margin-bottom:10px;font-weight:600;}
-.lf-q{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.8vw,28px);line-height:1.25;color:var(--ink);}
+.leitfrage{border-radius:var(--r);padding:clamp(18px,2.5vw,28px);position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.04);}
+.leitfrage::before{content:'\201C';position:absolute;top:-10px;right:14px;font-family:'Cormorant Garamond',serif;font-size:100px;color:rgba(0,0,0,0.06);line-height:1;pointer-events:none;}
+.lf-label{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy);margin-bottom:8px;font-weight:700;}
+.lf-q{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,24px);line-height:1.3;color:var(--ink);}
 
 /* Block headings */
-.block-h{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:14px;font-weight:600;}
+.block-h{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-muted);margin-bottom:12px;font-weight:700;}
 
 /* Video */
-.video-wrap{border-radius:var(--r-sm);overflow:hidden;background:#0d0f1a;box-shadow:var(--shadow-md);}
+.video-wrap{border-radius:var(--r-sm);overflow:hidden;background:#0a0a0a;box-shadow:var(--shadow-md);}
 .video-wrap video{width:100%;display:block;max-height:360px;}
-.video-meta{margin-top:10px;font-size:12px;color:var(--ink-muted);}
+.video-meta{margin-top:8px;font-size:12px;color:var(--ink-muted);}
 
 /* Resource items */
-.res-list{display:flex;flex-direction:column;gap:8px;}
+.res-list{display:flex;flex-direction:column;gap:7px;}
 .res-item{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 18px;border-radius:var(--r-sm);
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;border-radius:var(--r-sm);
   border:1.5px solid var(--cream-dark);
   text-decoration:none;color:var(--ink);
-  transition:var(--transition);
+  transition:var(--transition);background:var(--white);
 }
-.res-item:hover{border-color:var(--terra);background:var(--cream);transform:translateX(3px);}
-.res-icon{width:38px;height:38px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex:none;}
-.res-icon.pdf{background:var(--terra-light);color:var(--terra);}
-.res-name{font-size:14px;font-weight:500;line-height:1.3;}
-.res-meta{font-size:11px;color:var(--ink-muted);margin-top:2px;}
+.res-item:hover{border-color:var(--navy);background:#EFF6FF;transform:translateX(2px);}
+.res-icon{width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex:none;}
+.res-icon.pdf{background:#FEF3C7;color:#D97706;}
+.res-name{font-size:13px;font-weight:500;line-height:1.3;}
+.res-meta{font-size:11px;color:var(--ink-muted);margin-top:1px;}
 .res-arrow{flex:none;color:var(--ink-muted);transition:var(--transition);}
-.res-item:hover .res-arrow{color:var(--terra);}
+.res-item:hover .res-arrow{color:var(--navy);}
 
 /* Reflexionen */
-.ref-list{display:flex;flex-direction:column;gap:10px;}
+.ref-list{display:flex;flex-direction:column;gap:8px;}
 .ref-q{
-  display:flex;gap:14px;align-items:flex-start;
-  padding:16px 20px;border-radius:var(--r-sm);
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 18px;border-radius:var(--r-sm);
   background:var(--cream);border:1px solid var(--cream-dark);
 }
-.ref-num{width:26px;height:26px;min-width:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin-top:1px;}
-.ref-text{font-size:14px;line-height:1.6;color:var(--ink);}
+.ref-num{width:24px;height:24px;min-width:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#713F12;background:rgba(253,224,71,0.70) !important;margin-top:2px;}
+.ref-text{font-size:14px;line-height:1.6;color:var(--ink-mid);}
 
 /* Kulturatlas */
-.kulturatlas{border-radius:var(--r);padding:clamp(20px,3vw,30px);}
-.ka-label{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:8px;}
-.ka-text{font-size:14px;line-height:1.65;color:var(--ink);}
+.kulturatlas{border-radius:var(--r);padding:clamp(18px,2.5vw,26px);border:1px solid rgba(0,0,0,0.04);}
+.ka-label{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-muted);margin-bottom:8px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.ka-text{font-size:14px;line-height:1.65;color:var(--ink-mid);}
 .ka-btn{
   display:inline-flex;align-items:center;gap:8px;
-  margin-top:16px;padding:10px 20px;
-  background:var(--navy);color:#fff;
-  border-radius:var(--r-sm);font-size:12px;font-family:'Lora',serif;
-  text-decoration:none;transition:var(--transition);
+  margin-top:14px;padding:9px 18px;
+  background:var(--white);color:var(--ink-mid);
+  border:1.5px solid var(--cream-dark);
+  border-radius:var(--r-sm);font-size:12px;font-family:inherit;font-weight:500;
+  text-decoration:none;transition:var(--transition);box-shadow:var(--shadow-sm);
 }
-.ka-btn:hover{background:var(--navy-mid);}
+.ka-btn:hover{border-color:var(--ink-muted);background:var(--cream);color:var(--ink);}
 
 /* Präsenz */
-.praesenz{background:var(--cream);border-radius:var(--r);padding:clamp(20px,3vw,32px);border:1px solid var(--cream-dark);}
-.praesenz-meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12.5px;color:var(--ink-muted);margin-bottom:14px;padding:10px 14px;background:var(--cream-dark);border-radius:var(--r-sm);}
+.praesenz{background:var(--cream);border-radius:var(--r);padding:clamp(18px,2.5vw,28px);border:1px solid var(--cream-dark);}
+.praesenz-meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:var(--ink-mid);margin-bottom:14px;padding:10px 14px;background:var(--white);border-radius:var(--r-sm);border:1px solid var(--cream-dark);}
 .praesenz-meta span{display:flex;align-items:center;gap:5px;}
-.praesenz-themen{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
-.praesenz-themen li{display:flex;gap:11px;font-size:14px;line-height:1.5;}
-.praesenz-themen li::before{content:'→';flex:none;margin-top:0;}
-.praesenz-referat{padding:14px 18px;border-radius:var(--r-sm);border-left:3px solid var(--terra);background:var(--white);font-size:13px;margin-bottom:10px;}
+.praesenz-themen{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.praesenz-themen li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:var(--ink-mid);}
+.praesenz-themen li::before{content:'→';flex:none;color:var(--navy);font-weight:600;margin-top:0;}
+.praesenz-referat{padding:12px 16px;border-radius:var(--r-sm);border-left:3px solid var(--navy);background:var(--white);font-size:13px;margin-bottom:10px;color:var(--ink-mid);}
 .praesenz-note{font-size:12px;color:var(--ink-muted);font-style:italic;}
 .praesenz-ort{font-size:13px;color:var(--ink-muted);font-weight:600;margin-top:10px;}
 
@@ -276,23 +321,24 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
 .mobile-nav{
   display:none;
   position:fixed;bottom:0;left:0;right:0;z-index:60;
-  background:rgba(28,31,58,0.97);
+  background:rgba(255,255,255,0.97);
   backdrop-filter:blur(12px) saturate(140%);
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding:8px 0 max(8px, env(safe-area-inset-bottom));
+  border-top:1px solid var(--cream-dark);
+  padding:6px 0 max(6px, env(safe-area-inset-bottom));
+  box-shadow:0 -4px 20px rgba(0,0,0,0.06);
 }
 .mobile-nav-inner{display:flex;justify-content:space-around;align-items:center;}
 .mnav-btn{
-  display:flex;flex-direction:column;align-items:center;gap:4px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
   padding:6px 20px;border-radius:var(--r-sm);
-  font-size:10px;color:rgba(255,255,255,0.45);
-  text-transform:uppercase;letter-spacing:0.12em;
-  transition:var(--transition);background:none;border:none;cursor:pointer;font-family:'Lora',serif;
+  font-size:10px;color:var(--ink-muted);
+  text-transform:uppercase;letter-spacing:0.10em;font-weight:600;
+  transition:var(--transition);background:none;border:none;cursor:pointer;font-family:inherit;
   min-width:48px;min-height:48px;justify-content:center;
 }
-.mnav-btn.active{color:#fff;}
+.mnav-btn.active{color:var(--navy);}
 .mnav-btn svg{transition:var(--transition);}
-.mnav-btn.active svg{stroke:var(--terra);}
+.mnav-btn.active svg{stroke:var(--navy);}
 .mnav-dot{width:4px;height:4px;border-radius:50%;background:var(--terra);margin-top:1px;opacity:0;}
 .mnav-btn.active .mnav-dot{opacity:1;}
 
@@ -300,12 +346,6 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
 .mobile-view{display:none;}
 
 /* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .dash-grid{grid-template-columns:1fr 1fr;}
-  .feature-card{grid-column:span 2;}
-  .donut-card{grid-column:span 2;}
-  .stats-grid{grid-template-columns:repeat(2,1fr);}
-}
 
 @media(max-width:768px){
   body{padding-bottom:80px;}
@@ -317,72 +357,241 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
   .mobile-view{display:block;}
 
   /* Mobile home view */
-  #view-home{background:var(--cream);min-height:calc(100dvh - 80px);}
+  #view-home{background:transparent;min-height:calc(100dvh - 80px);}
   .mob-hero{
-    background:linear-gradient(160deg,var(--navy) 0%,#2D3060 60%,#1A2545 100%);
-    padding:32px 20px 28px;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#EFF6FF 0%,#DBEAFE 50%,#EDE9FE 100%);
+    padding:28px 20px 24px;position:relative;overflow:hidden;
   }
-  .mob-hero::before{content:'';position:absolute;inset:0;background:url('assets/enso-offwhite.png') right -40px top -40px / 240px 240px no-repeat;opacity:0.07;pointer-events:none;}
+  .mob-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.15) 0%,transparent 70%);pointer-events:none;}
   .mob-hero-inner{position:relative;z-index:1;}
-  .mob-greeting{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:rgba(255,255,255,0.45);margin-bottom:10px;}
-  .mob-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;line-height:1.05;letter-spacing:-0.02em;margin-bottom:8px;}
-  .mob-title em{color:var(--terra);font-style:normal;}
-  .mob-sub{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;}
+  .mob-greeting{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy);margin-bottom:8px;font-weight:600;}
+  .mob-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1.1;letter-spacing:-0.015em;margin-bottom:6px;}
+  .mob-title em{color:var(--navy);font-style:normal;}
+  .mob-sub{font-size:13px;color:var(--ink-muted);line-height:1.5;}
 
   /* Mobile feature card */
-  .mob-feature{margin:16px 16px 0;border-radius:var(--r);padding:22px 20px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;}
-  .mob-feature::after{content:'';position:absolute;right:-30px;bottom:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.07);pointer-events:none;}
-  .mob-fc-chip{display:inline-flex;align-items:center;padding:4px 12px;border-radius:var(--r-pill);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:14px;}
-  .mob-fc-title{font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1.1;margin-bottom:8px;}
-  .mob-fc-lead{font-size:13px;line-height:1.55;opacity:.7;margin-bottom:18px;font-style:italic;}
-  .mob-fc-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:var(--r-sm);font-size:13px;font-family:'Lora',serif;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.2);color:inherit;transition:var(--transition);}
+  .mob-feature{margin:14px 14px 0;border-radius:var(--r);padding:20px 18px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;}
+  .mob-feature::after{content:'';position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.10);pointer-events:none;}
+  .mob-fc-chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--r-pill);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;}
+  .mob-fc-title{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.15;margin-bottom:6px;}
+  .mob-fc-lead{font-size:12px;line-height:1.55;opacity:.75;margin-bottom:16px;}
+  .mob-fc-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:var(--r-pill);font-size:13px;font-family:inherit;font-weight:500;background:rgba(18,18,18,0.78);color:#fff;border:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.12);transition:var(--transition);}
 
   /* Mobile stats */
-  .mob-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px 16px 0;}
-  .mob-stat{background:var(--white);border-radius:var(--r-sm);padding:16px;box-shadow:var(--shadow-sm);}
-  .mob-stat-val{font-family:'Cormorant Garamond',serif;font-size:32px;line-height:1;}
-  .mob-stat-name{font-size:12px;margin-top:4px;}
+  .mob-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 14px 0;}
+  .mob-stat{background:var(--white);border-radius:var(--r-sm);padding:14px 16px;box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);}
+  .mob-stat-val{font-size:28px;font-weight:700;line-height:1;color:var(--ink);}
+  .mob-stat-name{font-size:11px;font-weight:500;margin-top:4px;color:var(--ink-mid);}
   .mob-stat-sub{font-size:10px;color:var(--ink-muted);}
 
   /* Mobile progress */
-  .mob-progress{margin:16px 16px 0;background:var(--white);border-radius:var(--r);padding:18px 18px 16px;box-shadow:var(--shadow-sm);}
-  .mob-progress-label{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-muted);margin-bottom:12px;display:flex;justify-content:space-between;}
-  .mob-progress-bar{height:6px;background:var(--cream-dark);border-radius:4px;overflow:hidden;}
-  .mob-progress-fill{height:100%;background:var(--terra);border-radius:4px;transition:width .6s ease;}
-  .mob-progress-dates{display:flex;justify-content:space-between;margin-top:8px;font-size:10px;color:var(--ink-muted);}
+  .mob-progress{margin:14px 14px 0;background:rgba(255,255,255,0.78);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-radius:var(--r);padding:16px 18px 14px;box-shadow:var(--shadow-sm);border:1px solid rgba(255,255,255,0.60);}
+  .mob-progress-label{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-muted);margin-bottom:10px;display:flex;justify-content:space-between;font-weight:600;}
+  .mob-progress-bar{height:5px;background:var(--cream-dark);border-radius:4px;overflow:hidden;}
+  .mob-progress-fill{height:100%;background:var(--navy);border-radius:4px;transition:width .6s ease;}
+  .mob-progress-dates{display:flex;justify-content:space-between;margin-top:7px;font-size:10px;color:var(--ink-muted);}
 
   /* Mobile padlet link */
-  .mob-padlet{display:flex;align-items:center;gap:12px;margin:16px 16px 24px;padding:16px 18px;background:var(--navy);border-radius:var(--r);color:#fff;text-decoration:none;box-shadow:var(--shadow-md);}
-  .mob-padlet-icon{width:36px;height:36px;border-radius:var(--r-sm);background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex:none;}
+  .mob-padlet{display:flex;align-items:center;gap:12px;margin:14px 14px 20px;padding:14px 16px;background:var(--navy);border-radius:var(--r);color:#fff;text-decoration:none;box-shadow:var(--shadow-md);}
+  .mob-padlet-icon{width:34px;height:34px;border-radius:var(--r-sm);background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex:none;}
   .mob-padlet-text{flex:1;}
   .mob-padlet-title{font-size:13px;font-weight:500;}
-  .mob-padlet-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:1px;}
+  .mob-padlet-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:1px;}
 
   /* Mobile week list view */
-  #view-weeks{padding:20px 16px;background:var(--cream);min-height:calc(100dvh - 80px);}
-  #view-weeks .section-header{margin-bottom:16px;}
-  .mob-wlist{display:flex;flex-direction:column;gap:8px;}
+  #view-weeks{padding:0;background:transparent;min-height:calc(100dvh - 80px);}
+  #view-weeks .section-header{padding:20px 18px 14px;margin-bottom:0;}
+  .mob-wlist{display:flex;flex-direction:column;}
+
+  /* New syllabus-style week rows */
+  .mob-wrow{
+    display:flex;align-items:center;gap:16px;
+    padding:18px 18px;
+    background:rgba(255,255,255,0.78);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid rgba(255,255,255,0.50);
+    text-align:left;cursor:pointer;width:100%;
+    transition:background var(--transition);
+    border:none;font-family:inherit;
+  }
+  .mob-wrow:active{background:var(--cream);}
+  .mob-wrow.is-pause{opacity:0.45;}
+  .mob-wnum{
+    font-family:'Cormorant Garamond',serif;
+    font-size:36px;font-weight:400;line-height:1;
+    min-width:42px;text-align:center;flex:none;
+  }
+  .mob-wrow-divider{width:1px;height:44px;background:var(--cream-dark);flex:none;}
+  .mob-wrow-info{flex:1;min-width:0;}
+  .mob-wrow-title{font-size:16px;font-weight:600;line-height:1.2;color:var(--ink);margin-bottom:4px;}
+  .mob-wrow-meta{font-size:12px;color:var(--ink-muted);}
+  .mob-wrow-chev{flex:none;color:var(--ink-muted);}
+  .mob-wrow.active .mob-wrow-title{color:var(--navy);}
+  .mob-wrow.active .mob-wnum{color:var(--navy);}
+  .mob-wrow.active .mob-wrow-divider{background:var(--navy);}
 
   /* Mobile detail view */
-  #view-detail{background:var(--white);min-height:calc(100dvh - 80px);}
-  .mob-detail-back{display:flex;align-items:center;gap:8px;padding:16px 20px;font-size:13px;color:var(--terra);cursor:pointer;border-bottom:1px solid var(--cream-dark);}
-  .mob-detail-content{padding:24px 20px;}
-  .mob-detail-h3{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.1;letter-spacing:-0.015em;margin-bottom:6px;}
-  .mob-detail-meta{font-size:12px;color:var(--ink-muted);margin-bottom:20px;}
-  .mob-detail-body{display:flex;flex-direction:column;gap:22px;}
+  #view-detail{background:transparent;min-height:calc(100dvh - 80px);}
+  .mob-detail-back{display:flex;align-items:center;gap:8px;padding:14px 20px;font-size:13px;font-weight:500;color:var(--navy);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.50);background:rgba(255,255,255,0.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+  .mob-detail-content{padding:20px 18px;}
+  .mob-detail-h3{font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.1;letter-spacing:-0.01em;margin-bottom:5px;}
+  .mob-detail-meta{font-size:12px;color:var(--ink-muted);margin-bottom:18px;}
+  .mob-detail-body{display:flex;flex-direction:column;gap:20px;}
 }
 
-@media(min-width:769px){
-  .week-layout{grid-template-columns:300px 1fr;}
-}
-@media(min-width:1024px){
-  .week-layout{grid-template-columns:340px 1fr;}
-}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 .detail{animation:fadeUp .25s ease both;}
 .mob-feature{animation:fadeUp .22s ease both;}
+
+/* ── QUIZ BUTTON ── */
+.quiz-open-btn{display:flex;align-items:center;gap:10px;margin-top:18px;padding:14px 20px;background:var(--tkS);color:#fff;border:none;border-radius:var(--r-sm);cursor:pointer;font-family:'Lora',serif;font-size:14px;font-weight:600;letter-spacing:.03em;transition:var(--transition);width:100%;}
+.quiz-open-btn:hover{background:#5a3f8f;transform:translateY(-1px);box-shadow:var(--shadow-md);}
+.quiz-open-btn svg{flex-shrink:0;}
+
+/* ── QUIZ MODAL ── */
+#quiz-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(17,24,39,0.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);overflow-y:auto;}
+#quiz-modal.open{display:flex;align-items:flex-start;justify-content:center;padding:24px 16px 48px;}
+.quiz-wrap{
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.70);
+  box-shadow:0 24px 64px rgba(0,0,0,0.14),inset 0 1px 0 rgba(255,255,255,0.80);
+  border-radius:var(--r);max-width:740px;width:100%;overflow:hidden;
+  animation:fadeUp .22s ease both;
+}
+.quiz-wrap *{box-sizing:border-box;margin:0;padding:0;}
+.quiz-modal-header-wrap{position:relative;}
+
+/* Header — yellow glass (matches feature card) */
+.quiz-wrap .qheader{
+  background:linear-gradient(135deg,rgba(255,240,80,0.55) 0%,rgba(234,179,8,0.32) 100%);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid rgba(234,179,8,0.35);
+  padding:clamp(20px,3vw,32px) clamp(20px,3vw,32px) 0;
+  position:relative;overflow:hidden;
+}
+.quiz-wrap .qheader::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(253,224,71,0.25);pointer-events:none;
+}
+.quiz-close{
+  position:absolute;top:14px;right:14px;
+  background:rgba(18,18,18,0.78);border:none;color:#fff;
+  width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.18);transition:var(--transition);
+}
+.quiz-close:hover{background:rgba(18,18,18,0.92);}
+.quiz-wrap .qheader-label{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-muted);margin-bottom:6px;font-weight:600;
+}
+.quiz-wrap .qheader h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,4vw,2.1rem);font-weight:400;line-height:1.1;
+  letter-spacing:-0.02em;color:var(--ink);margin-bottom:5px;
+}
+.quiz-wrap .qheader h1 span{color:var(--navy);}
+.quiz-wrap .qheader p{font-size:12px;color:var(--ink-muted);}
+
+/* Tabs */
+.quiz-wrap .qtabs{
+  display:flex;padding:0 clamp(16px,3vw,32px);
+  border-bottom:1px solid rgba(234,179,8,0.35);
+  background:rgba(255,249,196,0.30);
+  overflow-x:auto;gap:4px;
+}
+.quiz-wrap .qtab{
+  padding:12px 16px;font-size:11px;font-family:inherit;
+  letter-spacing:.04em;cursor:pointer;color:var(--ink-muted);
+  border:none;background:none;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:var(--transition);white-space:nowrap;font-weight:500;
+}
+.quiz-wrap .qtab:hover{color:var(--ink);}
+.quiz-wrap .qtab.active{color:var(--ink);border-bottom-color:rgba(234,179,8,0.80);font-weight:600;}
+
+/* Body */
+.quiz-wrap .qmain{padding:clamp(16px,3vw,28px) clamp(16px,3vw,32px) clamp(24px,4vw,40px);}
+.quiz-wrap .qsection{display:none;}
+.quiz-wrap .qsection.active{display:block;}
+.quiz-wrap .qsection-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;
+  color:var(--ink);margin-bottom:3px;margin-top:20px;
+}
+.quiz-wrap .qsection-sub{font-size:11px;color:var(--ink-muted);margin-bottom:16px;}
+
+/* Score bar */
+.quiz-wrap .score-bar-wrap{margin:12px 0 5px;background:var(--cream-dark);border-radius:var(--r-pill);height:5px;overflow:hidden;}
+.quiz-wrap .score-bar{height:100%;background:var(--navy);border-radius:var(--r-pill);width:0%;transition:width .5s ease;}
+.quiz-wrap .score-text{font-size:11px;color:var(--ink-muted);margin-bottom:16px;}
+.quiz-wrap .score-text strong{color:var(--ink);}
+
+/* Question blocks */
+.quiz-wrap .question-block{
+  background:var(--white);border-radius:var(--r-sm);
+  padding:16px 18px;margin-bottom:8px;
+  border:1.5px solid var(--cream-dark);
+  transition:border-color .25s;
+}
+.quiz-wrap .question-block.answered-correct{border-color:rgba(5,150,105,0.40);background:rgba(240,253,244,0.70);}
+.quiz-wrap .question-block.answered-wrong{border-color:rgba(220,38,38,0.30);background:rgba(254,242,242,0.70);}
+.quiz-wrap .question-num{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:5px;font-weight:600;}
+.quiz-wrap .question-text{font-size:14px;line-height:1.55;margin-bottom:12px;color:var(--ink);font-weight:500;}
+
+/* Options */
+.quiz-wrap .options{display:flex;flex-direction:column;gap:6px;}
+.quiz-wrap .qoption{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 13px;border-radius:var(--r-sm);
+  border:1.5px solid var(--cream-dark);cursor:pointer;
+  font-size:13px;line-height:1.45;background:var(--cream);
+  transition:var(--transition);text-align:left;width:100%;
+  font-family:inherit;color:var(--ink-mid);
+}
+.quiz-wrap .qoption:hover:not(:disabled){border-color:var(--navy);background:#EFF6FF;color:var(--ink);}
+.quiz-wrap .qoption:disabled{cursor:default;}
+.quiz-wrap .qoption.correct{border-color:rgba(5,150,105,0.60);background:rgba(240,253,244,0.80);color:#065F46;}
+.quiz-wrap .qoption.wrong{border-color:rgba(220,38,38,0.45);background:rgba(254,242,242,0.80);color:#991B1B;}
+.quiz-wrap .qoption.reveal{border-color:rgba(5,150,105,0.40);background:rgba(240,253,244,0.50);color:#065F46;opacity:.7;}
+.quiz-wrap .option-letter{
+  font-size:9px;font-weight:700;letter-spacing:.06em;
+  min-width:18px;height:18px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(253,224,71,0.55);color:#713F12;
+  flex:none;margin-top:1px;
+}
+.quiz-wrap .qoption.correct .option-letter{background:rgba(5,150,105,0.18);color:#065F46;}
+.quiz-wrap .qoption.wrong .option-letter{background:rgba(220,38,38,0.15);color:#991B1B;}
+.quiz-wrap .qoption.reveal .option-letter{background:rgba(5,150,105,0.14);color:#065F46;}
+
+/* Feedback */
+.quiz-wrap .feedback{
+  margin-top:10px;font-size:12px;line-height:1.55;
+  padding:9px 12px;border-radius:var(--r-sm);display:none;
+}
+.quiz-wrap .feedback.show{display:block;}
+.quiz-wrap .feedback.correct{background:rgba(240,253,244,0.80);color:#065F46;border:1px solid rgba(5,150,105,0.25);}
+.quiz-wrap .feedback.wrong{background:rgba(254,242,242,0.80);color:#991B1B;border:1px solid rgba(220,38,38,0.20);}
+
+/* Reset button — floating dark pill */
+.quiz-wrap .btn-reset{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;padding:10px 20px;
+  background:rgba(18,18,18,0.78);border-radius:var(--r-pill);
+  font-size:12px;font-family:inherit;color:#fff;border:none;cursor:pointer;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 4px 16px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.12);
+  transition:var(--transition);letter-spacing:.03em;
+}
+.quiz-wrap .btn-reset:hover{background:rgba(18,18,18,0.92);box-shadow:0 6px 20px rgba(0,0,0,0.22),inset 0 1px 0 rgba(255,255,255,0.12);}
 </style>
 </head>
 <body>
@@ -391,7 +600,7 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
 <nav class="topbar" role="navigation">
   <div class="topbar-inner">
     <a class="logo" href="#" aria-label="Zur Startseite">
-      <img src="assets/logo-ikd.svg" alt="IK Logo" style="width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;">
+      <img src="assets/logo-ikd.svg" alt="IK Logo" style="width:34px;height:34px;object-fit:contain;color:var(--navy);">
       <div class="logo-text">
         <span class="logo-name">Kultur im Dreiländereck</span>
         <span class="logo-sub">WiSe 2026 / 2027</span>
@@ -466,32 +675,6 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
       </div>
     </div>
 
-    <!-- Donut -->
-    <div class="donut-card">
-      <div class="donut-heading">Semesterfortschritt</div>
-      <div class="donut-ring">
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--cream-dark)" stroke-width="10"/>
-          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--terra)" stroke-width="10"
-            stroke-linecap="round" id="donut-arc"
-            stroke-dasharray="301.59" stroke-dashoffset="301.59"/>
-        </svg>
-        <div class="donut-center">
-          <span class="donut-pct" id="donut-pct">0 %</span>
-          <span class="donut-pct-label">abgeschlossen</span>
-        </div>
-      </div>
-      <div class="donut-title" id="donut-weeks">— Wochen</div>
-      <div class="donut-sub">von 14 Wochen · WiSe 26/27</div>
-    </div>
-  </div>
-
-  <!-- Stats -->
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-val">16</div><div class="stat-name">Semesterwochen</div><div class="stat-sub">inkl. Pause</div></div>
-    <div class="stat-card"><div class="stat-val">7</div><div class="stat-name">Selbststudiumswochen</div><div class="stat-sub">mit Video &amp; Lektüre</div></div>
-    <div class="stat-card"><div class="stat-val">7</div><div class="stat-name">Präsenztermine</div><div class="stat-sub">Mi · 08:00–11:30 Uhr</div></div>
-    <div class="stat-card"><div class="stat-val" id="stat-ka">6</div><div class="stat-name">Kulturatlas-Aufträge</div><div class="stat-sub">Padlet-Einträge</div></div>
   </div>
 </div>
 
@@ -501,12 +684,7 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
     <div class="section-eyebrow">Wochenübersicht</div>
     <h2 class="section-h2">Klicken Sie sich durch das Semester</h2>
   </div>
-  <div class="week-layout">
-    <div class="week-list" id="week-list"></div>
-    <div class="detail" id="detail">
-      <div style="padding:40px;text-align:center;color:var(--ink-muted);font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;">Wählen Sie eine Woche aus der Liste.</div>
-    </div>
-  </div>
+  <div class="week-list" id="week-list"></div>
 </div>
 
 <!-- ============ MOBILE VIEWS ============ -->
@@ -529,13 +707,6 @@ button{cursor:pointer;border:none;background:none;font-family:'Lora',serif;}
       Zur Woche öffnen
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
     </button>
-  </div>
-
-  <div class="mob-stats">
-    <div class="mob-stat"><div class="mob-stat-val" id="mob-pct">0%</div><div class="mob-stat-name">Fortschritt</div><div class="mob-stat-sub">Semester</div></div>
-    <div class="mob-stat"><div class="mob-stat-val">5</div><div class="mob-stat-name">Selbststudium</div><div class="mob-stat-sub">Wochen mit Material</div></div>
-    <div class="mob-stat"><div class="mob-stat-val">7</div><div class="mob-stat-name">Präsenztermine</div><div class="mob-stat-sub">Mi · G II/B260</div></div>
-    <div class="mob-stat"><div class="mob-stat-val">5</div><div class="mob-stat-name">Kulturatlas</div><div class="mob-stat-sub">Padlet-Aufträge</div></div>
   </div>
 
   <div class="mob-progress">
@@ -669,7 +840,13 @@ const WEEKS = [
    title:'Buß- und Bettag – Vorlesungsfrei',
    lead:'Gesetzlicher Feiertag in Sachsen. Kein Unterricht.'},
 
-  {kw:48,label:'KW 48',date:'25.11.2026',short:'25.11.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
+  // ── alles um einen Slot nach hinten verschoben (Buß- und Bettag) ──
+  {kw:48,label:'KW 48',date:'25.11.2026',short:'25.11.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
+   title:'Gedenk- und Erinnerungsorte',
+   lead:'Konzept der Erinnerungsorte, unterschiedliche nationale Narrative zu Krieg und Vertreibung, Formen des Erinnerns.',
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Konzept der Erinnerungsorte (Pierre Nora: Lieux de Mémoire)','Unterschiede nationaler Narrative: Krieg, Holocaust, Vertreibung, Sozialismus','Formen des Erinnerns: Mahnmale, Museen, digitale Plattformen','Zentrale Gedenkorte im Dreiländereck'],referat:'🎤 Referat 2a – Geteilte Geschichte – gemeinsame Erinnerung? (Gruppe 3)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Perspektivenwechsel · Jigsaw'}},
+
+  {kw:49,label:'KW 49',date:'02.12.2026',short:'02.12.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
    title:'Kulturkontakte und grenzüberschreitende Kulturarbeit',
    lead:'Kulturkontakte als Motor gesellschaftlichen Wandels: ViaThea, Neisse Filmfestival, Europaschule und Begegnungsorte im Grenzraum.',
    leitfrage:'Welche Institutionen und Projekte gestalten aktiv grenzüberschreitende Kulturarbeit – und wer profitiert davon?',
@@ -682,12 +859,12 @@ const WEEKS = [
    refs:['Beschreiben Sie ein grenzüberschreitendes Kulturprojekt im Dreiländereck. Welche Herausforderungen gibt es bei der Umsetzung?','Welche Rolle spielt Sprache als Barriere und Brücke in der grenzüberschreitenden Kulturarbeit?','Analysieren Sie die Europaschule als Modell: Welche Kompetenzen vermittelt sie – und welche blinden Flecken hat das Modell?'],
    ka:'Analysieren Sie einen Begegnungsort oder ein Kulturprojekt im Dreiländereck (z. B. ViaThea, Grenzpendler-Alltag, Europaschule). Padlet-Eintrag mit Kategorie „Begegnung" erstellen.'},
 
-  {kw:49,label:'KW 49',date:'02.12.2026',short:'02.12.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
+  {kw:50,label:'KW 50',date:'09.12.2026',short:'09.12.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
    title:'Kulturorte + Abschluss TK 2',
    lead:'Kulturelle Infrastruktur, grenzüberschreitende Projekte, World Café und Postersession zum Abschluss von TK 2.',
    praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Kulturelle Infrastruktur: Theater, Museen, Bibliotheken, Begegnungszentren','Analyse grenzüberschreitender Kulturprojekte: Neisse Filmfestival, ViaThea u. a.','Rolle institutioneller und zivilgesellschaftlicher Träger','Abschluss TK 2: Postersession + Reflexionsrunde'],referat:'🎤 Referat 2b – Kultur verbindet? (Gruppe 1)',methoden:'Kulturatlas-Kurzpräsentation · World Café · Postersession'}},
 
-  {kw:50,label:'KW 50',date:'09.12.2026',short:'09.12.',mode:'selbststudium',tk:'TK 3 · Interkulturelle Politik',
+  {kw:51,label:'KW 51',date:'16.12.2026',short:'16.12.',mode:'selbststudium',tk:'TK 3 · Interkulturelle Politik',
    title:'Interkulturelle Politik im Grenzraum',
    lead:'Akteure und Institutionen: Euroregion Neiße, INTERREG, grenzüberschreitende Kulturpolitik und ihre politischen Spannungsfelder.',
    leitfrage:'Wer hat die Macht, interkulturelle Begegnung im Dreiländereck zu gestalten – und wessen Interessen stehen dahinter?',
@@ -699,34 +876,28 @@ const WEEKS = [
    refs:['Welche Aufgaben übernimmt die Euroregion Neiße im Bereich Kulturförderung? Nennen Sie konkrete Beispiele.','Inwiefern kann INTERREG als Instrument kulturpolitischer Steuerung verstanden werden? Welche Schwächen hat das System?','Vorbereitung IBZ-Exkursion: Welche Fragen möchten Sie den Experten vor Ort (Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille) stellen?'],
    ka:'Recherchieren Sie eine Institution interkultureller Politik im Dreiländereck (z. B. Euroregion Neiße, INTERREG-Projekt). Analysieren Sie Aufgaben, Reichweite und Finanzierung. Padlet-Eintrag erstellen.'},
 
-  {kw:51,label:'KW 51',date:'16.12.2026',short:'16.12.',mode:'praesenz',tk:'TK 3 · Interkulturelle Politik',
-   title:'Kulturnetzwerk + Exkursion IBZ St. Marienthal',
-   lead:'Letzter Präsenztermin vor Weihnachten. Expertengespräche in Ostritz mit Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille.',
-   praesenz:{zeiten:ZEIT,themen:['Interkulturelle Politik im Grenzraum: Akteure, Institutionen, Spannungsfelder','Fallanalyse eines grenzüberschreitenden Kulturprojekts','Expertengespräche vor Ort: Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille'],referat:'🎤 Referat 3a – Wer gestaltet Begegnung? (Gruppe 2) · 🎤 Referat 3b – Begegnung in der Praxis (Gruppe 3)',methoden:'Expertengespräche · Buzz Groups · Live-Padlet-Eintrag · Abschlussreflexion',ort:'📍 Stiftung IBZ St. Marienthal, Ostritz'}},
-
   {kw:52,label:'KW 52–1',date:'23.12.2026',short:'23.12.–05.01.',mode:'pause',tk:'Pause',
    title:'Weihnachtspause',lead:'Vorlesungsfreie Zeit – KW 52 (2026) und KW 1 (2027). Gute Erholung!'},
 
-  {kw:1,label:'KW 1',date:'06.01.2027',short:'06.01.',mode:'selbststudium',tk:'Synthese',
+  {kw:1,label:'KW 1',date:'06.01.2027',short:'06.01.',mode:'praesenz',tk:'TK 3 · Interkulturelle Politik',
+   title:'Kulturnetzwerk + Exkursion IBZ St. Marienthal',
+   lead:'Expertengespräche in Ostritz mit Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille.',
+   praesenz:{zeiten:ZEIT,themen:['Interkulturelle Politik im Grenzraum: Akteure, Institutionen, Spannungsfelder','Fallanalyse eines grenzüberschreitenden Kulturprojekts','Expertengespräche vor Ort: Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille'],referat:'🎤 Referat 3a – Wer gestaltet Begegnung? (Gruppe 2) · 🎤 Referat 3b – Begegnung in der Praxis (Gruppe 3)',methoden:'Expertengespräche · Buzz Groups · Live-Padlet-Eintrag · Abschlussreflexion',ort:'📍 Stiftung IBZ St. Marienthal, Ostritz'}},
+
+  {kw:2,label:'KW 2',date:'13.01.2027',short:'13.01.',mode:'selbststudium',tk:'Synthese',
    title:'Synthese und Prüfungsvorbereitung',
    lead:'Was hält das Dreiländereck zusammen? Rückblick und Gesamtsynthese. Kulturatlas finalisieren, Begriffe und Theorien wiederholen.',
    leitfrage:'Was hält das Dreiländereck kulturell zusammen – und was hält es auseinander?',
    video:{path:'KW2/Synthese.mp4',label:'Input-Video: Synthese',meta:'Abschlusslektion'},
    pdfs:[],
    refs:['Verbinden Sie die drei Themenkomplexe (Identität, Erinnerung, Politik) zu einer These über das Dreiländereck.','Welches Konzept aus dem Kurs hat Ihre Perspektive auf Kultur im Grenzraum am stärksten verändert – und warum?','Welche blinden Flecken hat der Kurs Ihrer Meinung nach gelassen? Welche Perspektiven fehlen?'],
-   ka:'Kulturatlas finalisieren: Vollständigkeit aller Einträge prüfen, Quellen ergänzen, Querverweise zu anderen Gruppeneinträgen herstellen.'},
+   ka:'Kulturatlas finalisieren: Vollständigkeit aller Einträge prüfen, Quellen ergänzen, Querverweise zu anderen Gruppeneinträgen herstellen.',
+   quiz:true},
 
-  {kw:2,label:'KW 2',date:'13.01.2027',short:'13.01.',mode:'praesenz',tk:'Synthese',
+  {kw:3,label:'KW 3',date:'20.01.2027',short:'20.01.',mode:'praesenz',tk:'Synthese',
    title:'Gesamtsynthese und Prüfungsvorbereitung',
    lead:'Abschlusspräsentation Kulturatlas, gemeinsame Gesamtschau und strukturierte Prüfungsvorbereitung.',
    praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Abschlusspräsentation Kulturatlas: alle Gruppen','Gemeinsame Gesamtschau: Clustering, Querverweise, Synthese','Was hält das Dreiländereck zusammen? Verknüpfung TK 1 + TK 2 + TK 3','Strukturierte Prüfungsvorbereitung + Fragerunde'],referat:'Keine Referate – Syntheseleistung aller Gruppen',methoden:'Galerierundgang · Planspiel „Kulturgipfel Dreiländereck" · Fragerunde'}},
-
-  {kw:3,label:'KW 3',date:'20.01.2027',short:'20.01.',mode:'selbststudium',tk:'Synthese',
-   title:'Individuelle Prüfungsvorbereitung',
-   lead:'Letzte Selbststudiumswoche vor dem Abschlusskolloquium. Begriffe wiederholen, Kulturatlas abschließen, Fragen vorbereiten.',
-   leitfrage:'Welche drei Argumente würden Sie wählen, um die kulturelle Eigenheit des Dreiländerecks in fünf Minuten zu erklären?',
-   pdfs:[],
-   refs:['Fassen Sie die wichtigsten Theorien (Assmann, Bhabha, Nora) in je zwei Sätzen zusammen.','Welchen Kulturatlas-Eintrag empfehlen Sie anderen Studierenden als besonders aussagekräftig – und warum?','Wie würden Sie das Dreiländereck einem Außenstehenden als kulturellen Raum erklären?']},
 
   {kw:4,label:'KW 4',date:'27.01.2027',short:'27.01.',mode:'praesenz',tk:'Synthese',
    title:'Abschlusskolloquium',
@@ -769,11 +940,18 @@ const CHECK=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke=
 const CHEV=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`;
 
 // ── RENDER HELPERS ────────────────────────────────────────────
+function quizBtn(){
+  return '<button class="quiz-open-btn" onclick="openQuiz()">'
+    +'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>'
+    +' Quiz starten – alle drei Themenkomplexe'
+    +'</button>';
+}
+
 function buildDetail(w){
   const tk=tkStyle(w.tk);
   const mLabel=modeLabel(w.mode);
-  const chipBg=w.mode==='selbststudium'?'#1C1F3A22':w.mode==='pause'?'#EAEAE8':'#EEF3E8';
-  const chipCol=w.mode==='selbststudium'?tk.color:w.mode==='pause'?'#6B6B7A':'#4A6A3A';
+  const chipBg=w.mode==='pause'?'rgba(156,163,175,0.15)':'rgba(253,224,71,0.32)';
+  const chipCol=w.mode==='pause'?'var(--ink-muted)':'#713F12';
 
   let body='';
   if(w.mode==='pause'){
@@ -795,9 +973,10 @@ function buildDetail(w){
       ${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}
       ${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}
       ${pc.hinweis?`<div class="praesenz-note" style="margin-top:10px;">${pc.hinweis}</div>`:''}
-    </div>`;
+    </div>
+    ${w.quiz?quizBtn():''}`;
   } else {
-    if(w.leitfrage)body+=`<div class="leitfrage" style="background:${tk.bg};">
+    if(w.leitfrage)body+=`<div class="leitfrage" style="background:rgba(253,224,71,0.18);border:1px solid rgba(234,179,8,0.30);">
       <div class="lf-label">Leitfrage der Woche</div>
       <div class="lf-q">${w.leitfrage}</div>
     </div>`;
@@ -830,7 +1009,7 @@ function buildDetail(w){
         </div>`).join('')}
       </div>
     </div>`;
-    if(w.ka)body+=`<div class="kulturatlas" style="background:${tk.bg};">
+    if(w.ka)body+=`<div class="kulturatlas" style="background:rgba(253,224,71,0.15);border:1px solid rgba(234,179,8,0.28);">
       <div class="ka-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Kulturatlas-Auftrag
@@ -838,6 +1017,7 @@ function buildDetail(w){
       <div class="ka-text">${w.ka}</div>
       <a class="ka-btn" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">Zum Kulturatlas-Padlet ${ARROW}</a>
     </div>`;
+    if(w.quiz)body+=quizBtn();
   }
 
   return `<div class="detail-header">
@@ -882,10 +1062,20 @@ function renderDonut(){
 
 function renderFeatureCard(idx){
   const w=WEEKS[idx];const tk=tkStyle(w.tk);
-  const bgs={selbststudium:tk.color,praesenz:'#2A3A2A',pause:'#3A3A42'};
-  document.getElementById('fc').style.background=bgs[w.mode]||tk.color;
-  document.getElementById('fc').style.color='#fff';
-  document.getElementById('fc-chip').textContent=modeLabel(w.mode);
+  const fc=document.getElementById('fc');
+  const isPause=w.mode==='pause';
+  fc.style.background=isPause
+    ?'rgba(156,163,175,0.10)'
+    :'linear-gradient(145deg,rgba(255,240,80,0.45) 0%,rgba(234,179,8,0.25) 100%)';
+  fc.style.backdropFilter='blur(24px) saturate(160%)';
+  fc.style.webkitBackdropFilter='blur(24px) saturate(160%)';
+  fc.style.border='1px solid rgba(253,224,71,0.65)';
+  fc.style.boxShadow='0 8px 32px rgba(234,179,8,0.12),inset 0 1px 0 rgba(255,255,255,0.60)';
+  fc.style.color='var(--ink)';
+  const chip=document.getElementById('fc-chip');
+  chip.textContent=modeLabel(w.mode);
+  chip.style.background='rgba(234,179,8,0.28)';
+  chip.style.color='#713F12';
   document.getElementById('fc-kw').textContent=`${w.label} · ${w.short}`;
   document.getElementById('fc-title').textContent=w.title;
   const lead=document.getElementById('fc-lead');lead.textContent=w.lead;
@@ -898,39 +1088,39 @@ function renderWeekList(selIdx){
   document.getElementById('week-list').innerHTML=WEEKS.map((w,i)=>{
     const tk=tkStyle(w.tk);
     const isPast=i<cur,isSel=i===selIdx,isCur=i===cur;
-    const numBg=isSel?tk.color:isPast?tk.color+'40':'rgba(28,31,58,0.07)';
-    const numCol=isSel||isPast?'#fff':'var(--ink-muted)';
-    return `<button class="wrow${isSel?' active':''}${isPast&&!isSel?' past':''}${w.mode==='pause'?' is-pause':''}"
-      onclick="selectWeek(${i})" aria-pressed="${isSel}">
-      <div class="wnum" style="background:${numBg};color:${numCol};">
-        ${isPast?CHECK:w.label.replace('KW ','')}
-      </div>
-      <div class="winfo">
-        <div class="wkw-line">
-          <span class="wkw" style="color:${tk.color};">${w.label} · ${modeLabel(w.mode).split('sitzung')[0]}</span>
-          ${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}
+    const modeClass='mode-'+w.mode;
+    const modeShort=w.mode==='selbststudium'?'Selbststudium':w.mode==='praesenz'?'Präsenz':'Vorlesungsfrei';
+    return `<div class="wacc-item${isSel?' active':''}${w.mode==='pause'?' is-pause':''}" id="wacc-item-${i}">
+      <button class="wrow${isSel?' active':''}${isPast&&!isSel?' past':''} ${modeClass}"
+        onclick="selectWeek(${i})" aria-expanded="${isSel}">
+        <div class="wnum">${w.label.replace('KW ','')}</div>
+        <div class="wrow-divider"></div>
+        <div class="winfo">
+          <div class="wtitle">${w.title}${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}</div>
+          <div class="wmeta">${modeShort} · ${w.date}</div>
         </div>
-        <div class="wtitle">${w.title}</div>
-      </div>
-      <div class="wdate">${w.short}</div>
-      <div class="wchev">${CHEV}</div>
-    </button>`;
+        <div class="wchev" style="transform:rotate(${isSel?90:0}deg);">${CHEV}</div>
+      </button>
+      <div class="wacc-body" id="wacc-body-${i}">${isSel?buildDetail(w):''}</div>
+    </div>`;
   }).join('');
-}
-
-function renderDetail(idx){
-  const d=document.getElementById('detail');
-  d.innerHTML=buildDetail(WEEKS[idx]);
-  if(window.innerWidth<769){d.scrollIntoView({behavior:'smooth',block:'start'});}
+  if(selIdx!==null&&selIdx!==undefined){
+    const body=document.getElementById(`wacc-body-${selIdx}`);
+    if(body)body.style.display='block';
+  }
 }
 
 let curSel=getCurrentIdx();
 function selectWeek(idx){
-  curSel=idx;
-  renderWeekList(idx);
-  renderDetail(idx);
-  const rows=document.querySelectorAll('.wrow');
-  if(rows[idx])rows[idx].scrollIntoView({behavior:'smooth',block:'nearest'});
+  const closing=curSel===idx;
+  curSel=closing?null:idx;
+  renderWeekList(curSel);
+  if(!closing){
+    setTimeout(()=>{
+      const item=document.getElementById(`wacc-item-${idx}`);
+      if(item)item.scrollIntoView({behavior:'smooth',block:'nearest'});
+    },60);
+  }
 }
 
 // ── MOBILE ───────────────────────────────────────────────────
@@ -951,8 +1141,17 @@ function setMobileView(v){
 
 function renderMobileFeature(idx){
   const w=WEEKS[idx];const tk=tkStyle(w.tk);
-  document.getElementById('mob-fc').style.background=tk.color;
-  document.getElementById('mob-fc-chip').textContent=modeLabel(w.mode);
+  const mobFc=document.getElementById('mob-fc');
+  mobFc.style.background='linear-gradient(145deg,rgba(255,240,80,0.45) 0%,rgba(234,179,8,0.25) 100%)';
+  mobFc.style.backdropFilter='blur(24px) saturate(160%)';
+  mobFc.style.webkitBackdropFilter='blur(24px) saturate(160%)';
+  mobFc.style.border='1px solid rgba(253,224,71,0.65)';
+  mobFc.style.boxShadow='0 8px 32px rgba(234,179,8,0.12),inset 0 1px 0 rgba(255,255,255,0.60)';
+  mobFc.style.color='var(--ink)';
+  const mobChip=document.getElementById('mob-fc-chip');
+  mobChip.textContent=modeLabel(w.mode);
+  mobChip.style.background='rgba(234,179,8,0.28)';
+  mobChip.style.color='#713F12';
   document.getElementById('mob-fc-title').textContent=w.title;
   document.getElementById('mob-fc-lead').textContent=w.lead;
   document.getElementById('mob-fc-cta').onclick=()=>{
@@ -965,23 +1164,19 @@ function renderMobileWeekList(){
   const cur=getCurrentIdx();
   document.getElementById('mob-week-list').innerHTML=WEEKS.map((w,i)=>{
     const tk=tkStyle(w.tk);
-    const isPast=i<cur,isCur=i===cur;
-    const numBg=isPast?tk.color+'40':'rgba(28,31,58,0.07)';
-    const numCol=isPast?'#fff':'var(--ink-muted)';
-    return `<button class="wrow${isCur?' active':''}${isPast?' past':''}${w.mode==='pause'?' is-pause':''}"
-      onclick="renderMobileDetail(${i});setMobileView('detail');" style="margin-bottom:0;">
-      <div class="wnum" style="background:${isCur?tk.color:numBg};color:${isCur?'#fff':numCol};">
-        ${isPast&&!isCur?CHECK:w.label.replace('KW ','')}
+    const isCur=i===cur;
+    const kwNum=w.label.replace('KW ','');
+    const modeShort=w.mode==='selbststudium'?'Selbststudium':w.mode==='praesenz'?'Präsenz':'Vorlesungsfrei';
+    const numCol=isCur?'var(--navy)':w.mode==='pause'?'var(--ink-muted)':'var(--ink-muted)';
+    return `<button class="mob-wrow${isCur?' active':''}${w.mode==='pause'?' is-pause':''}"
+      onclick="renderMobileDetail(${i});setMobileView('detail');">
+      <div class="mob-wnum" style="color:${numCol};">${kwNum}</div>
+      <div class="mob-wrow-divider"></div>
+      <div class="mob-wrow-info">
+        <div class="mob-wrow-title">${w.title}</div>
+        <div class="mob-wrow-meta">${modeShort} · ${w.short}</div>
       </div>
-      <div class="winfo">
-        <div class="wkw-line">
-          <span class="wkw" style="color:${tk.color};">${w.label} · ${modeLabel(w.mode).split('sitzung')[0]}</span>
-          ${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}
-        </div>
-        <div class="wtitle">${w.title}</div>
-      </div>
-      <div class="wdate">${w.short}</div>
-      <div class="wchev" style="opacity:1;">${CHEV}</div>
+      <div class="mob-wrow-chev">${CHEV}</div>
     </button>`;
   }).join('');
 }
@@ -1043,10 +1238,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   // Desktop
   renderHighway();
-  renderDonut();
   renderFeatureCard(cur);
   renderWeekList(cur);
-  renderDetail(cur);
   renderNextTermin();
 
   // Mobile
@@ -1068,11 +1261,11 @@ document.addEventListener('DOMContentLoaded',()=>{
       const pc=w.praesenz;
       body=`<div class="praesenz">${(pc.raum||pc.zeiten||pc.ort)?`<div class="praesenz-meta">${pc.ort?`<span>📍 ${pc.ort}</span>`:(pc.raum?`<span>📍 Raum ${pc.raum}</span>`:'')}&ensp;${pc.zeiten?`<span>🕗 ${pc.zeiten}</span>`:''}</div>`:''}<div class="block-h">Themen</div><ul class="praesenz-themen">${pc.themen.map(t=>`<li>${t}</li>`).join('')}</ul>${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}${pc.hinweis?`<div class="praesenz-note" style="margin-top:8px;">${pc.hinweis}</div>`:''}</div>`;
     } else {
-      if(w.leitfrage)body+=`<div class="leitfrage" style="background:${tk.bg};"><div class="lf-label">Leitfrage</div><div class="lf-q">${w.leitfrage}</div></div>`;
+      if(w.leitfrage)body+=`<div class="leitfrage" style="background:rgba(253,224,71,0.18);border:1px solid rgba(234,179,8,0.30);"><div class="lf-label">Leitfrage</div><div class="lf-q">${w.leitfrage}</div></div>`;
       if(w.video)body+=`<div><div class="block-h">Input-Video</div><div class="video-wrap"><video controls preload="metadata"><source src="${w.video.path}" type="video/mp4"></video></div><div class="video-meta">${w.video.label}</div></div>`;
       if(w.pdfs&&w.pdfs.length)body+=`<div><div class="block-h">Lektüre</div><div class="res-list">${w.pdfs.map(p=>`<a class="res-item" href="${p.path}" target="_blank" rel="noopener"><div class="res-icon pdf">${PDF_I}</div><div style="flex:1;min-width:0;"><div class="res-name">${p.label}</div><div class="res-meta">${p.meta}</div></div><div class="res-arrow">${ARROW}</div></a>`).join('')}</div></div>`;
-      if(w.refs&&w.refs.length)body+=`<div><div class="block-h">Reflexionsfragen</div><div class="ref-list">${w.refs.map((q,i)=>`<div class="ref-q"><div class="ref-num" style="background:${tk.color};">${i+1}</div><div class="ref-text">${q}</div></div>`).join('')}</div></div>`;
-      if(w.ka)body+=`<div class="kulturatlas" style="background:${tk.bg};"><div class="ka-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kulturatlas-Auftrag</div><div class="ka-text">${w.ka}</div><a class="ka-btn" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">Zum Kulturatlas-Padlet ${ARROW}</a></div>`;
+      if(w.refs&&w.refs.length)body+=`<div><div class="block-h">Reflexionsfragen</div><div class="ref-list">${w.refs.map((q,i)=>`<div class="ref-q"><div class="ref-num">${i+1}</div><div class="ref-text">${q}</div></div>`).join('')}</div></div>`;
+      if(w.ka)body+=`<div class="kulturatlas" style="background:rgba(253,224,71,0.15);border:1px solid rgba(234,179,8,0.28);"><div class="ka-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kulturatlas-Auftrag</div><div class="ka-text">${w.ka}</div><a class="ka-btn" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">Zum Kulturatlas-Padlet ${ARROW}</a></div>`;
     }
     mobDetailContent.innerHTML=`
       <div style="margin-bottom:4px;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:${tk.color};">${w.tk}</div>
@@ -1091,6 +1284,305 @@ document.addEventListener('DOMContentLoaded',()=>{
     renderMobileDetail(cur);setMobileView('detail');
   };
 });
+</script>
+
+<!-- ── QUIZ MODAL ── -->
+<div id="quiz-modal" role="dialog" aria-modal="true" aria-label="Quiz – Kultur im Dreiländereck" onclick="if(event.target===this)closeQuiz()">
+  <div class="quiz-wrap">
+    <div class="quiz-modal-header-wrap">
+      <div class="quiz-wrap qheader">
+        <div class="qheader-label">Interaktives Quiz · WiSe 2026/27</div>
+        <h1>Kultur im <span>Dreiländereck</span></h1>
+        <p>Drei Themenkomplexe · je 5 Multiple-Choice-Fragen · sofortiges Feedback</p>
+        <button class="quiz-close" onclick="closeQuiz()" aria-label="Quiz schließen">✕</button>
+      </div>
+      <div class="qtabs">
+        <button class="qtab active" onclick="showQuizTab('qtk1',this)">TK 1 · Identität &amp; Traditionen</button>
+        <button class="qtab" onclick="showQuizTab('qtk2',this)">TK 2 · Geschichte &amp; Kulturorte</button>
+        <button class="qtab" onclick="showQuizTab('qtk3',this)">TK 3 · Netzwerk &amp; Politik</button>
+      </div>
+    </div>
+    <div class="qmain">
+
+      <!-- TK 1 -->
+      <div id="qtk1" class="qsection active">
+        <div class="qsection-title">TK 1 — Kultur und Identität</div>
+        <div class="qsection-sub">Hybridität · Third Space · Kollektive Identität · Traditionen im Wandel</div>
+        <div class="score-bar-wrap"><div class="score-bar" id="qbar-tk1"></div></div>
+        <div class="score-text" id="qscore-tk1">0 von 5 Fragen beantwortet</div>
+        <div class="question-block" id="qqb-tk1-1">
+          <div class="question-num">Frage 1</div>
+          <div class="question-text">Was beschreibt Homi Bhabhas Konzept des „Third Space"?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk1',1,this,false)"><span class="option-letter">A</span>Ein geografischer Ort zwischen drei Ländern</button>
+            <button class="qoption" onclick="qAnswer('tk1',1,this,true)"><span class="option-letter">B</span>Ein Zwischenraum, in dem neue kulturelle Bedeutungen ausgehandelt werden</button>
+            <button class="qoption" onclick="qAnswer('tk1',1,this,false)"><span class="option-letter">C</span>Ein EU-Förderprogramm für Grenzregionen</button>
+            <button class="qoption" onclick="qAnswer('tk1',1,this,false)"><span class="option-letter">D</span>Eine ethnografische Forschungsmethode</button>
+          </div>
+          <div class="feedback" id="qfb-tk1-1"></div>
+        </div>
+        <div class="question-block" id="qqb-tk1-2">
+          <div class="question-num">Frage 2</div>
+          <div class="question-text">Jan Assmann beschreibt kollektive Identität als etwas, das durch __________ stabilisiert wird.</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk1',2,this,false)"><span class="option-letter">A</span>Wirtschaftliche Stärke und politische Macht</button>
+            <button class="qoption" onclick="qAnswer('tk1',2,this,false)"><span class="option-letter">B</span>Staatliche Gesetze und Verfassungen</button>
+            <button class="qoption" onclick="qAnswer('tk1',2,this,true)"><span class="option-letter">C</span>Gemeinsame Erinnerungen, Narrative, Rituale und Symbole</button>
+            <button class="qoption" onclick="qAnswer('tk1',2,this,false)"><span class="option-letter">D</span>Geografische Grenzen und territoriale Zugehörigkeit</button>
+          </div>
+          <div class="feedback" id="qfb-tk1-2"></div>
+        </div>
+        <div class="question-block" id="qqb-tk1-3">
+          <div class="question-num">Frage 3</div>
+          <div class="question-text">Was beschreibt der Begriff „Hybridität" im Kontext von Grenzregionen?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk1',3,this,false)"><span class="option-letter">A</span>Die Vermischung zweier politischer Systeme</button>
+            <button class="qoption" onclick="qAnswer('tk1',3,this,true)"><span class="option-letter">B</span>Das Entstehen von Mischformen kultureller Praktiken und Identitäten durch Begegnung</button>
+            <button class="qoption" onclick="qAnswer('tk1',3,this,false)"><span class="option-letter">C</span>Ein Defizit kultureller Zugehörigkeit</button>
+            <button class="qoption" onclick="qAnswer('tk1',3,this,false)"><span class="option-letter">D</span>Die Übernahme einer dominanten Kultur durch eine Minderheit</button>
+          </div>
+          <div class="feedback" id="qfb-tk1-3"></div>
+        </div>
+        <div class="question-block" id="qqb-tk1-4">
+          <div class="question-num">Frage 4</div>
+          <div class="question-text">Was zeigt das Beispiel des Osterreitens in der Lausitz im Kontext des Moduls?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk1',4,this,false)"><span class="option-letter">A</span>Dass sorbische Traditionen heute nur noch touristisch genutzt werden</button>
+            <button class="qoption" onclick="qAnswer('tk1',4,this,false)"><span class="option-letter">B</span>Dass Traditionen unveränderlich sind und weitergegeben werden</button>
+            <button class="qoption" onclick="qAnswer('tk1',4,this,true)"><span class="option-letter">C</span>Wie Minderheitenkultur kollektive Identität sichtbar macht und sich gleichzeitig wandelt</button>
+            <button class="qoption" onclick="qAnswer('tk1',4,this,false)"><span class="option-letter">D</span>Dass religiöse Praktiken keinen Bezug zur regionalen Identität haben</button>
+          </div>
+          <div class="feedback" id="qfb-tk1-4"></div>
+        </div>
+        <div class="question-block" id="qqb-tk1-5">
+          <div class="question-num">Frage 5</div>
+          <div class="question-text">Nach Tajfel und Turner entsteht soziale Identität vor allem durch …</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk1',5,this,false)"><span class="option-letter">A</span>Individuelle Leistungen und persönliche Erfolge</button>
+            <button class="qoption" onclick="qAnswer('tk1',5,this,true)"><span class="option-letter">B</span>Die Abgrenzung der eigenen Gruppe von anderen — das „Wir" definiert sich über das „Sie"</button>
+            <button class="qoption" onclick="qAnswer('tk1',5,this,false)"><span class="option-letter">C</span>Staatsbürgerschaft und rechtliche Zugehörigkeit</button>
+            <button class="qoption" onclick="qAnswer('tk1',5,this,false)"><span class="option-letter">D</span>Sprachkenntnisse und Bildungsabschlüsse</button>
+          </div>
+          <div class="feedback" id="qfb-tk1-5"></div>
+        </div>
+        <button class="btn-reset" onclick="qReset('tk1',5)">Quiz zurücksetzen</button>
+      </div>
+
+      <!-- TK 2 -->
+      <div id="qtk2" class="qsection">
+        <div class="qsection-title">TK 2 — Regionale Kultur und Geschichte</div>
+        <div class="qsection-sub">Erinnerungsorte · Kulturorte · Nationale Narrative · Grenzüberschreitende Kulturarbeit</div>
+        <div class="score-bar-wrap"><div class="score-bar" id="qbar-tk2"></div></div>
+        <div class="score-text" id="qscore-tk2">0 von 5 Fragen beantwortet</div>
+        <div class="question-block" id="qqb-tk2-1">
+          <div class="question-num">Frage 1</div>
+          <div class="question-text">Was versteht Pierre Nora unter einem „Erinnerungsort" (lieu de mémoire)?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk2',1,this,false)"><span class="option-letter">A</span>Ausschließlich physische Gedenkstätten und Denkmäler</button>
+            <button class="qoption" onclick="qAnswer('tk2',1,this,true)"><span class="option-letter">B</span>Verdichtete Orte — physisch oder symbolisch — an denen kollektive Erinnerung gebündelt und gedeutet wird</button>
+            <button class="qoption" onclick="qAnswer('tk2',1,this,false)"><span class="option-letter">C</span>Staatliche Archive mit historischen Dokumenten</button>
+            <button class="qoption" onclick="qAnswer('tk2',1,this,false)"><span class="option-letter">D</span>Touristisch erschlossene Sehenswürdigkeiten</button>
+          </div>
+          <div class="feedback" id="qfb-tk2-1"></div>
+        </div>
+        <div class="question-block" id="qqb-tk2-2">
+          <div class="question-num">Frage 2</div>
+          <div class="question-text">Das Stalag VIII A bei Görlitz/Zgorzelec ist heute …</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk2',2,this,false)"><span class="option-letter">A</span>Eine reine Gedenkstätte ohne kulturelle Nutzung</button>
+            <button class="qoption" onclick="qAnswer('tk2',2,this,true)"><span class="option-letter">B</span>Ein Ort, der Gewaltgeschichte, Musik (Messiaen) und Bildungsarbeit verbindet</button>
+            <button class="qoption" onclick="qAnswer('tk2',2,this,false)"><span class="option-letter">C</span>Ein privates Museum ohne öffentliche Zugänglichkeit</button>
+            <button class="qoption" onclick="qAnswer('tk2',2,this,false)"><span class="option-letter">D</span>Ein Verwaltungszentrum der Euroregion Neiße</button>
+          </div>
+          <div class="feedback" id="qfb-tk2-2"></div>
+        </div>
+        <div class="question-block" id="qqb-tk2-3">
+          <div class="question-num">Frage 3</div>
+          <div class="question-text">Warum unterscheiden sich deutsche, polnische und tschechische Erinnerungskulturen im Dreiländereck?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk2',3,this,false)"><span class="option-letter">A</span>Weil nur Deutschland eine professionelle Gedenkkultur entwickelt hat</button>
+            <button class="qoption" onclick="qAnswer('tk2',3,this,false)"><span class="option-letter">B</span>Weil Erinnerung objektiv und deshalb überall gleich ist</button>
+            <button class="qoption" onclick="qAnswer('tk2',3,this,true)"><span class="option-letter">C</span>Weil nationale Narrative dieselben Ereignisse (Krieg, Vertreibung, Sozialismus) unterschiedlich deuten und gewichten</button>
+            <button class="qoption" onclick="qAnswer('tk2',3,this,false)"><span class="option-letter">D</span>Weil nur Polen und Tschechien von Vertreibung betroffen waren</button>
+          </div>
+          <div class="feedback" id="qfb-tk2-3"></div>
+        </div>
+        <div class="question-block" id="qqb-tk2-4">
+          <div class="question-num">Frage 4</div>
+          <div class="question-text">Was macht das Neisse Filmfestival zu einem Beispiel grenzüberschreitender Kulturarbeit?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk2',4,this,false)"><span class="option-letter">A</span>Es zeigt ausschließlich deutsche Filmproduktionen</button>
+            <button class="qoption" onclick="qAnswer('tk2',4,this,true)"><span class="option-letter">B</span>Es verbindet Spielorte in Deutschland, Polen und Tschechien und schafft einen trinationalen Kulturraum</button>
+            <button class="qoption" onclick="qAnswer('tk2',4,this,false)"><span class="option-letter">C</span>Es wird ausschließlich von der EU finanziert</button>
+            <button class="qoption" onclick="qAnswer('tk2',4,this,false)"><span class="option-letter">D</span>Es findet nur in Görlitz statt</button>
+          </div>
+          <div class="feedback" id="qfb-tk2-4"></div>
+        </div>
+        <div class="question-block" id="qqb-tk2-5">
+          <div class="question-num">Frage 5</div>
+          <div class="question-text">Was unterscheidet einen Erinnerungsort von einem Kulturort?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk2',5,this,false)"><span class="option-letter">A</span>Erinnerungsorte sind immer älter als Kulturorte</button>
+            <button class="qoption" onclick="qAnswer('tk2',5,this,false)"><span class="option-letter">B</span>Kulturorte sind immer staatlich finanziert, Erinnerungsorte nicht</button>
+            <button class="qoption" onclick="qAnswer('tk2',5,this,true)"><span class="option-letter">C</span>Erinnerungsorte verdichten kollektive Vergangenheit; Kulturorte schaffen aktive Begegnung — ein Ort kann beides zugleich sein</button>
+            <button class="qoption" onclick="qAnswer('tk2',5,this,false)"><span class="option-letter">D</span>Es gibt keinen Unterschied — beide Begriffe sind synonym</button>
+          </div>
+          <div class="feedback" id="qfb-tk2-5"></div>
+        </div>
+        <button class="btn-reset" onclick="qReset('tk2',5)">Quiz zurücksetzen</button>
+      </div>
+
+      <!-- TK 3 -->
+      <div id="qtk3" class="qsection">
+        <div class="qsection-title">TK 3 — Kulturnetzwerk Dreiländereck</div>
+        <div class="qsection-sub">Interkulturelle Politik · Euroregion · IBZ · Zivilgesellschaft · Kulturkontakt</div>
+        <div class="score-bar-wrap"><div class="score-bar" id="qbar-tk3"></div></div>
+        <div class="score-text" id="qscore-tk3">0 von 5 Fragen beantwortet</div>
+        <div class="question-block" id="qqb-tk3-1">
+          <div class="question-num">Frage 1</div>
+          <div class="question-text">Was unterscheidet institutionelle Kulturpolitik von zivilgesellschaftlichem Engagement im Grenzraum?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk3',1,this,false)"><span class="option-letter">A</span>Institutionen sind immer effektiver</button>
+            <button class="qoption" onclick="qAnswer('tk3',1,this,true)"><span class="option-letter">B</span>Institutionen schaffen planbare Rahmenbedingungen; Zivilgesellschaft trägt Alltagskontakt und Inhalte</button>
+            <button class="qoption" onclick="qAnswer('tk3',1,this,false)"><span class="option-letter">C</span>Zivilgesellschaft wird grundsätzlich nicht öffentlich gefördert</button>
+            <button class="qoption" onclick="qAnswer('tk3',1,this,false)"><span class="option-letter">D</span>Es gibt keinen funktionalen Unterschied zwischen beiden</button>
+          </div>
+          <div class="feedback" id="qfb-tk3-1"></div>
+        </div>
+        <div class="question-block" id="qqb-tk3-2">
+          <div class="question-num">Frage 2</div>
+          <div class="question-text">In welchem Jahr wurde die Euroregion Neisse-Nisa-Nysa gegründet, und wo?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk3',2,this,false)"><span class="option-letter">A</span>1989 in Görlitz</button>
+            <button class="qoption" onclick="qAnswer('tk3',2,this,false)"><span class="option-letter">B</span>2004 in Liberec</button>
+            <button class="qoption" onclick="qAnswer('tk3',2,this,true)"><span class="option-letter">C</span>1991 in Zittau — als erste Euroregion in Mittel- und Osteuropa</button>
+            <button class="qoption" onclick="qAnswer('tk3',2,this,false)"><span class="option-letter">D</span>1945 in Jelenia Góra</button>
+          </div>
+          <div class="feedback" id="qfb-tk3-2"></div>
+        </div>
+        <div class="question-block" id="qqb-tk3-3">
+          <div class="question-num">Frage 3</div>
+          <div class="question-text">Was ist die Funktion des IBZ St. Marienthal im Dreiländereck?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk3',3,this,false)"><span class="option-letter">A</span>Es ist ausschließlich ein religiöses Kloster ohne Bildungsangebote</button>
+            <button class="qoption" onclick="qAnswer('tk3',3,this,false)"><span class="option-letter">B</span>Es ist ein EU-Verwaltungszentrum für INTERREG-Projekte</button>
+            <button class="qoption" onclick="qAnswer('tk3',3,this,true)"><span class="option-letter">C</span>Es ist ein Bildungs- und Begegnungszentrum mit ca. 200 Veranstaltungen jährlich für Menschen aus DE, PL und CZ</button>
+            <button class="qoption" onclick="qAnswer('tk3',3,this,false)"><span class="option-letter">D</span>Es ist ein rein touristisches Angebot ohne politische Bildung</button>
+          </div>
+          <div class="feedback" id="qfb-tk3-3"></div>
+        </div>
+        <div class="question-block" id="qqb-tk3-4">
+          <div class="question-num">Frage 4</div>
+          <div class="question-text">Was beschreibt der Begriff „Kulturkontakt" im Kontext des Dreiländerecks?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk3',4,this,false)"><span class="option-letter">A</span>Nur freundliche und konfliktfreie Begegnungen zwischen Kulturen</button>
+            <button class="qoption" onclick="qAnswer('tk3',4,this,true)"><span class="option-letter">B</span>Begegnung von Menschen, Praktiken und Deutungen über Grenzen hinweg — inklusive Reibung, Anpassung und Neuerfindung</button>
+            <button class="qoption" onclick="qAnswer('tk3',4,this,false)"><span class="option-letter">C</span>Den Austausch von Kunstwerken zwischen Museen</button>
+            <button class="qoption" onclick="qAnswer('tk3',4,this,false)"><span class="option-letter">D</span>Staatlich organisierte Kulturdiplomatie</button>
+          </div>
+          <div class="feedback" id="qfb-tk3-4"></div>
+        </div>
+        <div class="question-block" id="qqb-tk3-5">
+          <div class="question-num">Frage 5</div>
+          <div class="question-text">Welche der folgenden Einrichtungen ist ein Beispiel für zivilgesellschaftliche Kulturarbeit im Dreiländereck?</div>
+          <div class="options">
+            <button class="qoption" onclick="qAnswer('tk3',5,this,false)"><span class="option-letter">A</span>Die Euroregion Neiße</button>
+            <button class="qoption" onclick="qAnswer('tk3',5,this,false)"><span class="option-letter">B</span>INTERREG Sachsen–Tschechien</button>
+            <button class="qoption" onclick="qAnswer('tk3',5,this,true)"><span class="option-letter">C</span>Die Rabryka in Görlitz — ein soziokulturelles Zentrum mit niedrigschwelliger Begegnung</button>
+            <button class="qoption" onclick="qAnswer('tk3',5,this,false)"><span class="option-letter">D</span>Das Sächsische Staatsministerium für Kultur</button>
+          </div>
+          <div class="feedback" id="qfb-tk3-5"></div>
+        </div>
+        <button class="btn-reset" onclick="qReset('tk3',5)">Quiz zurücksetzen</button>
+      </div>
+
+    </div><!-- /qmain -->
+  </div><!-- /quiz-wrap -->
+</div><!-- /quiz-modal -->
+
+<script>
+// ── QUIZ LOGIC ──────────────────────────────────────────────────
+const qState={tk1:{answered:0,total:5},tk2:{answered:0,total:5},tk3:{answered:0,total:5}};
+
+const qFeedback={
+  'tk1-1':{correct:'Bhabha beschreibt den Third Space als produktiven Zwischenraum, in dem weder die eine noch die andere Kultur dominiert — sondern neue Bedeutungen entstehen. Görlitz/Zgorzelec ist ein gutes Beispiel.',wrong:'Der Third Space ist kein physischer Ort, sondern ein kulturtheoretisches Konzept. Bhabha meint einen Raum der Aushandlung, der zwischen bestehenden kulturellen Kategorien entsteht.'},
+  'tk1-2':{correct:'Assmann betont, dass kollektive Identität nicht von selbst entsteht, sondern aktiv hergestellt wird — durch das, was eine Gruppe erinnert, feiert und erzählt.',wrong:'Assmann hebt kulturelles Gedächtnis hervor: Identität entsteht durch geteilte Geschichten, Symbole und Rituale — nicht durch wirtschaftliche oder politische Faktoren allein.'},
+  'tk1-3':{correct:'Hybridität ist nach Bhabha kein Defizit, sondern der Normalzustand in Kontaktzonen. Im Dreiländereck entsteht sie z.B. durch Mehrsprachigkeit, binationale Familien und grenzüberschreitende Festivals.',wrong:'Hybridität beschreibt das produktive Entstehen von etwas Neuem aus kultureller Begegnung — kein Verlust, keine Übernahme, sondern Transformation.'},
+  'tk1-4':{correct:'Das Osterreiten zeigt, wie eine Minderheitentradition (sorbisch) kollektive Zugehörigkeit sichtbar macht und gleichzeitig von Veränderungen durch DDR-Zeit und Gegenwart geprägt ist.',wrong:'Das Osterreiten ist kein rein touristisches Phänomen — es ist ein lebendiger Ausdruck sorbischer Identität, der sich gleichzeitig wandelt und neu interpretiert wird.'},
+  'tk1-5':{correct:'Tajfel und Turner zeigen: Gruppen bilden sich über Vergleich und Abgrenzung. Das "Wir" braucht ein "Sie" — das macht Identität relational, nicht starr.',wrong:'Die Soziale Identitätstheorie (Tajfel/Turner) betont, dass Gruppenidentität durch intergruppale Vergleiche entsteht — nicht durch individuelle Merkmale oder rechtliche Kategorien.'},
+  'tk2-1':{correct:'Nora meint damit nicht nur Orte im geografischen Sinne — auch Texte, Symbole, Feste und Rituale können Erinnerungsorte sein, wenn kollektive Erinnerung an ihnen verdichtet wird.',wrong:'Noras Begriff geht weit über physische Denkmäler hinaus. Er umfasst alle Verdichtungspunkte kollektiver Erinnerung — Feste, Symbole, Bücher, Rituale, Persönlichkeiten.'},
+  'tk2-2':{correct:'Olivier Messiaen komponierte dort 1941 sein Quartett für das Ende der Zeit. Heute verbindet der Meetingpoint Memory Messiaen Erinnerungsarbeit mit Musik und Bildung.',wrong:'Das Stalag VIII A ist ein besonderes Beispiel: Ein ehemaliger Gewaltort wurde zu einem Ort der Kultur und Bildung transformiert — das ist genau die Spannung zwischen Erinnerungs- und Kulturort.'},
+  'tk2-3':{correct:'Erinnerung ist immer selektiv und perspektivisch. Was in Deutschland als Vertreibungsgeschichte erinnert wird, ist in Polen als Rückkehr ins Eigene gerahmt — dieselben Ereignisse, unterschiedliche Narrative.',wrong:'Erinnerungskulturen sind nicht objektiv, sondern immer perspektivisch. Nationale Narrative formen, was erinnert, was vergessen und was betont wird.'},
+  'tk2-4':{correct:'Das Neisse Filmfestival ist ein Paradebeispiel: Es verbindet Kinos in Zittau, Bogatynia und Liberec und schafft damit buchstäblich einen grenzüberschreitenden Kulturraum.',wrong:'Das Neisse Filmfestival hat explizit einen trinationalen Ansatz — es findet an Spielorten in allen drei Ländern statt und verbindet Publikum über Grenzen hinweg.'},
+  'tk2-5':{correct:'Die Spannung ist produktiv: Das Schlesische Museum ist Erinnerungsort (schlesische Geschichte) und Kulturort (Ausstellungen, Begegnung) zugleich. Das Stalag VIII A auch.',wrong:'Die Begriffe haben unterschiedliche Schwerpunkte — Erinnerungsort betont die Vergangenheitsdimension, Kulturort die aktive Gegenwartspraxis. Aber sie schließen sich nicht aus.'},
+  'tk3-1':{correct:'Institutionen wie Euroregion oder IBZ schaffen verlässliche Strukturen und Förderlogiken. Einrichtungen wie Rabryka oder Hillersche Villa bringen die Alltagsdimension — beide brauchen einander.',wrong:'Der Unterschied ist komplementär, nicht hierarchisch: Institutionen schaffen den Rahmen, Zivilgesellschaft füllt ihn mit Leben und Alltagsrelevanz.'},
+  'tk3-2':{correct:'Die ERN ist die älteste Euroregion in Mittel- und Osteuropa — gegründet kurz nach dem Fall des Eisernen Vorhangs, mit Sitz der deutschen Geschäftsstelle in Zittau.',wrong:'Die Euroregion Neiße wurde 1991 in Zittau gegründet — als direkte Reaktion auf den Fall des Eisernen Vorhangs 1989 und als erste Euroregion in Mittel- und Osteuropa.'},
+  'tk3-3':{correct:'Das IBZ wurde 1992 von der Zisterzienserinnenabtei gegründet und ist heute ein aktives Bildungs- und Begegnungszentrum mit Spracharbeit (KoKoPol), politischer Bildung und internationalem Austausch.',wrong:'Das IBZ ist weit mehr als ein Kloster — es ist ein aktives Bildungszentrum mit ca. 200 Veranstaltungen jährlich für Menschen aus allen drei Ländern des Dreiländerecks.'},
+  'tk3-4':{correct:'Kulturkontakt ist nach den Quellen des Moduls kein harmonischer Prozess, sondern umfasst auch Reibung, Missverständnisse und Aushandlung — und genau daraus entsteht oft etwas Neues.',wrong:'Kulturkontakt ist breiter als Kulturdiplomatie oder Museumstausch — er meint den alltäglichen und institutionellen Kontakt, der Veränderung, Anpassung und neue Formen hervorbringt.'},
+  'tk3-5':{correct:'Die Rabryka ist ein Bottom-up-Projekt: aus einer Jugendbürgerinitiative entstanden, auf dem Gelände der alten Waggonfabrik, offen für alle — das ist das Gegenstück zu institutioneller Kulturpolitik.',wrong:'Euroregion und INTERREG sind institutionelle Akteure mit staatlicher oder EU-Förderlogik. Die Rabryka ist ein zivilgesellschaftliches Zentrum, das von unten gewachsen ist.'}
+};
+
+function openQuiz(){
+  document.getElementById('quiz-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeQuiz(){
+  document.getElementById('quiz-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeQuiz();});
+
+function showQuizTab(id,btn){
+  document.querySelectorAll('.qsection').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.qtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function qAnswer(section,qnum,btn,isCorrect){
+  const block=document.getElementById('qqb-'+section+'-'+qnum);
+  if(block.classList.contains('answered-correct')||block.classList.contains('answered-wrong'))return;
+  const allOpts=btn.closest('.options').querySelectorAll('.qoption');
+  allOpts.forEach(o=>{
+    o.disabled=true;
+    if(o.getAttribute('onclick')&&o.getAttribute('onclick').includes(',true)'))o.classList.add('reveal');
+  });
+  const fb=document.getElementById('qfb-'+section+'-'+qnum);
+  const key=section+'-'+qnum;
+  if(isCorrect){
+    btn.classList.remove('reveal');btn.classList.add('correct');
+    block.classList.add('answered-correct');
+    fb.textContent='✓ Richtig! '+(qFeedback[key]?qFeedback[key].correct:'');
+    fb.className='feedback show correct';
+  } else {
+    btn.classList.add('wrong');
+    block.classList.add('answered-wrong');
+    fb.textContent='✗ Leider falsch. '+(qFeedback[key]?qFeedback[key].wrong:'');
+    fb.className='feedback show wrong';
+  }
+  qState[section].answered++;
+  qUpdateScore(section);
+}
+
+function qUpdateScore(section){
+  const s=qState[section];
+  const pct=Math.round(s.answered/s.total*100);
+  document.getElementById('qbar-'+section).style.width=pct+'%';
+  document.getElementById('qscore-'+section).innerHTML=`<strong>${s.answered} von ${s.total}</strong> Fragen beantwortet`;
+}
+
+function qReset(section,total){
+  qState[section]={answered:0,total};
+  for(let i=1;i<=total;i++){
+    const block=document.getElementById('qqb-'+section+'-'+i);
+    block.classList.remove('answered-correct','answered-wrong');
+    block.querySelectorAll('.qoption').forEach(o=>{o.disabled=false;o.classList.remove('correct','wrong','reveal');});
+    const fb=document.getElementById('qfb-'+section+'-'+i);
+    fb.className='feedback';fb.textContent='';
+  }
+  document.getElementById('qbar-'+section).style.width='0%';
+  document.getElementById('qscore-'+section).textContent='0 von '+total+' Fragen beantwortet';
+}
 </script>
 </body>
 </html>
