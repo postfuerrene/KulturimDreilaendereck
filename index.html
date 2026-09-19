@@ -21,7 +21,7 @@
   --white:#FFFFFF;
   --ink:#111827;
   --ink-mid:#374151;
-  --ink-muted:#9CA3AF;
+  --ink-muted:#5B6472;
   /* TK-Farben — lebhaft aber freundlich */
   --tk1:#DC2626;   /* warmes Rot       · TK1 Identität */
   --tk2:#2563EB;   /* Blau             · TK2 Erinnerung */
@@ -78,7 +78,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .logo img{width:30px;height:30px;object-fit:contain;filter:none;opacity:1;}
 .logo-text{line-height:1.1;}
 .logo-name{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);display:block;letter-spacing:-0.01em;}
-.logo-sub{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);display:block;}
+.logo-sub{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);display:block;}
 .topbar-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .btn-ghost{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:var(--r-sm);font-size:12px;font-family:inherit;color:var(--ink-mid);border:1px solid var(--cream-dark);transition:var(--transition);}
 .btn-ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--ink-muted);}
@@ -88,7 +88,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-next:hover{background:#FDE68A;}
 .next-dot{width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(1.3);}}
-.next-kw{font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-muted);}
+.next-kw{font-size:10px;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-muted);}
 
 /* ── HERO ── */
 .hero{
@@ -109,7 +109,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   pointer-events:none;
 }
 .hero-inner{position:relative;z-index:1;max-width:1320px;margin:0 auto;}
-.hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;}
+.hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy-mid);margin-bottom:16px;display:flex;align-items:center;gap:10px;font-weight:600;}
 .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--terra);border-radius:2px;flex:none;}
 .hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-0.02em;color:var(--ink);max-width:16ch;margin-bottom:18px;}
 .hero h1 em{color:var(--navy);font-style:normal;}
@@ -120,7 +120,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 /* ── PROGRESS HIGHWAY ── */
 .highway-wrap{background:var(--white);border-bottom:1px solid var(--cream-dark);padding:0 clamp(16px,4vw,48px);}
 .highway{max-width:1320px;margin:0 auto;padding:12px 0 16px;}
-.highway-label{font-size:9px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:8px;display:flex;justify-content:space-between;}
+.highway-label{font-size:10px;text-transform:uppercase;letter-spacing:0.2em;color:var(--ink-muted);margin-bottom:8px;display:flex;justify-content:space-between;}
 .highway-track{display:flex;gap:3px;height:5px;border-radius:4px;overflow:hidden;}
 .hwy-seg{flex:1;border-radius:2px;cursor:pointer;transition:opacity var(--transition),transform .15s;}
 .hwy-seg:hover{opacity:1 !important;transform:scaleY(1.5);}
@@ -144,38 +144,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .fc-top{display:flex;align-items:flex-start;gap:12px;justify-content:space-between;margin-bottom:auto;}
 .fc-chip{padding:4px 12px;border-radius:var(--r-pill);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;}
 .fc-kw{text-align:right;font-size:11px;line-height:1.3;}
-.fc-kw-label{text-transform:uppercase;letter-spacing:0.15em;font-size:9px;opacity:.6;}
+.fc-kw-label{text-transform:uppercase;letter-spacing:0.15em;font-size:10px;opacity:.6;}
 .fc-kw-val{font-family:'Cormorant Garamond',serif;font-size:18px;margin-top:2px;}
 .fc-body{margin-top:18px;}
 .fc-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(22px,2.8vw,30px);line-height:1.15;letter-spacing:-0.01em;margin-bottom:8px;}
-.fc-lead{font-size:13px;line-height:1.6;opacity:.75;margin-bottom:18px;}
+.fc-lead{font-size:13px;line-height:1.6;opacity:.85;margin-bottom:18px;}
 .fc-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(18,18,18,0.78);border-radius:var(--r-pill);font-size:13px;font-family:inherit;color:#fff;border:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.12);transition:var(--transition);}
 .fc-cta:hover{background:rgba(18,18,18,0.92);box-shadow:0 6px 20px rgba(0,0,0,0.22),inset 0 1px 0 rgba(255,255,255,0.12);}
 .fc-cta svg{flex:none;}
-
-/* Donut card */
-.donut-card{
-  grid-column:span 1;
-  background:var(--white);border-radius:var(--r);
-  padding:clamp(20px,2.5vw,28px);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);
-}
-.donut-heading{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--ink-muted);margin-bottom:16px;font-weight:600;}
-.donut-ring{position:relative;width:110px;height:110px;}
-.donut-ring svg{transform:rotate(-90deg);}
-.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.donut-pct{font-size:26px;font-weight:700;line-height:1;color:var(--ink);}
-.donut-pct-label{font-size:10px;color:var(--ink-muted);margin-top:2px;}
-.donut-title{font-size:14px;font-weight:600;color:var(--ink);margin-top:12px;}
-.donut-sub{font-size:11px;color:var(--ink-muted);margin-top:3px;}
-
-/* Stat cards */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px;}
-.stat-card{background:var(--white);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);}
-.stat-val{font-size:36px;font-weight:700;line-height:1;color:var(--ink);}
-.stat-name{font-size:13px;color:var(--ink-mid);margin-top:6px;font-weight:500;}
-.stat-sub{font-size:11px;color:var(--ink-muted);margin-top:2px;}
 
 /* ── WOCHEN SECTION ── */
 .weeks-section{max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,52px) clamp(16px,4vw,48px) clamp(48px,6vw,80px);}
@@ -364,7 +340,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   }
   .mob-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.15) 0%,transparent 70%);pointer-events:none;}
   .mob-hero-inner{position:relative;z-index:1;}
-  .mob-greeting{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy);margin-bottom:8px;font-weight:600;}
+  .mob-greeting{font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--navy-mid);margin-bottom:8px;font-weight:600;}
   .mob-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:var(--ink);line-height:1.1;letter-spacing:-0.015em;margin-bottom:6px;}
   .mob-title em{color:var(--navy);font-style:normal;}
   .mob-sub{font-size:13px;color:var(--ink-muted);line-height:1.5;}
@@ -372,17 +348,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   /* Mobile feature card */
   .mob-feature{margin:14px 14px 0;border-radius:var(--r);padding:20px 18px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;}
   .mob-feature::after{content:'';position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.10);pointer-events:none;}
-  .mob-fc-chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--r-pill);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;}
+  .mob-fc-chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--r-pill);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;}
   .mob-fc-title{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.15;margin-bottom:6px;}
-  .mob-fc-lead{font-size:12px;line-height:1.55;opacity:.75;margin-bottom:16px;}
+  .mob-fc-lead{font-size:12px;line-height:1.55;opacity:.85;margin-bottom:16px;}
   .mob-fc-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:var(--r-pill);font-size:13px;font-family:inherit;font-weight:500;background:rgba(18,18,18,0.78);color:#fff;border:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 4px 16px rgba(0,0,0,0.18),inset 0 1px 0 rgba(255,255,255,0.12);transition:var(--transition);}
-
-  /* Mobile stats */
-  .mob-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 14px 0;}
-  .mob-stat{background:var(--white);border-radius:var(--r-sm);padding:14px 16px;box-shadow:var(--shadow-sm);border:1px solid var(--cream-dark);}
-  .mob-stat-val{font-size:28px;font-weight:700;line-height:1;color:var(--ink);}
-  .mob-stat-name{font-size:11px;font-weight:500;margin-top:4px;color:var(--ink-mid);}
-  .mob-stat-sub{font-size:10px;color:var(--ink-muted);}
 
   /* Mobile progress */
   .mob-progress{margin:14px 14px 0;background:rgba(255,255,255,0.78);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-radius:var(--r);padding:16px 18px 14px;box-shadow:var(--shadow-sm);border:1px solid rgba(255,255,255,0.60);}
@@ -543,7 +512,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 }
 .quiz-wrap .question-block.answered-correct{border-color:rgba(5,150,105,0.40);background:rgba(240,253,244,0.70);}
 .quiz-wrap .question-block.answered-wrong{border-color:rgba(220,38,38,0.30);background:rgba(254,242,242,0.70);}
-.quiz-wrap .question-num{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:5px;font-weight:600;}
+.quiz-wrap .question-num{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:5px;font-weight:600;}
 .quiz-wrap .question-text{font-size:14px;line-height:1.55;margin-bottom:12px;color:var(--ink);font-weight:500;}
 
 /* Options */
@@ -562,7 +531,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .quiz-wrap .qoption.wrong{border-color:rgba(220,38,38,0.45);background:rgba(254,242,242,0.80);color:#991B1B;}
 .quiz-wrap .qoption.reveal{border-color:rgba(5,150,105,0.40);background:rgba(240,253,244,0.50);color:#065F46;opacity:.7;}
 .quiz-wrap .option-letter{
-  font-size:9px;font-weight:700;letter-spacing:.06em;
+  font-size:10px;font-weight:700;letter-spacing:.06em;
   min-width:18px;height:18px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:rgba(253,224,71,0.55);color:#713F12;
@@ -657,9 +626,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 <div class="dash">
   <div class="dash-grid">
     <!-- Feature card -->
-    <div class="feature-card" id="fc" style="background:var(--terra);color:#fff;">
+    <div class="feature-card" id="fc" style="background:linear-gradient(145deg,rgba(255,240,80,0.45) 0%,rgba(234,179,8,0.25) 100%);color:var(--ink);">
       <div class="fc-top">
-        <span class="fc-chip" id="fc-chip" style="background:rgba(0,0,0,0.2);color:#fff;">Selbststudium</span>
+        <span class="fc-chip" id="fc-chip" style="background:rgba(234,179,8,0.28);color:#713F12;">Selbststudium</span>
         <div class="fc-kw">
           <div class="fc-kw-label">Diese Woche</div>
           <div class="fc-kw-val" id="fc-kw">KW —</div>
@@ -699,8 +668,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     </div>
   </div>
 
-  <div class="mob-feature" id="mob-fc" style="background:var(--terra);color:#fff;">
-    <div class="mob-fc-chip" id="mob-fc-chip" style="background:rgba(0,0,0,0.2);color:#fff;">Selbststudium</div>
+  <div class="mob-feature" id="mob-fc" style="background:linear-gradient(145deg,rgba(255,240,80,0.45) 0%,rgba(234,179,8,0.25) 100%);color:var(--ink);">
+    <div class="mob-fc-chip" id="mob-fc-chip" style="background:rgba(234,179,8,0.28);color:#713F12;">Selbststudium</div>
     <div class="mob-fc-title" id="mob-fc-title">—</div>
     <div class="mob-fc-lead" id="mob-fc-lead"></div>
     <button class="mob-fc-cta" id="mob-fc-cta">
@@ -1051,15 +1020,6 @@ function renderHighway(){
   }));
 }
 
-function renderDonut(){
-  const p=getProgress();
-  const R=48,C=2*Math.PI*R;
-  document.getElementById('donut-arc').setAttribute('stroke-dashoffset',(C*(1-p)).toFixed(2));
-  const pct=Math.round(p*100);
-  document.getElementById('donut-pct').textContent=pct+' %';
-  document.getElementById('donut-weeks').textContent=Math.round(p*WEEKS.length)+' Wochen';
-}
-
 function renderFeatureCard(idx){
   const w=WEEKS[idx];const tk=tkStyle(w.tk);
   const fc=document.getElementById('fc');
@@ -1196,7 +1156,6 @@ function renderMobileDetail(idx){
 function renderMobileProgress(){
   const p=getProgress();
   const pct=Math.round(p*100);
-  document.getElementById('mob-pct').textContent=pct+'%';
   document.getElementById('mob-progress-fill').style.width=pct+'%';
   document.getElementById('mob-progress-pct').textContent=pct+' %';
 }
