@@ -1,2 +1,3 @@
 .claude/launch.json
 *.pptx
+__pycache__/
