@@ -20,10 +20,10 @@
       "computedHash": "0058036865ecbb864fd0c4132efcc62425355d6e99c7e6ef6a936742d62a5dea"
     },
     "apple-design": {
-      "source": "emilkowalski/skill",
+      "source": "dickwu/apple-design-skill",
       "sourceType": "github",
-      "skillPath": "skills/apple-design/SKILL.md",
-      "computedHash": "0190417d092a0df447b000154e39733ea6d97efad6d3bec8a6ce3845aeb88914"
+      "skillPath": "SKILL.md",
+      "computedHash": "2d61ea262429ac7a02a2694dfabda4bd202ada3c8c23cd0fc4ef9eb9e512d235"
     },
     "ask-sonner": {
       "source": "emilkowalski/skill",
