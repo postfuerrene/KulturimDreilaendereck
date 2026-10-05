@@ -252,6 +252,10 @@ h2.title{font-size:96px;}
 .grp{display:inline-flex;align-items:center;gap:12px;padding:8px 22px 8px 10px;border-radius:40px;background:var(--ink);color:var(--paper);font-size:24px;white-space:nowrap;}
 .grp i{font-style:normal;width:34px;height:34px;border-radius:50%;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;font-size:24px;}
 
+/* Typographic markers instead of emoji (as in the first version) */
+.num{display:block;font-family:var(--font-display);font-weight:400;font-size:88px;line-height:.8;color:var(--c,var(--terra));}
+.bullet{width:12px;height:12px;border-radius:50%;background:var(--terra);display:inline-block;transform:translateY(-3px);}
+
 /* ===========================================
    01 · COVER
    =========================================== */
@@ -365,7 +369,7 @@ h2.title{font-size:96px;}
 .irows{list-style:none;display:flex;flex-direction:column;justify-content:center;}
 .irows li{display:grid;grid-template-columns:90px 1fr;align-items:start;padding:30px 0;border-top:1px solid var(--line);}
 .irows li:first-child{border-top:none;}
-.irows .emo{font-size:52px;}
+.irows .num{font-size:64px;}
 .irows h3{font-family:var(--font-display);font-weight:500;font-size:44px;line-height:1.1;}
 .irows p{font-size:27px;line-height:1.45;color:var(--ink-mid);margin-top:8px;}
 .darkbox{padding:56px 56px;display:flex;flex-direction:column;}
@@ -412,7 +416,7 @@ table.reftab{width:100%;border-collapse:collapse;}
 .slide.dark .pageno{color:rgba(243,237,226,.7);}
 .center{position:absolute;inset:150px var(--pad-x) 110px;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
 .center .emo{font-size:110px;}
-.center h2{font-family:var(--font-display);font-weight:400;font-size:140px;line-height:1;margin-top:30px;}
+.center h2{font-family:var(--font-display);font-weight:400;font-size:150px;line-height:1;}
 .center p{font-size:36px;color:rgba(243,237,226,.78);margin-top:28px;}
 .gboxes{display:grid;grid-template-columns:repeat(3,360px);gap:40px;margin-top:70px;}
 .gboxes div{height:170px;border:2px solid rgba(243,237,226,.35);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:60px;}
@@ -463,7 +467,7 @@ table.reftab{width:100%;border-collapse:collapse;}
    19 · LINKS
    =========================================== */
 .lrows{display:flex;flex-direction:column;gap:16px;}
-.lrow{display:grid;grid-template-columns:64px 260px 1fr;align-items:center;gap:20px;padding:22px 40px;border-radius:6px;background:rgba(255,255,255,.5);border:1px solid var(--line);border-left:8px solid var(--c);text-decoration:none;color:inherit;}
+.lrow{display:grid;grid-template-columns:260px 1fr;align-items:center;gap:20px;padding:22px 40px;border-radius:6px;background:rgba(255,255,255,.5);border:1px solid var(--line);border-left:8px solid var(--c);text-decoration:none;color:inherit;}
 .lrow .emo{font-size:40px;}
 .lrow .k{font-size:22px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);}
 .lrow .v{font-family:var(--font-display);font-size:38px;line-height:1.1;white-space:nowrap;}
@@ -539,7 +543,7 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
         <div class="card   reveal" style="--d:0.20s"><time>08:00</time><h3>Blitzlicht</h3><p>Wer bin ich? Was erwarte ich von diesem Modul?</p></div>
         <div class="card   reveal" style="--d:0.28s"><time>08:10</time><h3>Modulvorstellung</h3><p>Diese Folien · Lernbedarfsanalyse</p></div>
         <div class="card   reveal" style="--d:0.36s"><time>08:45</time><h3>Gruppen + Referate</h3><p>Einteilung · Themenvergabe</p></div>
-        <div class="card tint row2 reveal" style="--d:0.44s"><time>09:30</time><h3>Pause ☕</h3><p>30 Minuten</p></div>
+        <div class="card tint row2 reveal" style="--d:0.44s"><time>09:30</time><h3>Pause</h3><p>30 Minuten</p></div>
         <div class="card  row2 reveal" style="--d:0.52s"><time>10:00</time><h3>Kulturatlas-Demo</h3><p>Padlet live · Selbststudium-Walkthrough</p></div>
         <div class="card  row2 reveal" style="--d:0.60s"><time>11:00</time><h3>Ausblick &amp; Fragen</h3><p>KW 42 Selbststudium · offene Fragen</p></div>
         </div>
@@ -565,9 +569,9 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
       <p class="kicker reveal">Warum dieses Modul?</p>
       <h2 class="title reveal" style="--d:.1s">Das Dreiländereck als <em>Labor</em></h2>
       <div class="content"><div class="tiles3">
-        <div class="card bar-top c1 reveal" style="--d:0.25s"><span class="emo">🔬</span><h3>Labor vor der Haustür</h3><p><b>Görlitz/Zgorzelec/Liberec</b> als lebendiges Fallbeispiel. Kein Lehrbuchbeispiel — wir sind mittendrin.</p></div>
-        <div class="card bar-top c2 reveal" style="--d:0.37s"><span class="emo">🧭</span><h3>Identität &amp; Erinnerung</h3><p>Wie entsteht Gemeinschaft an Grenzen? Was verbindet, was trennt drei Nationen mit sehr unterschiedlicher Geschichte?</p></div>
-        <div class="card bar-top c3 reveal" style="--d:0.49s"><span class="emo">🌐</span><h3>IWK-Relevanz</h3><p>Mehrsprachigkeit, Kulturmanagement, Europakompetenzen. Was ihr hier lernt, braucht ihr im Beruf.</p></div>
+        <div class="card bar-top c1 reveal" style="--d:0.25s"><span class="num">1</span><h3>Labor vor der Haustür</h3><p><b>Görlitz/Zgorzelec/Liberec</b> als lebendiges Fallbeispiel. Kein Lehrbuchbeispiel — wir sind mittendrin.</p></div>
+        <div class="card bar-top c2 reveal" style="--d:0.37s"><span class="num">2</span><h3>Identität &amp; Erinnerung</h3><p>Wie entsteht Gemeinschaft an Grenzen? Was verbindet, was trennt drei Nationen mit sehr unterschiedlicher Geschichte?</p></div>
+        <div class="card bar-top c3 reveal" style="--d:0.49s"><span class="num">3</span><h3>IWK-Relevanz</h3><p>Mehrsprachigkeit, Kulturmanagement, Europakompetenzen. Was ihr hier lernt, braucht ihr im Beruf.</p></div>
         </div>
       </div>
     </div>
@@ -679,13 +683,13 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
       <div class="content">
         <div class="atlas">
           <ul class="irows">
-            <li class="reveal" style="--d:.2s"><span class="emo">🗺️</span><div><h3>Padlet — gemeinsame Karte</h3><p>Jede Gruppe trägt Orte, Bräuche &amp; Beobachtungen ein</p></div></li>
-            <li class="reveal" style="--d:.3s"><span class="emo">👥</span><div><h3>3 Gruppen · 3 Themenbereiche</h3><p>TK 1 Identität / TK 2 Erinnerung / TK 3 Kulturnetzwerk</p></div></li>
-            <li class="reveal" style="--d:.4s"><span class="emo">📝</span><div><h3>5–7 Sätze pro Beitrag</h3><p>Ort, Bedeutung, Zuordnung zu einem Baustein</p></div></li>
+            <li class="reveal c1" style="--d:.2s"><span class="num">1</span><div><h3>Padlet — gemeinsame Karte</h3><p>Jede Gruppe trägt Orte, Bräuche &amp; Beobachtungen ein</p></div></li>
+            <li class="reveal c2" style="--d:.3s"><span class="num">2</span><div><h3>3 Gruppen · 3 Themenbereiche</h3><p>TK 1 Identität / TK 2 Erinnerung / TK 3 Kulturnetzwerk</p></div></li>
+            <li class="reveal c3" style="--d:.4s"><span class="num">3</span><div><h3>5–7 Sätze pro Beitrag</h3><p>Ort, Bedeutung, Zuordnung zu einem Baustein</p></div></li>
           </ul>
           <div class="card dark darkbox reveal" style="--d:.35s">
             <div class="enso draw" style="--d:.7s"><img src="assets/enso-creme.png" alt=""></div>
-            <span class="lab">🔗 Euer Padlet</span>
+            <span class="lab">Euer Padlet</span>
             <h3>Kulturatlas WiSe 26/27</h3>
             <a class="url" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70</a>
             <p class="demo">→ Demo folgt in Block 2 (10:00 Uhr)</p>
@@ -702,11 +706,11 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
       <h2 class="title reveal" style="--d:.1s">Prüfungsleistung</h2>
       <div class="content">
         <div class="exam3">
-          <div class="card reveal" style="--d:.2s"><span class="emo">✍️</span><h3>Klausur (PL)</h3><p>Schriftliche Abschlussprüfung</p><span class="when">KW 3 / Jan 2027</span></div>
-          <div class="card dark reveal" style="--d:.3s"><span class="emo">📌</span><h3>Kulturatlas-Portfolio</h3><p>Beiträge im Padlet über das Semester</p><span class="when">laufend · alle Wochen</span></div>
-          <div class="card reveal" style="--d:.4s"><span class="emo">🎤</span><h3>Referat</h3><p>15 Min. Gruppenreferat + Handout</p><span class="when">KW 43, 45, 49 oder 51</span></div>
+          <div class="card c1 reveal" style="--d:.2s"><span class="num">1</span><h3>Klausur (PL)</h3><p>Schriftliche Abschlussprüfung</p><span class="when">KW 3 / Jan 2027</span></div>
+          <div class="card dark reveal" style="--d:.3s;--c:#D9A88C"><span class="num">2</span><h3>Kulturatlas-Portfolio</h3><p>Beiträge im Padlet über das Semester</p><span class="when">laufend · alle Wochen</span></div>
+          <div class="card c3 reveal" style="--d:.4s"><span class="num">3</span><h3>Referat</h3><p>15 Min. Gruppenreferat + Handout</p><span class="when">KW 43, 45, 49 oder 51</span></div>
         </div>
-        <div class="tip reveal" style="--d:.55s"><span class="emo">💡</span><p>Kulturatlas-Beiträge direkt nach dem Selbststudium einpflegen — dann ist der Bezug noch frisch und die Klausur schreibt sich leichter.</p></div>
+        <div class="tip reveal" style="--d:.55s"><span class="lab" style="color:var(--terra)">Tipp</span><p>Kulturatlas-Beiträge direkt nach dem Selbststudium einpflegen — dann ist der Bezug noch frisch und die Klausur schreibt sich leichter.</p></div>
       </div>
     </div>
   </section>
@@ -736,7 +740,6 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
   <section class="slide dark" aria-label="Jetzt Gruppen bilden!">
     <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>13</b> / 19</div></header>
     <div class="center">
-      <span class="emo reveal" style="--d:.1s">👥</span>
       <h2 class="reveal" style="--d:.2s">Jetzt Gruppen bilden!</h2>
       <p class="reveal" style="--d:.32s">3 Gruppen · je 3–4 Personen · Bitte findet euch zusammen.</p>
       <div class="gboxes">
@@ -814,18 +817,18 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
       <div class="content">
         <div class="out">
           <div class="card reveal" style="--d:.2s"><span class="lab">KW 42 · Selbststudium</span><ul>
-            <li><span class="emo">📹</span><span><b>Video:</b> Einführung Kulturelle Identität (ca. 20 Min.)</span></li>
-            <li><span class="emo">📄</span><span><b>Lektüre:</b> 1 Text (auf Kurswebsite)</span></li>
-            <li><span class="emo">📌</span><span><b>Padlet-Eintrag:</b> erster Kulturatlas-Beitrag</span></li>
-            <li><span class="emo">⏱️</span><span><b>Zeitaufwand:</b> max. 2×90 Min.</span></li>
+            <li><span><i class="bullet"></i></span><span><b>Video:</b> Einführung Kulturelle Identität (ca. 20 Min.)</span></li>
+            <li><span><i class="bullet"></i></span><span><b>Lektüre:</b> 1 Text (auf Kurswebsite)</span></li>
+            <li><span><i class="bullet"></i></span><span><b>Padlet-Eintrag:</b> erster Kulturatlas-Beitrag</span></li>
+            <li><span><i class="bullet"></i></span><span><b>Zeitaufwand:</b> max. 2×90 Min.</span></li>
           </ul></div>
           <div class="card dark reveal" style="--d:.32s"><span class="lab">Bis KW 43 · Mi 21.10.</span><h3>Nächste Schritte</h3><ul>
             <li><span class="emo">✓</span><span>Gruppenaufteilung steht</span></li>
             <li><span class="emo">→</span><span>Referat TK 1 vorbereiten beginnen</span></li>
-            <li><span class="emo">✉</span><span>Bei Fragen: <a href="mailto:seidel@sankt-marienthal.eu">seidel@sankt-marienthal.eu</a></span></li>
+            <li><span class="emo">→</span><span>Bei Fragen: <a href="mailto:seidel@sankt-marienthal.eu">seidel@sankt-marienthal.eu</a></span></li>
           </ul></div>
         </div>
-        <p class="closing reveal" style="--d:.5s">Auf eine gute gemeinsame Arbeit im Dreiländereck! <span>🇩🇪 🇵🇱 🇨🇿</span></p>
+        <p class="closing reveal" style="--d:.5s">Auf eine gute gemeinsame Arbeit im Dreiländereck!</p>
       </div>
     </div>
   </section>
@@ -837,12 +840,12 @@ body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);out
       <h2 class="title reveal" style="--d:.1s">Wichtige Links &amp; Kontakt</h2>
       <div class="content">
         <div class="lrows">
-          <a class="lrow c1 reveal" style="--d:0.20s" href="https://kultur-im-dreilaendereck2627.vercel.app" target="_blank" rel="noopener"><span class="emo">🌐</span><span class="k">Kurswebsite</span><span class="v ">kultur-im-dreilaendereck2627.vercel.app</span></a>
-          <a class="lrow c2 reveal" style="--d:0.30s" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener"><span class="emo">🗺️</span><span class="k">Kulturatlas</span><span class="v long">padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70</span></a>
-          <a class="lrow c3 reveal" style="--d:0.40s" href="https://postfuerrene.github.io/KulturimDreieck/quiz-dreilaendereck.html" target="_blank" rel="noopener"><span class="emo">❓</span><span class="k">Quiz</span><span class="v long">postfuerrene.github.io/KulturimDreieck/quiz-dreilaendereck.html</span></a>
-          <a class="lrow c4 reveal" style="--d:0.50s" href="mailto:seidel@sankt-marienthal.eu"><span class="emo">✉️</span><span class="k">E-Mail</span><span class="v ">seidel@sankt-marienthal.eu</span></a>
+          <a class="lrow c1 reveal" style="--d:0.20s" href="https://kultur-im-dreilaendereck2627.vercel.app" target="_blank" rel="noopener"><span class="k">Kurswebsite</span><span class="v ">kultur-im-dreilaendereck2627.vercel.app</span></a>
+          <a class="lrow c2 reveal" style="--d:0.30s" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener"><span class="k">Kulturatlas</span><span class="v long">padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70</span></a>
+          <a class="lrow c3 reveal" style="--d:0.40s" href="https://postfuerrene.github.io/KulturimDreieck/quiz-dreilaendereck.html" target="_blank" rel="noopener"><span class="k">Quiz</span><span class="v long">postfuerrene.github.io/KulturimDreieck/quiz-dreilaendereck.html</span></a>
+          <a class="lrow c4 reveal" style="--d:0.50s" href="mailto:seidel@sankt-marienthal.eu"><span class="k">E-Mail</span><span class="v ">seidel@sankt-marienthal.eu</span></a>
         </div>
-        <div class="closebox reveal" style="--d:.65s">Auf eine gute gemeinsame Arbeit im Dreiländereck!<span>🇩🇪 🇵🇱 🇨🇿</span></div>
+        <div class="closebox reveal" style="--d:.65s">Auf eine gute gemeinsame Arbeit im Dreiländereck!</div>
       </div>
     </div>
   </section>
