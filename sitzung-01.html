@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kultur im Dreiländereck · Woche 1</title>
+<meta name="description" content="Woche 1 des Seminars „Kultur im Dreiländereck“, WiSe 2026/27, HSZG Görlitz.">
+
+<!-- Fonts: course fonts (local, as on the course page) + Google Fonts fallback -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap">
+
+<style>
+/* ===========================================
+   LOCAL COURSE FONTS
+   Same files as index.html (fonts/)
+   =========================================== */
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype-variations');font-weight:300 700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Lora';src:url('fonts/Lora-VariableFont_wght.ttf') format('truetype-variations');font-weight:400 700;font-style:normal;font-display:swap;}
+
+/* ===========================================
+   THEME TOKENS
+   Earth tones taken from the course's enso assets.
+   Change these to restyle the whole deck.
+   =========================================== */
+:root{
+  --paper:#F3EDE2;        /* warm cream slide background */
+  --paper-deep:#E9E0D0;   /* tinted panels */
+  --ink:#2A2724;          /* anthracite text */
+  --ink-mid:#4F4943;
+  --ink-muted:#7A7168;
+  --line:rgba(42,39,36,.16);
+
+  --terra:#B8653E;        /* Gruppe 1 / primary accent */
+  --terra-soft:#EBD4C4;
+  --sage:#6F8569;         /* Gruppe 2 */
+  --sage-soft:#D6DDCF;
+  --indigo:#3E4E6E;       /* Gruppe 3 */
+  --indigo-soft:#D3D7E0;
+
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Lora',Georgia,serif;
+
+  --pad-x:128px;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+
+  --stage-bg:#1E1C1A;
+  --slide-bg:var(--paper);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   (viewport-base.css, included in full)
+   =========================================== */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+    .deck-controls {
+        display: none !important;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* ===========================================
+   SLIDE SURFACE
+   Paper grain via layered gradients
+   =========================================== */
+.slide{
+  font-variant-numeric:lining-nums;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 700px at 88% 8%, rgba(184,101,62,.07), transparent 60%),
+    radial-gradient(900px 600px at 6% 96%, rgba(111,133,105,.08), transparent 60%),
+    var(--paper);
+  transition:opacity .5s ease, visibility .5s;
+}
+.slide::after{ /* fine paper texture */
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .16 0 0 0 0 .15 0 0 0 0 .14 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===========================================
+   DECK CHROME (header + footer on each slide)
+   =========================================== */
+.chrome-top{
+  position:absolute;top:56px;left:var(--pad-x);right:var(--pad-x);
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);
+  z-index:2;
+}
+.brand{display:flex;align-items:center;gap:18px;}
+.brand svg{width:30px;height:30px;color:var(--ink);}
+.pageno{font-family:var(--font-display);font-size:28px;letter-spacing:.04em;text-transform:none;color:var(--ink-mid);}
+.pageno b{font-weight:600;color:var(--terra);}
+
+.slide-body{
+  position:absolute;left:var(--pad-x);right:var(--pad-x);top:150px;bottom:110px;
+  z-index:2;
+}
+.kicker{
+  font-size:22px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);
+  display:flex;align-items:center;gap:18px;margin-bottom:22px;
+}
+.kicker::before{content:'';width:56px;height:2px;background:currentColor;}
+h2.title{
+  font-family:var(--font-display);font-weight:400;font-size:104px;line-height:1;
+  letter-spacing:-.015em;color:var(--ink);
+}
+h2.title em{font-style:italic;color:var(--terra);}
+
+/* ===========================================
+   ENSO DECORATION (course brush circles)
+   =========================================== */
+.enso{position:absolute;pointer-events:none;z-index:1;}
+.enso img{width:100%;height:100%;max-width:none;max-height:none;display:block;}
+
+/* ===========================================
+   REVEAL ANIMATIONS
+   Set per-element delay with style="--d:.3s"
+   =========================================== */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay:var(--d,0s);
+}
+.slide.visible .reveal{opacity:1;transform:none;}
+.enso.draw{
+  opacity:0;transform:rotate(-14deg) scale(.94);
+  transition:opacity 1.6s var(--ease), transform 2.2s var(--ease);
+  transition-delay:var(--d,.1s);
+}
+.slide.visible .enso.draw{opacity:var(--o,1);transform:none;}
+
+/* ===========================================
+   SLIDE 1 — TITLE
+   =========================================== */
+.s-title .slide-body{top:200px;right:auto;width:1080px;}
+.s-title .eyebrow{font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:40px;}
+.s-title h1{
+  font-family:var(--font-display);font-weight:400;font-size:150px;line-height:.92;letter-spacing:-.025em;
+}
+.s-title h1 .sem{display:block;font-style:italic;color:var(--terra);font-size:96px;margin-top:22px;letter-spacing:-.01em;}
+.s-title .sub{font-size:31px;line-height:1.5;color:var(--ink-mid);margin-top:48px;max-width:960px;}
+.s-title .byline{
+  position:absolute;left:var(--pad-x);bottom:96px;z-index:2;
+  display:flex;gap:44px;align-items:center;font-size:24px;color:var(--ink-mid);
+}
+.s-title .byline .name{font-size:30px;font-weight:500;color:var(--ink);}
+.s-title .byline .dot{width:6px;height:6px;border-radius:50%;background:var(--terra);}
+
+/* ===========================================
+   SLIDE 2 — WARUM (statement + three circles)
+   =========================================== */
+.s-why .lead{
+  font-family:var(--font-display);font-size:66px;line-height:1.12;font-weight:400;
+  margin-top:60px;max-width:960px;letter-spacing:-.01em;
+}
+.s-why .lead em{color:var(--terra);}
+.venn{position:absolute;right:40px;top:130px;width:560px;height:520px;}
+.venn .c{
+  position:absolute;width:330px;height:330px;border-radius:50%;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:76px;
+  font-family:var(--font-display);font-size:44px;letter-spacing:.06em;mix-blend-mode:multiply;
+}
+.venn .de{left:115px;top:0;background:rgba(184,101,62,.30);color:var(--terra);}
+.venn .pl{left:0;top:190px;background:rgba(111,133,105,.34);color:var(--sage);align-items:center;justify-content:flex-start;padding:0 0 60px 72px;}
+.venn .cz{left:230px;top:190px;background:rgba(62,78,110,.28);color:var(--indigo);align-items:center;justify-content:flex-end;padding:0 72px 60px 0;}
+.venn .core{
+  position:absolute;left:190px;top:258px;width:180px;text-align:center;
+  font-size:21px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+}
+.triad{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);}
+.triad div{padding:34px 0 0;font-size:30px;color:var(--ink-mid);}
+.triad b{display:block;font-family:var(--font-display);font-weight:500;font-size:64px;color:var(--ink);line-height:1;margin-bottom:6px;}
+
+/* ===========================================
+   SLIDE 3 — THEMENKOMPLEXE (three columns)
+   =========================================== */
+.tk-grid{position:absolute;left:0;right:0;top:250px;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+.tk{
+  position:relative;padding:48px 48px 44px;border-radius:6px;background:rgba(255,255,255,.42);
+  border:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;
+}
+.tk::before{content:'';position:absolute;left:0;top:0;right:0;height:8px;background:var(--c);}
+.tk .num{font-family:var(--font-display);font-size:170px;line-height:.8;color:var(--c);font-weight:400;}
+.tk .lab{font-size:21px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-top:30px;}
+.tk h3{font-family:var(--font-display);font-weight:500;font-size:54px;line-height:1.05;margin-top:12px;}
+.tk .q{margin-top:auto;font-family:var(--font-display);font-style:italic;font-size:44px;color:var(--c);padding-top:24px;border-top:1px solid var(--line);}
+
+/* ===========================================
+   SLIDE 4 — HYBRIDER MODUS (A/B split)
+   =========================================== */
+.ab{position:absolute;left:0;right:0;top:240px;height:510px;display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.week{position:relative;padding:44px 52px;border-radius:6px;overflow:hidden;}
+.week.a{background:var(--terra-soft);}
+.week.b{background:var(--sage-soft);}
+.week .tag{display:flex;align-items:baseline;gap:20px;}
+.week .letter{font-family:var(--font-display);font-size:120px;line-height:.8;}
+.week.a .letter{color:var(--terra);} .week.b .letter{color:var(--sage);}
+.week .tag span:not(.letter){font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mid);}
+.flow{display:flex;align-items:center;gap:16px;margin-top:44px;flex-wrap:wrap;}
+.flow .st{background:var(--paper);padding:14px 26px;border-radius:40px;font-size:29px;}
+.flow .ar{font-size:30px;color:var(--terra);}
+.flow .pl{font-size:30px;color:var(--sage);}
+.flow.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;}
+.flow.grid .st{text-align:center;}
+.meta{position:absolute;left:52px;right:52px;bottom:42px;display:flex;gap:44px;font-size:27px;color:var(--ink-mid);border-top:1px solid var(--line);padding-top:24px;}
+.meta b{font-weight:600;color:var(--ink);}
+.rhythm{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:26px;}
+.rhythm .beats{display:flex;gap:10px;}
+.rhythm .beats i{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-family:var(--font-display);font-size:26px;color:var(--paper);}
+.rhythm .beats i.a{background:var(--terra);} .rhythm .beats i.b{background:var(--sage);}
+.rhythm p{font-family:var(--font-display);font-size:42px;font-style:italic;}
+
+/* ===========================================
+   SLIDE 5 — KULTURATLAS (text + convergence)
+   =========================================== */
+.atlas-text{position:absolute;left:0;top:250px;width:820px;}
+.atlas-text .lead{font-family:var(--font-display);font-size:52px;line-height:1.15;}
+.atlas-text ul{list-style:none;margin-top:44px;}
+.atlas-text li{font-size:30px;color:var(--ink-mid);padding:18px 0;border-top:1px solid var(--line);display:flex;gap:22px;}
+.atlas-text li::before{content:'';flex:none;width:12px;height:12px;border-radius:50%;background:var(--terra);margin-top:15px;}
+.linkline{
+  position:absolute;left:0;bottom:0;display:flex;align-items:center;gap:20px;
+  font-size:24px;color:var(--ink-mid);
+}
+.linkline a,.linkcard a{color:inherit;text-decoration:none;}
+.linkline .url{font-family:var(--font-body);color:var(--terra);border-bottom:1px solid var(--terra);padding-bottom:2px;}
+.converge{position:absolute;right:0;top:240px;width:720px;height:580px;}
+.converge .small{position:absolute;width:200px;height:198px;}
+.converge .small .lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-display);font-size:26px;line-height:1.05;text-align:center;}
+.converge .small .lbl small{font-family:var(--font-body);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-top:6px;}
+.converge .big{position:absolute;left:200px;top:250px;width:330px;height:327px;}
+.converge .big .lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.converge .big .n{font-family:var(--font-display);font-size:120px;line-height:.8;}
+.converge .big .t{font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mid);margin-top:14px;}
+.converge svg.lines{position:absolute;inset:0;width:100%;height:100%;}
+
+/* ===========================================
+   SLIDE 6 — PRÜFUNGSLEISTUNG (weighted rows)
+   =========================================== */
+.exam{position:absolute;left:0;right:0;top:250px;bottom:0;display:grid;grid-template-columns:1.25fr 1fr;gap:40px;}
+.exam .main{background:var(--ink);color:var(--paper);border-radius:6px;padding:56px 60px;position:relative;overflow:hidden;}
+.exam .main .lab{font-size:22px;letter-spacing:.18em;text-transform:uppercase;color:#D9A88C;}
+.exam .main h3{font-family:var(--font-display);font-weight:400;font-size:110px;line-height:1;margin-top:20px;}
+.exam .main h3 span{font-size:60px;color:#D9A88C;font-style:italic;}
+.exam .main p{font-size:30px;line-height:1.5;color:#D8D0C4;margin-top:36px;max-width:640px;}
+.exam .main .chips{position:absolute;left:60px;bottom:56px;display:flex;gap:14px;}
+.exam .main .chips span{border:1px solid rgba(243,237,226,.35);border-radius:40px;padding:10px 24px;font-size:24px;}
+.exam .main .enso{width:420px;height:416px;right:-110px;top:-90px;--o:.35;}
+.exam .side{display:grid;grid-template-rows:1fr 1fr;gap:40px;}
+.exam .card{border:1px solid var(--line);background:rgba(255,255,255,.42);border-radius:6px;padding:40px 48px;display:flex;flex-direction:column;justify-content:center;}
+.exam .card .lab{font-size:21px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);}
+.exam .card h4{font-family:var(--font-display);font-weight:500;font-size:50px;line-height:1.08;margin-top:12px;}
+.exam .card p{font-size:26px;color:var(--ink-mid);margin-top:12px;}
+
+/* ===========================================
+   SLIDE 7 — ABLAUF (two blocks + pause)
+   =========================================== */
+.agenda{position:absolute;left:0;right:0;top:240px;bottom:0;display:grid;grid-template-columns:1fr 150px 1fr;gap:56px;}
+.agenda ol{list-style:none;}
+.agenda li{display:grid;grid-template-columns:150px 1fr;align-items:baseline;padding:26px 0;border-top:1px solid var(--line);}
+.agenda li:last-child{border-bottom:1px solid var(--line);}
+.agenda time{font-family:var(--font-display);font-size:46px;color:var(--terra);font-weight:500;}
+.agenda .blk2 time{color:var(--sage);}
+.agenda li span{font-size:31px;line-height:1.3;}
+.agenda li span small{display:block;font-size:22px;color:var(--ink-muted);margin-top:4px;}
+.pause{
+  position:relative;border-radius:80px;background:var(--paper-deep);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+}
+.pause time{font-family:var(--font-display);font-size:44px;color:var(--ink);}
+.pause span{writing-mode:vertical-rl;transform:rotate(180deg);font-size:26px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-muted);}
+.pause .cup{width:50px;height:50px;color:var(--ink-mid);}
+
+/* ===========================================
+   SLIDE 8 — REFERATE (table + rule matrix)
+   =========================================== */
+.ref{position:absolute;left:0;right:0;top:230px;bottom:0;display:grid;grid-template-columns:1fr 470px;gap:64px;}
+table.reftab{width:100%;border-collapse:collapse;}
+.reftab th{text-align:left;font-weight:400;font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);padding:0 0 16px;border-bottom:2px solid var(--ink);}
+.reftab td{padding:21px 0;border-bottom:1px solid var(--line);font-size:30px;vertical-align:middle;}
+.reftab td.tkc{font-family:var(--font-display);font-size:40px;font-weight:500;width:130px;color:var(--ink-mid);}
+.reftab tr.tk-start td{border-top:1px solid rgba(42,39,36,.3);}
+.reftab td.grp{width:210px;text-align:right;}
+.gp{display:inline-flex;align-items:center;gap:12px;font-size:25px;padding:8px 20px 8px 14px;border-radius:40px;background:var(--soft);color:var(--c);}
+.gp::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--c);}
+.g1{--c:var(--terra);--soft:var(--terra-soft);}
+.g2{--c:var(--sage);--soft:var(--sage-soft);}
+.g3{--c:var(--indigo);--soft:var(--indigo-soft);}
+.matrix{background:rgba(255,255,255,.42);border:1px solid var(--line);border-radius:6px;padding:36px 40px;align-self:start;}
+.matrix .lab{font-size:20px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);}
+.matrix .grid{display:grid;grid-template-columns:120px repeat(3,1fr);gap:10px;margin-top:22px;align-items:center;text-align:center;}
+.matrix .grid .h{font-family:var(--font-display);font-size:30px;color:var(--ink-mid);}
+.matrix .grid .rh{text-align:left;font-size:22px;color:var(--c);}
+.matrix .cell{height:64px;border-radius:6px;background:var(--soft);color:var(--c);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:28px;font-weight:600;}
+.rule{margin-top:28px;font-family:var(--font-display);font-style:italic;font-size:36px;line-height:1.2;color:var(--ink);padding-top:24px;border-top:1px solid var(--line);}
+
+/* ===========================================
+   SLIDE 9 — LINKS (three link cards)
+   =========================================== */
+.s-links .enso{width:680px;height:674px;right:-250px;bottom:-290px;--o:.55;}
+.links{position:absolute;left:0;right:300px;top:250px;display:flex;flex-direction:column;gap:28px;}
+.linkcard{
+  text-decoration:none;color:inherit;
+  display:grid;grid-template-columns:240px 1fr;align-items:center;gap:30px;
+  padding:34px 44px;border-radius:6px;background:rgba(255,255,255,.5);border:1px solid var(--line);
+  border-left:8px solid var(--c);
+}
+.linkcard .k{font-size:22px;letter-spacing:.16em;text-transform:uppercase;color:var(--c);}
+.linkcard .v{font-family:var(--font-display);font-size:46px;line-height:1.1;color:var(--ink);white-space:nowrap;}
+.linkcard .v.long{font-size:33px;}
+.linkcard a:hover .v{color:var(--c);}
+
+/* ===========================================
+   NAV CHROME OUTSIDE THE STAGE
+   =========================================== */
+.progress{position:fixed;left:0;bottom:0;height:3px;background:var(--terra);z-index:1000;transition:width .5s var(--ease);}
+
+/* ===========================================
+   INLINE EDITING (hover top-left or press E)
+   =========================================== */
+.edit-hotzone{position:fixed;top:0;left:0;width:80px;height:80px;z-index:10000;cursor:pointer;}
+.edit-toggle{
+  position:fixed;top:16px;left:16px;z-index:10001;width:44px;height:44px;border-radius:50%;
+  border:none;background:var(--paper);color:var(--ink);font-size:20px;cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.edit-toggle.show,.edit-toggle.active{opacity:1;pointer-events:auto;}
+.edit-toggle.active{background:var(--terra);color:#fff;}
+body.editing [contenteditable="true"]{outline:1px dashed rgba(184,101,62,.6);outline-offset:4px;cursor:text;}
+</style>
+</head>
+<body>
+
+<!-- Reusable IK logo (from assets/logo-ikd.svg) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="kclip"><rect x="258" y="0" width="492" height="750"/></clipPath>
+    <symbol id="ik-logo" viewBox="0 0 750 750">
+      <rect x="5" y="0" width="108" height="750"/>
+      <rect x="150" y="0" width="108" height="750"/>
+      <g clip-path="url(#kclip)">
+        <rect x="258" y="302" width="700" height="71" transform="rotate(-38,258,375)"/>
+        <rect x="258" y="192" width="700" height="71" transform="rotate(-38,258,375)"/>
+        <rect x="258" y="82"  width="700" height="71" transform="rotate(-38,258,375)"/>
+        <rect x="258" y="377" width="700" height="71" transform="rotate(38,258,375)"/>
+        <rect x="258" y="487" width="700" height="71" transform="rotate(38,258,375)"/>
+        <rect x="258" y="597" width="700" height="71" transform="rotate(38,258,375)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+
+  <!-- ========== 01 · TITEL ========== -->
+  <section class="slide s-title active" aria-label="Titel">
+    <div class="slide-body">
+      <p class="eyebrow reveal" style="--d:.1s">Hochschulseminar · Woche 1</p>
+      <h1 class="reveal" style="--d:.2s">Kultur im Dreiländereck<span class="sem">WiSe 2026/27</span></h1>
+      <p class="sub reveal" style="--d:.4s">Kulturelle Identitäten, Erinnerungsorte und grenzüberschreitende Begegnungen im deutsch-polnisch-tschechischen Raum</p>
+    </div>
+    <div class="byline reveal" style="--d:.6s">
+      <span class="name">René Seidel</span><i class="dot"></i>
+      <span>seidel@sankt-marienthal.eu</span><i class="dot"></i>
+      <span>HSZG Görlitz</span>
+    </div>
+  </section>
+
+  <!-- ========== 02 · WARUM DIESES MODUL? ========== -->
+  <section class="slide s-why" aria-label="Warum dieses Modul?">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>02</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Einstieg</p>
+      <h2 class="title reveal" style="--d:.1s">Warum dieses Modul?</h2>
+      <p class="lead reveal" style="--d:.25s">Das Dreiländereck DE-PL-CZ ist <em>kein neutraler Raum</em> — es ist ein Labor für Identität, Erinnerung und Begegnung.</p>
+      <div class="venn reveal" style="--d:.4s" aria-hidden="true">
+        <div class="c de">DE</div><div class="c pl">PL</div><div class="c cz">CZ</div>
+        <div class="core">eine<br>Region</div>
+      </div>
+      <div class="triad">
+        <div class="reveal" style="--d:.55s"><b>3</b>Sprachen</div>
+        <div class="reveal" style="--d:.65s"><b>3</b>Erinnerungskulturen</div>
+        <div class="reveal" style="--d:.75s"><b>1</b>Region</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 03 · THEMENKOMPLEXE ========== -->
+  <section class="slide" aria-label="3 Themenkomplexe">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>03</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Aufbau</p>
+      <h2 class="title reveal" style="--d:.1s">3 Themenkomplexe</h2>
+      <div class="tk-grid">
+        <article class="tk reveal" style="--c:var(--terra);--d:.25s">
+          <span class="num">1</span><span class="lab">TK 1</span>
+          <h3>Kultur und Identität</h3>
+          <p class="q">Wer sind wir hier?</p>
+        </article>
+        <article class="tk reveal" style="--c:var(--sage);--d:.38s">
+          <span class="num">2</span><span class="lab">TK 2</span>
+          <h3>Geschichte und Kulturorte</h3>
+          <p class="q">Was erinnern wir?</p>
+        </article>
+        <article class="tk reveal" style="--c:var(--indigo);--d:.51s">
+          <span class="num">3</span><span class="lab">TK 3</span>
+          <h3>Kulturnetzwerk</h3>
+          <p class="q">Wer gestaltet Begegnung?</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 04 · HYBRIDER MODUS ========== -->
+  <section class="slide" aria-label="Der hybride Modus">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>04</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Format</p>
+      <h2 class="title reveal" style="--d:.1s">Der hybride Modus</h2>
+      <div class="ab">
+        <div class="week a reveal" style="--d:.25s">
+          <div class="tag"><span class="letter">A</span><span>Woche A · Präsenz</span></div>
+          <div class="flow"><span class="st">Referat</span><span class="ar">→</span><span class="st">Methode</span><span class="ar">→</span><span class="st">Kulturatlas</span></div>
+          <div class="meta"><span><b>Mi 08:00–11:30</b></span><span>Raum <b>G II/B260</b></span></div>
+        </div>
+        <div class="week b reveal" style="--d:.38s">
+          <div class="tag"><span class="letter">B</span><span>Woche B · Selbststudium</span></div>
+          <div class="flow grid"><span class="st">Video</span><span class="st">Lektüre</span><span class="st">Reflexion</span><span class="st">Padlet-Eintrag</span></div>
+          <div class="meta"><span>Umfang <b>max. 2×90 min</b></span></div>
+        </div>
+      </div>
+      <div class="rhythm reveal" style="--d:.55s">
+        <div class="beats" aria-hidden="true"><i class="a">A</i><i class="b">B</i><i class="a">A</i><i class="b">B</i><i class="a">A</i><i class="b">B</i></div>
+        <p>Beide Wochen zählen als Lehrveranstaltung.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 05 · KULTURATLAS ========== -->
+  <section class="slide" aria-label="Das Kulturatlas-Portfolio">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>05</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Kursartefakt</p>
+      <h2 class="title reveal" style="--d:.1s">Das Kulturatlas-Portfolio</h2>
+      <div class="atlas-text">
+        <p class="lead reveal" style="--d:.2s">Euer gemeinsames Kursartefakt auf Padlet</p>
+        <ul>
+          <li class="reveal" style="--d:.3s">3 Gruppen · 3 Themenbereiche · 1 Gesamtbild</li>
+          <li class="reveal" style="--d:.4s">Jede Gruppe trägt eigene Einträge bei und kommentiert andere</li>
+        </ul>
+      </div>
+      <div class="converge" aria-hidden="true">
+        <svg class="lines reveal" style="--d:.7s" viewBox="0 0 720 580" fill="none" stroke="rgba(42,39,36,.28)" stroke-width="2" stroke-dasharray="6 8">
+          <path d="M120 205 C 140 270, 200 300, 255 320"/>
+          <path d="M365 205 L 365 255"/>
+          <path d="M610 205 C 590 270, 530 300, 475 320"/>
+        </svg>
+        <div class="small enso draw" style="left:20px;top:0;--d:.3s"><img src="assets/enso-terrakotta.png" alt=""><div class="lbl">Gruppe 1<small>TK 1</small></div></div>
+        <div class="small enso draw" style="left:265px;top:0;--d:.42s"><img src="assets/enso-sage.png" alt=""><div class="lbl">Gruppe 2<small>TK 2</small></div></div>
+        <div class="small enso draw" style="left:510px;top:0;--d:.54s"><img src="assets/enso-indigo.png" alt=""><div class="lbl">Gruppe 3<small>TK 3</small></div></div>
+        <div class="big enso draw" style="--d:.85s"><img src="assets/enso-anthrazit.png" alt=""><div class="lbl"><span class="n">1</span><span class="t">Gesamtbild</span></div></div>
+      </div>
+      <div class="linkline reveal" style="--d:.6s">
+        <span>Link</span>
+        <a href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener"><span class="url">padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 06 · PRÜFUNGSLEISTUNG ========== -->
+  <section class="slide" aria-label="Prüfungsleistung">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>06</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Leistung</p>
+      <h2 class="title reveal" style="--d:.1s">Prüfungsleistung</h2>
+      <div class="exam">
+        <div class="main reveal" style="--d:.25s">
+          <div class="enso draw" style="--d:.6s"><img src="assets/enso-creme.png" alt=""></div>
+          <span class="lab">Prüfungsleistung</span>
+          <h3>Klausur <span>(PL)</span></h3>
+          <p>Prüft Begriffe, Theorien und regionale Beispiele aus dem Dreiländereck.</p>
+          <div class="chips"><span>Begriffe</span><span>Theorien</span><span>regionale Beispiele</span></div>
+        </div>
+        <div class="side">
+          <div class="card reveal" style="--c:var(--terra);--d:.4s">
+            <span class="lab">Mitarbeit</span>
+            <h4>Portfoliobeiträge</h4>
+            <p>fließen in die Mitarbeitsnote ein</p>
+          </div>
+          <div class="card reveal" style="--c:var(--sage);--d:.52s">
+            <span class="lab">Selbstkontrolle</span>
+            <h4>Quiz</h4>
+            <p>verfügbar auf der Kursseite</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 07 · HEUTE: ABLAUF ========== -->
+  <section class="slide" aria-label="Heute: Ablauf">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>07</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Woche 1</p>
+      <h2 class="title reveal" style="--d:.1s">Heute: <em>Ablauf</em></h2>
+      <div class="agenda">
+        <ol class="blk1">
+          <li class="reveal" style="--d:.2s"><time>08:00</time><span>Ankommen &amp; Blitzlicht</span></li>
+          <li class="reveal" style="--d:.27s"><time>08:10</time><span>Modulvorstellung</span></li>
+          <li class="reveal" style="--d:.34s"><time>08:30</time><span>Lernbedarfsanalyse<small>Ergebnisse</small></span></li>
+          <li class="reveal" style="--d:.41s"><time>08:45</time><span>Gruppenbildung + Referatsvergabe</span></li>
+        </ol>
+        <div class="pause reveal" style="--d:.5s">
+          <time>09:30</time>
+          <svg class="cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3c0 1.5 1 1.5 1 3M12 3c0 1.5 1 1.5 1 3"/></svg>
+          <span>Pause</span>
+        </div>
+        <ol class="blk2">
+          <li class="reveal" style="--d:.58s"><time>10:00</time><span>Kulturatlas-Demo + Gruppeneinrichtung</span></li>
+          <li class="reveal" style="--d:.65s"><time>10:30</time><span>Selbststudium KW 42<small>Walkthrough</small></span></li>
+          <li class="reveal" style="--d:.72s"><time>10:50</time><span>Erwartungen<small>Kartenabfrage</small></span></li>
+          <li class="reveal" style="--d:.79s"><time>11:10</time><span>Ausblick + Abschluss</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 08 · EURE REFERATE ========== -->
+  <section class="slide" aria-label="Eure Referate">
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>08</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Referatsvergabe</p>
+      <h2 class="title reveal" style="--d:.1s">Eure Referate</h2>
+      <div class="ref">
+        <table class="reftab reveal" style="--d:.25s">
+          <thead><tr><th>TK</th><th>Thema</th><th style="text-align:right">Gruppe</th></tr></thead>
+          <tbody>
+            <tr class="tk-start"><td class="tkc">1a</td><td>Hybridität und Identitätsbildung in Dritten Orten</td><td class="grp"><span class="gp g1">Gruppe 1</span></td></tr>
+            <tr><td class="tkc">1b</td><td>Traditionen im Wandel</td><td class="grp"><span class="gp g2">Gruppe 2</span></td></tr>
+            <tr class="tk-start"><td class="tkc">2a</td><td>Geteilte Geschichte – gemeinsame Erinnerung?</td><td class="grp"><span class="gp g3">Gruppe 3</span></td></tr>
+            <tr><td class="tkc">2b</td><td>Grenzüberschreitende Kulturorte</td><td class="grp"><span class="gp g1">Gruppe 1</span></td></tr>
+            <tr class="tk-start"><td class="tkc">3a</td><td>Wer gestaltet Begegnung?</td><td class="grp"><span class="gp g2">Gruppe 2</span></td></tr>
+            <tr><td class="tkc">3b</td><td>Begegnung in der Praxis</td><td class="grp"><span class="gp g3">Gruppe 3</span></td></tr>
+          </tbody>
+        </table>
+        <aside class="matrix reveal" style="--d:.4s">
+          <span class="lab">Verteilung</span>
+          <div class="grid">
+            <span></span><span class="h">TK 1</span><span class="h">TK 2</span><span class="h">TK 3</span>
+            <span class="rh g1">Gruppe 1</span><span class="cell g1">1a</span><span class="cell g1">2b</span><span></span>
+            <span class="rh g2">Gruppe 2</span><span class="cell g2">1b</span><span></span><span class="cell g2">3a</span>
+            <span class="rh g3">Gruppe 3</span><span></span><span class="cell g3">2a</span><span class="cell g3">3b</span>
+          </div>
+          <p class="rule">Regel: Keine Gruppe hält zwei Referate aus demselben Themenkomplex.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 09 · WICHTIGE LINKS ========== -->
+  <section class="slide s-links" aria-label="Wichtige Links">
+    <div class="enso draw" style="--d:.3s"><img src="assets/enso-sage.png" alt=""></div>
+    <header class="chrome-top"><div class="brand"><svg fill="currentColor"><use href="#ik-logo"/></svg>Kultur im Dreiländereck</div><div class="pageno"><b>09</b> / 09</div></header>
+    <div class="slide-body">
+      <p class="kicker reveal">Zum Mitnehmen</p>
+      <h2 class="title reveal" style="--d:.1s">Wichtige Links</h2>
+      <div class="links">
+        <a class="linkcard reveal" style="--c:var(--terra);--d:.25s" href="https://kultur-im-dreilaendereck2627.vercel.app" target="_blank" rel="noopener">
+          <span class="k">Kursseite</span><span class="v">kultur-im-dreilaendereck2627.vercel.app</span>
+        </a>
+        <a class="linkcard reveal" style="--c:var(--sage);--d:.38s" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">
+          <span class="k">Kulturatlas Padlet</span><span class="v long">padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70</span>
+        </a>
+        <a class="linkcard reveal" style="--c:var(--indigo);--d:.51s" href="mailto:seidel@sankt-marienthal.eu">
+          <span class="k">Kontakt</span><span class="v">seidel@sankt-marienthal.eu</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle" title="Bearbeiten (E)" aria-label="Bearbeitungsmodus">✎</button>
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   Fixed 1920×1080 stage, keyboard/touch/wheel nav
+   =========================================== */
+class SlidePresentation{
+  constructor(){
+    this.slides=[...document.querySelectorAll('.slide')];
+    this.stage=document.getElementById('deckStage');
+    this.progress=document.getElementById('progress');
+    this.current=0;
+    this.locked=false;
+    this.setupStageScale();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    const fromHash=parseInt(location.hash.slice(1),10);
+    this.show(Number.isFinite(fromHash)?fromHash-1:0);
+    addEventListener('hashchange',()=>{
+      const n=parseInt(location.hash.slice(1),10);
+      if(Number.isFinite(n)&&n-1!==this.current) this.show(n-1);
+    });
+  }
+  setupStageScale(){
+    const scale=()=>{
+      const f=Math.min(innerWidth/1920,innerHeight/1080);
+      const x=(innerWidth-1920*f)/2, y=(innerHeight-1080*f)/2;
+      this.stage.style.transform=`translate(${x}px,${y}px) scale(${f})`;
+    };
+    scale(); addEventListener('resize',scale);
+  }
+  setupKeyboardNav(){
+    document.addEventListener('keydown',e=>{
+      if(this.locked) return; // editing text
+      if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();this.next();}
+      else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();this.prev();}
+      else if(e.key==='Home'){this.show(0);}
+      else if(e.key==='End'){this.show(this.slides.length-1);}
+    });
+  }
+  setupTouchNav(){
+    let sx=0,sy=0;
+    document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    document.addEventListener('touchend',e=>{
+      if(this.locked) return;
+      const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) dx<0?this.next():this.prev();
+    });
+  }
+  setupWheelNav(){
+    let last=0;
+    addEventListener('wheel',e=>{
+      if(this.locked) return;
+      const now=Date.now(); if(now-last<700||Math.abs(e.deltaY)<20) return;
+      last=now; e.deltaY>0?this.next():this.prev();
+    },{passive:true});
+  }
+  next(){this.show(this.current+1);}
+  prev(){this.show(this.current-1);}
+  show(i){
+    this.current=Math.max(0,Math.min(i,this.slides.length-1));
+    this.slides.forEach((s,k)=>{
+      const on=k===this.current;
+      s.classList.toggle('active',on);
+      s.setAttribute('aria-hidden',on?'false':'true');
+      if(!on) s.classList.remove('visible');
+    });
+    // next frame so transitions replay on each visit
+    requestAnimationFrame(()=>requestAnimationFrame(()=>this.slides[this.current].classList.add('visible')));
+    this.progress.style.width=((this.current+1)/this.slides.length*100)+'%';
+    history.replaceState(null,'','#'+(this.current+1));
+  }
+}
+
+/* ===========================================
+   INLINE EDITOR
+   E or top-left hotzone toggles; changes auto-save
+   to localStorage; Ctrl/Cmd+S downloads the HTML
+   =========================================== */
+class InlineEditor{
+  constructor(deck){
+    this.deck=deck; this.isActive=false;
+    this.key='ikd-sitzung-01-edits';
+    this.targets=[...document.querySelectorAll('.slide h1,.slide h2,.slide h3,.slide h4,.slide p,.slide li span,.slide td,.slide .st,.slide .lbl,.slide .k,.slide .v')];
+    this.restore();
+  }
+  toggleEditMode(){
+    this.isActive=!this.isActive; this.deck.locked=this.isActive;
+    document.body.classList.toggle('editing',this.isActive);
+    document.getElementById('editToggle').classList.toggle('active',this.isActive);
+    this.targets.forEach(el=>el.setAttribute('contenteditable',this.isActive?'true':'false'));
+    if(!this.isActive) this.save();
+  }
+  save(){
+    try{localStorage.setItem(this.key,JSON.stringify(this.targets.map(el=>el.innerHTML)));}catch(e){}
+  }
+  restore(){
+    try{
+      const d=JSON.parse(localStorage.getItem(this.key)||'null');
+      if(Array.isArray(d)&&d.length===this.targets.length) d.forEach((h,i)=>this.targets[i].innerHTML=h);
+    }catch(e){}
+  }
+  download(){
+    const wasActive=this.isActive; if(wasActive) this.toggleEditMode();
+    const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+    a.download='sitzung-01.html'; a.click();
+  }
+}
+
+const deck=new SlidePresentation();
+const editor=new InlineEditor(deck);
+
+const hotzone=document.getElementById('editHotzone');
+const editToggle=document.getElementById('editToggle');
+let hideTimeout=null;
+editToggle.addEventListener('click',()=>editor.toggleEditMode());
+hotzone.addEventListener('click',()=>editor.toggleEditMode());
+hotzone.addEventListener('mouseenter',()=>{clearTimeout(hideTimeout);editToggle.classList.add('show');});
+hotzone.addEventListener('mouseleave',()=>{hideTimeout=setTimeout(()=>{if(!editor.isActive)editToggle.classList.remove('show');},400);});
+editToggle.addEventListener('mouseenter',()=>clearTimeout(hideTimeout));
+editToggle.addEventListener('mouseleave',()=>{hideTimeout=setTimeout(()=>{if(!editor.isActive)editToggle.classList.remove('show');},400);});
+document.addEventListener('input',()=>editor.save());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();editor.save();editor.download();return;}
+  if((e.key==='e'||e.key==='E')&&e.target.getAttribute('contenteditable')!=='true'&&!e.ctrlKey&&!e.metaKey) editor.toggleEditMode();
+  if(e.key==='Escape'&&editor.isActive) editor.toggleEditMode();
+});
+</script>
+</body>
+</html>
