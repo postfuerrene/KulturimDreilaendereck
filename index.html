@@ -67,6 +67,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
 .btn-ghost:hover{background:var(--cream);color:var(--ink);border-color:var(--ink-muted);}
 .btn-terra{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r-sm);font-size:12px;font-family:inherit;background:var(--navy);color:#fff;transition:var(--transition);}
 .btn-terra:hover{background:var(--navy-mid);}
+.btn-briefing{font-weight:600;text-decoration:none;}
+.hero-cta{display:inline-flex;align-items:center;gap:14px;margin-top:24px;padding:14px 22px;background:var(--navy);color:#fff;border-radius:var(--r-sm);text-decoration:none;box-shadow:var(--shadow-md);transition:var(--transition);}
+.hero-cta:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.hero-cta span{display:flex;flex-direction:column;gap:2px;}
+.hero-cta strong{font-size:15px;font-weight:600;}
+.hero-cta small{font-size:12px;color:rgba(255,255,255,0.75);}
 .btn-next{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:var(--r-sm);font-size:11px;font-family:inherit;background:var(--terra-light);color:var(--ink-mid);border:1px solid #FDE68A;transition:var(--transition);}
 .btn-next:hover{background:#FDE68A;}
 .next-dot{width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none;animation:pulse 2s infinite;}
@@ -150,7 +156,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   transition:border-color var(--transition),box-shadow var(--transition);
 }
 .wacc-item.active{border-color:var(--navy);box-shadow:var(--shadow-md);}
-.wacc-item.is-pause{opacity:0.75;}
+.wacc-item.is-pause{opacity:0.6;}
+/* Präsenz-Termine hervorheben, ausgefallene Termine dezent */
+.wacc-item.is-praesenz{border-left:3px solid var(--terra);}
+.mode-pill{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.04em;padding:2px 8px;border-radius:var(--r-pill);vertical-align:1px;}
+.mode-pill.mp-praesenz{background:var(--terra-light);color:#713F12;border:1px solid #FDE68A;}
+.mode-pill.mp-pause{background:var(--cream);color:var(--ink-muted);border:1px solid var(--cream-dark);}
+.wacc-item.is-pause .wtitle,.mob-wrow.is-pause .mob-wrow-title{font-weight:500;color:var(--ink-muted);}
 
 /* Accordion trigger row */
 .wrow{
@@ -369,7 +381,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
     font-family:inherit;
   }
   .mob-wrow:active{background:var(--cream);transform:scale(0.98);}
-  .mob-wrow.is-pause{opacity:0.45;}
+  .mob-wrow.is-pause{opacity:0.6;}
+  .mob-wrow.is-praesenz{box-shadow:inset 3px 0 0 var(--terra);}
   .mob-wnum{
     font-family:'Cormorant Garamond',serif;
     font-size:36px;font-weight:400;line-height:1;
@@ -560,6 +573,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </div>
     </a>
     <div class="topbar-actions">
+      <a class="btn-terra btn-briefing" href="Referate/Referat-Briefings_WiSe2627.pdf" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Referat-Briefings
+      </a>
       <a class="btn-ghost" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Kulturatlas
@@ -589,9 +606,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       </span>
       <span class="hero-badge">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        07.10.2026 – 27.01.2027
+        07.10.2026 – 28.01.2027
       </span>
     </div>
+    <a class="hero-cta" href="Referate/Referat-Briefings_WiSe2627.pdf" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span><strong>Referat-Briefings</strong><small>Leitfragen · Quellen · Hinweise für alle sechs Referate (PDF)</small></span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
   </div>
 </section>
 
@@ -600,7 +622,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
   <div class="highway">
     <div class="highway-label">
       <span>Semesterverlauf</span>
-      <span id="hw-dates">07.10.2026 → 27.01.2027</span>
+      <span id="hw-dates">07.10.2026 → 28.01.2027</span>
     </div>
     <div class="highway-track" id="highway-track"></div>
   </div>
@@ -668,9 +690,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;}
       <span id="mob-progress-pct">0 %</span>
     </div>
     <div class="mob-progress-bar"><div class="mob-progress-fill" id="mob-progress-fill" style="width:0%"></div></div>
-    <div class="mob-progress-dates"><span>05.10.2026</span><span>29.01.2027</span></div>
+    <div class="mob-progress-dates"><span>07.10.2026</span><span>28.01.2027</span></div>
   </div>
 
+  <a class="mob-padlet" href="Referate/Referat-Briefings_WiSe2627.pdf" target="_blank" rel="noopener" style="margin-bottom:0;">
+    <div class="mob-padlet-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+    <div class="mob-padlet-text">
+      <div class="mob-padlet-title">Referat-Briefings (PDF)</div>
+      <div class="mob-padlet-sub">Leitfragen · Quellen · Hinweise für alle Referate</div>
+    </div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+  </a>
   <a class="mob-padlet" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">
     <div class="mob-padlet-icon">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -738,13 +768,17 @@ const RAUM = 'G II/B260';
 const ZEIT  = '08:00–09:30 Uhr &amp; 10:00–11:30 Uhr';
 
 const WEEKS = [
-  {kw:41,label:'KW 41',date:'07.10.2026',short:'07.10.',mode:'praesenz',tk:'Einstieg',
-   title:'Einstieg und Auftakt',
-   lead:'Organisatorische Auftaktsitzung: Vorstellung des Moduls, Gruppenbildung und Einführung in das Kulturatlas-Portfolio.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Vorstellung des Moduls, Ablauf und hybrider Modus','Auswertung der Lernbedarfsanalyse','Gruppenbildung (3 Gruppen) + Referatsvergabe','Einführung Kulturatlas-Portfolio: Struktur, Padlet, Erwartungen'],hinweis:'Keine Referate – organisatorische Sitzung.',folien:{path:'sitzung-01.html',label:'Präsentation Woche 1',meta:'Folien zur Auftaktsitzung · 26 Folien'}}},
+  {kw:41,label:'KW 41',date:'07.10.2026',short:'07.10.',mode:'selbststudium',tk:'Einstieg',
+   title:'Kurseinführung + TK1 Einstieg',
+   lead:'Einführung in das Modul, den hybriden Modus und das Kulturatlas-Portfolio – und erster Einstieg in Themenkomplex 1.',
+   folien:{path:'sitzung-01.html',label:'Präsentation Kurseinführung',meta:'Folien zur Kurseinführung · 26 Folien'}},
 
-  {kw:42,label:'KW 42',date:'14.10.2026',short:'14.10.',mode:'selbststudium',tk:'TK 1 · Identität & Traditionen',
-   title:'Kollektive Identität',
+  {kw:42,label:'KW 42',date:'14.10.2026',short:'14.10.',mode:'selbststudium',tk:'Einstieg',
+   title:'Studierende auf Exkursion',
+   lead:'Die Studierenden sind diese Woche auf Exkursion. Keine Lehrveranstaltung im Kurs.'},
+
+  {kw:43,label:'KW 43',date:'21.10.2026',short:'21.10.',mode:'selbststudium',tk:'TK 1 · Identität & Traditionen',
+   title:'TK1: Kollektive Identität',
    lead:'Was macht uns zu wem wir sind – als Gruppe, als Region? Assmann, Bhabha und das Konzept des Third Space im Grenzraum.',
    leitfrage:'Wie entstehen kollektive Identitäten, und welche Rolle spielt der Grenzraum dabei?',
    video:{path:'KW 42/Kollektive_Identität.mp4',label:'Input-Video: Kollektive Identität',meta:'Lektion 1 · TK 1.1'},
@@ -756,13 +790,8 @@ const WEEKS = [
    refs:['Welche Merkmale definieren die kollektive Identität des Dreiländerecks (D/PL/CZ)? Nennen Sie drei konkrete Beispiele.','Inwiefern lässt sich das Dreiländereck als „Third Space" (Bhabha) verstehen? Wo sehen Sie Hybridität im Alltag?','Assmann unterscheidet kulturelles und kommunikatives Gedächtnis. Welchem Typ ordnen Sie aktuelle Erinnerungspraktiken in Ihrer Heimatregion zu?'],
    ka:'Recherchieren Sie ein Beispiel für kollektive Identitätsmarkierungen im Dreiländereck (z. B. Grenzdenkmäler, zweisprachige Ortsschilder, regionale Feste). Padlet-Eintrag mit Titel, Kategorie, Beschreibung (5–7 Sätze), Einordnung, Ort und Quelle.'},
 
-  {kw:43,label:'KW 43',date:'21.10.2026',short:'21.10.',mode:'praesenz',tk:'TK 1 · Identität & Traditionen',
-   title:'Individuelle und kollektive Identität',
-   lead:'Grundbegriffe, Theorien kollektiver Identität (Assmann, Tajfel/Turner), Hybridität und Border-Languaging.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Grundbegriffe: Identität, kollektive, soziale und kulturelle Identität','Theorien kollektiver Identität (Assmann, Tajfel/Turner)','Homi Bhabha: Third Space / Dritte Orte in Grenzregionen','Hybridität und Border-Languaging'],referat:'🎤 Referat 1a – Zwischen Grenzen und Begegnung (Gruppe 1)',methoden:'Concept Map · Kulturatlas-Kurzpräsentation · Think-Pair-Share'}},
-
   {kw:44,label:'KW 44',date:'28.10.2026',short:'28.10.',mode:'selbststudium',tk:'TK 1 · Identität & Traditionen',
-   title:'Traditionen im Wandel',
+   title:'TK1: Traditionen im Wandel',
    lead:'Wie wandeln sich Traditionen in Lausitz, Nordböhmen und Niederschlesien – und was bleibt? Brüche, Kontinuitäten, Migration.',
    leitfrage:'Welche Traditionen des Dreiländerecks haben Migration, Krieg und Systemwechsel überlebt – und warum?',
    video:{path:'KW 44/Traditionen_im_Wandel.mp4',label:'Input-Video: Traditionen im Wandel',meta:'Lektion 2 · TK 1.2'},
@@ -773,13 +802,8 @@ const WEEKS = [
    refs:['Beschreiben Sie eine Tradition aus der Region, die sich durch politische Zäsuren (1945, 1989) verändert hat. Worin bestand der Wandel?','Welche Rolle spielt die Kirche als Trägerin von Tradition im Dreiländereck? Unterscheiden Sie den deutschen, polnischen und tschechischen Kontext.','Inwiefern kann kulinarische Tradition als „weicher" Indikator für kulturelle Kontinuität gelten?'],
    ka:'Recherchieren Sie ein Fest, einen Brauch oder ein Handwerk aus der Region (Lausitz, Nordböhmen oder Niederschlesien). Padlet-Eintrag mit Fokus auf Wandel und Kontinuität.'},
 
-  {kw:45,label:'KW 45',date:'04.11.2026',short:'04.11.',mode:'praesenz',tk:'TK 1 · Identität & Traditionen',
-   title:'Traditionen + Abschluss TK 1',
-   lead:'Historische Entwicklung von Traditionen, Brüche und Kontinuitäten, Abschluss TK 1 mit Postersession.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Historische Entwicklung von Traditionen: Lausitz, Nordböhmen, Niederschlesien','Brüche und Kontinuitäten: Feiertage, Feste, Esskultur, Handwerk','Einfluss von Migration, Krieg, Systemwechseln','Abschluss TK 1: Postersession + Reflexionsrunde'],referat:'🎤 Referat 1b – Traditionen im Wandel (Gruppe 2)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Diskussion · Postersession'}},
-
-  {kw:46,label:'KW 46',date:'11.11.2026',short:'11.11.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
-   title:'Erinnerungsorte und Kulturorte',
+  {kw:45,label:'KW 45',date:'04.11.2026',short:'04.11.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
+   title:'TK2: Erinnerungsorte',
    lead:'Pierre Nora und die Lieux de Mémoire: Was macht einen Ort zum Erinnerungsort? Nationale Narrative im Dreiländereck.',
    leitfrage:'Was ist der Unterschied zwischen Geschichte und Erinnerung – und warum ist diese Unterscheidung im Dreiländereck besonders bedeutsam?',
    video:{path:'KW 46/Erinnerungsorte_im_Dreiländereck.mp4',label:'Input-Video: Erinnerungsorte im Dreiländereck',meta:'Lektion 3 · TK 2.1'},
@@ -790,37 +814,23 @@ const WEEKS = [
    refs:['Nennen Sie drei Erinnerungsorte im Dreiländereck und erklären Sie, welche nationale Erinnerungskultur sie repräsentieren.','Pierre Nora unterscheidet „milieux de mémoire" und „lieux de mémoire". Erläutern Sie den Unterschied anhand eines Beispiels aus der Region.','Wie verändert digitale Medien (z. B. Dokumentarfilme, Webseiten, Podcasts) die Form des kollektiven Erinnerns?'],
    ka:'Recherchieren Sie einen Gedenkort oder ein Erinnerungsprojekt im Dreiländereck. Analysieren Sie: Wessen Erinnerung wird gepflegt? Welches nationale Narrativ steht dahinter? Padlet-Eintrag erstellen.'},
 
+  {kw:46,label:'KW 46',date:'11.11.2026',short:'11.11.',mode:'praesenz',tk:'TK 1 · Identität & Traditionen',
+   title:'TK1-Referate: a + b',
+   lead:'Präsenzsitzung mit den beiden Referaten aus Themenkomplex 1.',
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Referat TK1-a: Kollektive Identität in Grenzregionen','Referat TK1-b: Traditionen im Wandel – Lausitz &amp; Niederschlesien'],referat:'Je 15 Min. Vortrag + 5 Min. Diskussion'}},
+
   {kw:47,label:'KW 47',date:'18.11.2026',short:'18.11.',mode:'pause',tk:'Pause',
-   title:'Buß- und Bettag – Vorlesungsfrei',
-   lead:'Gesetzlicher Feiertag in Sachsen. Kein Unterricht.'},
+   title:'Buß- und Bettag',
+   lead:'Gesetzlicher Feiertag in Sachsen. Die Sitzung entfällt.'},
 
-  // ── alles um einen Slot nach hinten verschoben (Buß- und Bettag) ──
   {kw:48,label:'KW 48',date:'25.11.2026',short:'25.11.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
-   title:'Gedenk- und Erinnerungsorte',
-   lead:'Konzept der Erinnerungsorte, unterschiedliche nationale Narrative zu Krieg und Vertreibung, Formen des Erinnerns.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Konzept der Erinnerungsorte (Pierre Nora: Lieux de Mémoire)','Unterschiede nationaler Narrative: Krieg, Holocaust, Vertreibung, Sozialismus','Formen des Erinnerns: Mahnmale, Museen, digitale Plattformen','Zentrale Gedenkorte im Dreiländereck'],referat:'🎤 Referat 2a – Geteilte Geschichte – gemeinsame Erinnerung? (Gruppe 3)',methoden:'Kulturatlas-Kurzpräsentation · Rollenkarten-Perspektivenwechsel · Jigsaw'}},
+   title:'TK2-Referate: a + b',
+   lead:'Präsenzsitzung mit den beiden Referaten aus Themenkomplex 2.',
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Referat TK2-a: Erinnerungsorte – Stalag VIII A &amp; Neisse Filmfest','Referat TK2-b: Kulturkontakte im Dreiländereck'],referat:'Je 15 Min. Vortrag + 5 Min. Diskussion'}},
 
-  {kw:49,label:'KW 49',date:'02.12.2026',short:'02.12.',mode:'selbststudium',tk:'TK 2 · Erinnerung & Kulturorte',
-   title:'Kulturkontakte und grenzüberschreitende Kulturarbeit',
-   lead:'Kulturkontakte als Motor gesellschaftlichen Wandels: ViaThea, Neisse Filmfestival, Europaschule und Begegnungsorte im Grenzraum.',
-   leitfrage:'Welche Institutionen und Projekte gestalten aktiv grenzüberschreitende Kulturarbeit – und wer profitiert davon?',
-   video:{path:'KW 48/Kulturkontakte__Dreiländereck.mp4',label:'Input-Video: Kulturkontakte im Dreiländereck',meta:'Lektion 4 · TK 2.2'},
-   pdfs:[
-     {path:'KW 48/Kulturkontakte-und-grenzuberschreitende-Kulturarbeit.pdf',label:'Kulturkontakte und grenzüberschreitende Kulturarbeit (Skript)',meta:'Lektüre 1'},
-     {path:'KW 48/brozura 30 let web.pdf',label:'Broschüre: 30 Jahre grenzüberschreitende Zusammenarbeit',meta:'Lektüre 2'},
-     {path:'KW 48/ssoar-2013-engel_et_al-Grenzen_der_Grenzuberschreitung_Zur_Ubersetzungsleistung.pdf',label:'Engel et al.: Grenzen der Grenzüberschreitung (2013)',meta:'Lektüre 3 (Vertiefung)'}
-   ],
-   refs:['Beschreiben Sie ein grenzüberschreitendes Kulturprojekt im Dreiländereck. Welche Herausforderungen gibt es bei der Umsetzung?','Welche Rolle spielt Sprache als Barriere und Brücke in der grenzüberschreitenden Kulturarbeit?','Analysieren Sie die Europaschule als Modell: Welche Kompetenzen vermittelt sie – und welche blinden Flecken hat das Modell?'],
-   ka:'Analysieren Sie einen Begegnungsort oder ein Kulturprojekt im Dreiländereck (z. B. ViaThea, Grenzpendler-Alltag, Europaschule). Padlet-Eintrag mit Kategorie „Begegnung" erstellen.'},
-
-  {kw:50,label:'KW 50',date:'09.12.2026',short:'09.12.',mode:'praesenz',tk:'TK 2 · Erinnerung & Kulturorte',
-   title:'Kulturorte + Abschluss TK 2',
-   lead:'Kulturelle Infrastruktur, grenzüberschreitende Projekte, World Café und Postersession zum Abschluss von TK 2.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Kulturelle Infrastruktur: Theater, Museen, Bibliotheken, Begegnungszentren','Analyse grenzüberschreitender Kulturprojekte: Neisse Filmfestival, ViaThea u. a.','Rolle institutioneller und zivilgesellschaftlicher Träger','Abschluss TK 2: Postersession + Reflexionsrunde'],referat:'🎤 Referat 2b – Kultur verbindet? (Gruppe 1)',methoden:'Kulturatlas-Kurzpräsentation · World Café · Postersession'}},
-
-  {kw:51,label:'KW 51',date:'16.12.2026',short:'16.12.',mode:'selbststudium',tk:'TK 3 · Interkulturelle Politik',
-   title:'Interkulturelle Politik im Grenzraum',
-   lead:'Akteure und Institutionen: Euroregion Neiße, INTERREG, grenzüberschreitende Kulturpolitik und ihre politischen Spannungsfelder.',
+  {kw:49,label:'KW 49',date:'02.12.2026',short:'02.12.',mode:'selbststudium',tk:'TK 3 · Interkulturelle Politik',
+   title:'TK3: IBZ · Euroregion · Kulturpolitik',
+   lead:'Akteure und Institutionen: IBZ St. Marienthal, Euroregion Neiße, INTERREG und grenzüberschreitende Kulturpolitik.',
    leitfrage:'Wer hat die Macht, interkulturelle Begegnung im Dreiländereck zu gestalten – und wessen Interessen stehen dahinter?',
    video:{path:'KW 50/Politik_im_Grenzraum.mp4',label:'Input-Video: Interkulturelle Politik im Grenzraum',meta:'Lektion 5 · TK 3'},
    pdfs:[
@@ -830,17 +840,19 @@ const WEEKS = [
    refs:['Welche Aufgaben übernimmt die Euroregion Neiße im Bereich Kulturförderung? Nennen Sie konkrete Beispiele.','Inwiefern kann INTERREG als Instrument kulturpolitischer Steuerung verstanden werden? Welche Schwächen hat das System?','Vorbereitung IBZ-Exkursion: Welche Fragen möchten Sie den Experten vor Ort (Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille) stellen?'],
    ka:'Recherchieren Sie eine Institution interkultureller Politik im Dreiländereck (z. B. Euroregion Neiße, INTERREG-Projekt). Analysieren Sie Aufgaben, Reichweite und Finanzierung. Padlet-Eintrag erstellen.'},
 
-  {kw:52,label:'KW 52–1',date:'23.12.2026',short:'23.12.–05.01.',mode:'pause',tk:'Pause',
-   title:'Weihnachtspause',lead:'Vorlesungsfreie Zeit – KW 52 (2026) und KW 1 (2027). Gute Erholung!'},
+  {kw:50,label:'KW 50',date:'09.12.2026',short:'09.12.',mode:'praesenz',tk:'TK 3 · Interkulturelle Politik',
+   title:'TK3-Referate: a + b',
+   lead:'Präsenzsitzung mit den beiden Referaten aus Themenkomplex 3.',
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Referat TK3-a: IBZ · Euroregion · INTERREG','Referat TK3-b: Kulturpolitik im Grenzraum'],referat:'Je 15 Min. Vortrag + 5 Min. Diskussion'}},
 
-  {kw:1,label:'KW 1',date:'06.01.2027',short:'06.01.',mode:'praesenz',tk:'TK 3 · Interkulturelle Politik',
-   title:'Kulturnetzwerk + Exkursion IBZ St. Marienthal',
-   lead:'Expertengespräche in Ostritz mit Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille.',
-   praesenz:{zeiten:ZEIT,themen:['Interkulturelle Politik im Grenzraum: Akteure, Institutionen, Spannungsfelder','Fallanalyse eines grenzüberschreitenden Kulturprojekts','Expertengespräche vor Ort: Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille'],referat:'🎤 Referat 3a – Wer gestaltet Begegnung? (Gruppe 2) · 🎤 Referat 3b – Begegnung in der Praxis (Gruppe 3)',methoden:'Expertengespräche · Buzz Groups · Live-Padlet-Eintrag · Abschlussreflexion',ort:'📍 Stiftung IBZ St. Marienthal, Ostritz'}},
+  {kw:51,label:'KW 51',date:'16.12.2026',short:'16.12.',mode:'praesenz',tk:'TK 3 · Interkulturelle Politik',
+   title:'Exkursion IBZ + Abschluss TK3',
+   lead:'Exkursion zur Stiftung IBZ St. Marienthal in Ostritz mit Expertengesprächen und Abschluss von Themenkomplex 3.',
+   praesenz:{zeiten:ZEIT,themen:['Expertengespräche vor Ort: Gregor Schaaf-Schuchardt, Georg Salditt, Gunnar Hille','Interkulturelle Politik im Grenzraum: Akteure, Institutionen, Spannungsfelder','Abschluss TK 3'],ort:'📍 Stiftung IBZ St. Marienthal, Ostritz'}},
 
-  {kw:2,label:'KW 2',date:'13.01.2027',short:'13.01.',mode:'selbststudium',tk:'Synthese',
-   title:'Synthese und Prüfungsvorbereitung',
-   lead:'Was hält das Dreiländereck zusammen? Rückblick und Gesamtsynthese. Kulturatlas finalisieren, Begriffe und Theorien wiederholen.',
+  {kw:1,label:'KW 1',date:'07.01.2027',short:'07.01.',mode:'selbststudium',tk:'Synthese',
+   title:'Prüfungsvorbereitung',
+   lead:'Was hält das Dreiländereck zusammen? Rückblick und Synthese, Kulturatlas finalisieren, Begriffe und Theorien wiederholen.',
    leitfrage:'Was hält das Dreiländereck kulturell zusammen – und was hält es auseinander?',
    video:{path:'KW2/Synthese.mp4',label:'Input-Video: Synthese',meta:'Abschlusslektion'},
    pdfs:[],
@@ -848,12 +860,18 @@ const WEEKS = [
    ka:'Kulturatlas finalisieren: Vollständigkeit aller Einträge prüfen, Quellen ergänzen, Querverweise zu anderen Gruppeneinträgen herstellen.',
    quiz:true},
 
-  {kw:3,label:'KW 3',date:'20.01.2027',short:'20.01.',mode:'praesenz',tk:'Synthese',
-   title:'Gesamtsynthese und Prüfungsvorbereitung',
-   lead:'Abschlusspräsentation Kulturatlas, gemeinsame Gesamtschau und strukturierte Prüfungsvorbereitung.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Abschlusspräsentation Kulturatlas: alle Gruppen','Gemeinsame Gesamtschau: Clustering, Querverweise, Synthese','Was hält das Dreiländereck zusammen? Verknüpfung TK 1 + TK 2 + TK 3','Strukturierte Prüfungsvorbereitung + Fragerunde'],referat:'Keine Referate – Syntheseleistung aller Gruppen',methoden:'Galerierundgang · Planspiel „Kulturgipfel Dreiländereck" · Fragerunde'}},
+  {kw:2,label:'KW 2',date:'14.01.2027',short:'14.01.',mode:'praesenz',tk:'Synthese',
+   title:'Prüfungsvorbereitung gemeinsam',
+   lead:'Gemeinsame Gesamtschau aller Themenkomplexe und strukturierte Prüfungsvorbereitung.',
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Gemeinsame Gesamtschau: TK 1 + TK 2 + TK 3','Strukturierte Prüfungsvorbereitung + Fragerunde'],},
+   quiz:true},
 
-  {kw:4,label:'KW 4',date:'27.01.2027',short:'27.01.',mode:'praesenz',tk:'Synthese',
+  {kw:3,label:'KW 3',date:'21.01.2027',short:'21.01.',mode:'selbststudium',tk:'Synthese',
+   title:'Individuelle Vorbereitung',
+   lead:'Individuelle Prüfungsvorbereitung: Begriffe, Theorien und regionale Beispiele wiederholen.',
+   quiz:true},
+
+  {kw:4,label:'KW 4',date:'28.01.2027',short:'28.01.',mode:'praesenz',tk:'Synthese',
    title:'Abschlusskolloquium',
    lead:'Abschlusssitzung des Semesters: Mündliche Prüfungsgespräche, Kursevaluation und gemeinsamer Abschluss.',
    praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Mündliche Abschlussgespräche (Einzeln/Gruppen)','Kursevaluation: Was hat gelernt? Was bleibt?','Abschlusspräsentation: Highlights aus dem Kulturatlas','Verabschiedung + Ausblick'],methoden:'Prüfungsgespräche · Fishbowl-Diskussion · Abschlussreflexion'}}
@@ -861,7 +879,7 @@ const WEEKS = [
 
 // ── HELPERS ──────────────────────────────────────────────────
 const SEMESTER_START = new Date('2026-10-07');
-const SEMESTER_END   = new Date('2027-01-27');
+const SEMESTER_END   = new Date('2027-01-28');
 
 function getProgress(){
   const n=new Date();
@@ -886,7 +904,8 @@ function parseDateDE(s){
   return new Date(+p[2],+p[1]-1,+p[0]);
 }
 function tkStyle(tkName){return TK[tkName]||{color:'#8A8A9A',bg:'#EAEAE8'};}
-function modeLabel(m){return{selbststudium:'Selbststudium',praesenz:'Präsenzsitzung',pause:'Vorlesungsfrei'}[m]||m;}
+function modeLabel(m){return{selbststudium:'Selbststudium',praesenz:'Präsenzsitzung',pause:'Entfällt'}[m]||m;}
+function modeMeta(w,d){return w.mode==='praesenz'?`<span class="mode-pill mp-praesenz">Präsenz</span> · ${d}`:w.mode==='pause'?`<span class="mode-pill mp-pause">Entfällt</span> · ${d}`:`Selbststudium · ${d}`;}
 
 const ARROW=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>`;
 const SLIDES_I=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`;
@@ -933,6 +952,8 @@ function buildDetail(w){
     </div>
     ${w.quiz?quizBtn():''}`;
   } else {
+    if(!w.leitfrage)body+=`<p style="font-size:14px;line-height:1.6;color:var(--ink-mid);">${w.lead}</p>`;
+    if(w.folien)body+=folienLink(w.folien);
     if(w.leitfrage)body+=`<div class="leitfrage" style="background:rgba(253,224,71,0.18);border:1px solid rgba(234,179,8,0.30);">
       <div class="lf-label">Leitfrage der Woche</div>
       <div class="lf-q">${w.leitfrage}</div>
@@ -1033,15 +1054,14 @@ function renderWeekList(selIdx){
     const tk=tkStyle(w.tk);
     const isPast=i<cur,isSel=i===selIdx,isCur=i===cur;
     const modeClass='mode-'+w.mode;
-    const modeShort=w.mode==='selbststudium'?'Selbststudium':w.mode==='praesenz'?'Präsenz':'Vorlesungsfrei';
-    return `<div class="wacc-item${isSel?' active':''}${w.mode==='pause'?' is-pause':''}" id="wacc-item-${i}">
+    return `<div class="wacc-item${isSel?' active':''}${w.mode==='pause'?' is-pause':''}${w.mode==='praesenz'?' is-praesenz':''}" id="wacc-item-${i}">
       <button class="wrow${isSel?' active':''}${isPast&&!isSel?' past':''} ${modeClass}"
         onclick="selectWeek(${i})" aria-expanded="${isSel}">
         <div class="wnum">${w.label.replace('KW ','')}</div>
         <div class="wrow-divider"></div>
         <div class="winfo">
           <div class="wtitle">${w.title}${isCur?`<span class="wcurrent-tag">${new Date()<SEMESTER_START?'Start':'Aktuell'}</span>`:''}</div>
-          <div class="wmeta">${modeShort} · ${w.date}</div>
+          <div class="wmeta">${modeMeta(w,w.date)}</div>
         </div>
         <div class="wchev" style="transform:rotate(${isSel?90:0}deg);">${CHEV}</div>
       </button>
@@ -1125,15 +1145,14 @@ function renderMobileWeekList(){
     const tk=tkStyle(w.tk);
     const isCur=i===cur;
     const kwNum=w.label.replace('KW ','');
-    const modeShort=w.mode==='selbststudium'?'Selbststudium':w.mode==='praesenz'?'Präsenz':'Vorlesungsfrei';
     const numCol=isCur?'var(--navy)':w.mode==='pause'?'var(--ink-muted)':'var(--ink-muted)';
-    return `<button class="mob-wrow${isCur?' active':''}${w.mode==='pause'?' is-pause':''}"
+    return `<button class="mob-wrow${isCur?' active':''}${w.mode==='pause'?' is-pause':''}${w.mode==='praesenz'?' is-praesenz':''}"
       onclick="renderMobileDetail(${i});setMobileView('detail');">
       <div class="mob-wnum" style="color:${numCol};">${kwNum}</div>
       <div class="mob-wrow-divider"></div>
       <div class="mob-wrow-info">
         <div class="mob-wrow-title">${w.title}</div>
-        <div class="mob-wrow-meta">${modeShort} · ${w.short}</div>
+        <div class="mob-wrow-meta">${modeMeta(w,w.short)}</div>
       </div>
       <div class="mob-wrow-chev">${CHEV}</div>
     </button>`;
@@ -1217,13 +1236,16 @@ document.addEventListener('DOMContentLoaded',()=>{
       body=`<div style="text-align:center;padding:40px 0;"><div style="font-size:56px;margin-bottom:16px;">${isXmas?'🎄':'🕊️'}</div><div style="font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:8px;">${w.title}</div><div style="font-size:14px;color:var(--ink-muted);">${w.lead}</div></div>`;
     } else if(w.mode==='praesenz'&&w.praesenz){
       const pc=w.praesenz;
-      body=`<div class="praesenz">${(pc.raum||pc.zeiten||pc.ort)?`<div class="praesenz-meta">${pc.ort?`<span>📍 ${pc.ort}</span>`:(pc.raum?`<span>📍 Raum ${pc.raum}</span>`:'')}&ensp;${pc.zeiten?`<span>🕗 ${pc.zeiten}</span>`:''}</div>`:''}<div class="block-h">Themen</div><ul class="praesenz-themen">${pc.themen.map(t=>`<li>${t}</li>`).join('')}</ul>${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}${pc.hinweis?`<div class="praesenz-note" style="margin-top:8px;">${pc.hinweis}</div>`:''}${folienLink(pc.folien)}</div>`;
+      body=`<div class="praesenz">${(pc.raum||pc.zeiten||pc.ort)?`<div class="praesenz-meta">${pc.ort?`<span>📍 ${pc.ort}</span>`:(pc.raum?`<span>📍 Raum ${pc.raum}</span>`:'')}&ensp;${pc.zeiten?`<span>🕗 ${pc.zeiten}</span>`:''}</div>`:''}<div class="block-h">Themen</div><ul class="praesenz-themen">${pc.themen.map(t=>`<li>${t}</li>`).join('')}</ul>${pc.referat?`<div class="praesenz-referat" style="border-left-color:${tk.color};">${pc.referat}</div>`:''}${pc.methoden?`<div style="font-size:12px;color:var(--ink-muted);margin-top:8px;"><strong style="color:var(--ink);">Methoden:</strong> ${pc.methoden}</div>`:''}${pc.ort?`<div class="praesenz-ort">${pc.ort}</div>`:''}${pc.hinweis?`<div class="praesenz-note" style="margin-top:8px;">${pc.hinweis}</div>`:''}${folienLink(pc.folien)}</div>`+(w.quiz?quizBtn():'');
     } else {
+      if(!w.leitfrage)body+=`<p style="font-size:14px;line-height:1.6;color:var(--ink-mid);">${w.lead}</p>`;
+      if(w.folien)body+=folienLink(w.folien);
       if(w.leitfrage)body+=`<div class="leitfrage" style="background:rgba(253,224,71,0.18);border:1px solid rgba(234,179,8,0.30);"><div class="lf-label">Leitfrage</div><div class="lf-q">${w.leitfrage}</div></div>`;
       if(w.video)body+=`<div><div class="block-h">Input-Video</div><div class="video-wrap"><video controls preload="metadata"><source src="${w.video.path}" type="video/mp4"></video></div><div class="video-meta">${w.video.label}</div></div>`;
       if(w.pdfs&&w.pdfs.length)body+=`<div><div class="block-h">Lektüre</div><div class="res-list">${w.pdfs.map(p=>`<a class="res-item" href="${p.path}" target="_blank" rel="noopener"><div class="res-icon pdf">${PDF_I}</div><div style="flex:1;min-width:0;"><div class="res-name">${p.label}</div><div class="res-meta">${p.meta}</div></div><div class="res-arrow">${ARROW}</div></a>`).join('')}</div></div>`;
       if(w.refs&&w.refs.length)body+=`<div><div class="block-h">Reflexionsfragen</div><div class="ref-list">${w.refs.map((q,i)=>`<div class="ref-q"><div class="ref-num">${i+1}</div><div class="ref-text">${q}</div></div>`).join('')}</div></div>`;
       if(w.ka)body+=`<div class="kulturatlas" style="background:rgba(253,224,71,0.15);border:1px solid rgba(234,179,8,0.28);"><div class="ka-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kulturatlas-Auftrag</div><div class="ka-text">${w.ka}</div><a class="ka-btn" href="https://padlet.com/post_fuer_rene/kulturatlas-wise-26-2-q6etz1lj0bchrb70" target="_blank" rel="noopener">Zum Kulturatlas-Padlet ${ARROW}</a></div>`;
+      if(w.quiz)body+=quizBtn();
     }
     mobDetailContent.innerHTML=`
       <div style="margin-bottom:4px;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:${tk.color};">${w.tk}</div>
