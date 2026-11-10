@@ -817,7 +817,7 @@ const WEEKS = [
   {kw:46,label:'KW 46',date:'11.11.2026',short:'11.11.',mode:'praesenz',tk:'TK 1 · Identität & Traditionen',
    title:'TK1-Referate: a + b',
    lead:'Präsenzsitzung mit den beiden Referaten aus Themenkomplex 1.',
-   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Referat TK1-a: Kollektive Identität in Grenzregionen','Referat TK1-b: Traditionen im Wandel – Lausitz &amp; Niederschlesien'],referat:'Je 15 Min. Vortrag + 5 Min. Diskussion'}},
+   praesenz:{raum:RAUM,zeiten:ZEIT,themen:['Referat TK1-a: Kollektive Identität in Grenzregionen','Referat TK1-b: Traditionen im Wandel – Lausitz &amp; Niederschlesien'],referat:'Je 15 Min. Vortrag + 5 Min. Diskussion',folien:[{path:'Referate/KW46_TK1-a_Kollektive-Identitaet_She-Holky.pdf',label:'Referat TK1-a: Kollektive Identität in Grenzregionen',meta:'Gruppe She-Holky · Präsentation (PDF, 11 Folien)'}]}},
 
   {kw:47,label:'KW 47',date:'18.11.2026',short:'18.11.',mode:'pause',tk:'Pause',
    title:'Buß- und Bettag',
@@ -909,7 +909,7 @@ function modeMeta(w,d){return w.mode==='praesenz'?`<span class="mode-pill mp-pra
 
 const ARROW=`<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>`;
 const SLIDES_I=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>`;
-function folienLink(f){return f?`<div class="res-list"><a class="res-item" href="${f.path}" target="_blank" rel="noopener"><div class="res-icon slides">${SLIDES_I}</div><div style="flex:1;min-width:0;"><div class="res-name">${f.label}</div><div class="res-meta">${f.meta}</div></div><div class="res-arrow">${ARROW}</div></a></div>`:'';}
+function folienLink(f){if(!f)return'';const l=[].concat(f);return `<div class="res-list">${l.map(x=>`<a class="res-item" href="${x.path}" target="_blank" rel="noopener"><div class="res-icon slides">${SLIDES_I}</div><div style="flex:1;min-width:0;"><div class="res-name">${x.label}</div><div class="res-meta">${x.meta}</div></div><div class="res-arrow">${ARROW}</div></a>`).join('')}</div>`;}
 const PDF_I=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
 const CHECK=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
 const CHEV=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>`;
