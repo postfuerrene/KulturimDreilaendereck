@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KW 48 · Erinnerungsorte & Kulturorte im Dreiländereck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   VIEWPORT BASE
+   ============================================================ */
+html, body { width:100%; height:100%; margin:0; overflow:hidden; background:#1a1a1a; }
+.deck-viewport { position:fixed; inset:0; overflow:hidden; background:#1a1a1a; }
+#stage { position:absolute; left:0; top:0; width:1920px; height:1080px; overflow:hidden; transform-origin:0 0; }
+
+.slide {
+  position:absolute; inset:0; width:1920px; height:1080px;
+  overflow:hidden; visibility:hidden; opacity:0; pointer-events:none;
+  background:var(--paper);
+  font-family:'Hanken Grotesk', sans-serif;
+  color:var(--ink);
+}
+.slide.active { visibility:visible; opacity:1; pointer-events:auto; z-index:1; }
+
+@media (prefers-reduced-motion:reduce) {
+  * { animation-duration:0.01ms!important; transition-duration:0.01ms!important; }
+}
+
+/* ============================================================
+   COBALT GRID — Design-System
+   ============================================================ */
+:root {
+  --paper:      #F0EBDE;
+  --paper2:     #E6E0CE;
+  --ink:        #1F2BE0;
+  --ink-soft:   #5560E5;
+  --ink-faint:  rgba(31,43,224,0.08);
+  --ink-faint2: rgba(31,43,224,0.18);
+}
+
+/* Graph-paper grid */
+.slide::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--ink-faint) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ink-faint) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none; z-index:0;
+}
+/* Cobalt-Haarlinien oben + unten */
+.slide::after {
+  content:'';
+  position:absolute; left:0; right:0; top:0;
+  height:3px; background:var(--ink);
+  box-shadow:0 1077px 0 0 var(--ink);
+  z-index:10; pointer-events:none;
+}
+
+/* === LAYOUT === */
+.slide-inner {
+  position:absolute; inset:0;
+  display:flex; flex-direction:row;
+  z-index:2;
+}
+
+/* Linke Leiste */
+.left-col {
+  width:240px; min-width:240px;
+  background:var(--ink);
+  display:flex; flex-direction:column;
+  align-items:flex-start; justify-content:space-between;
+  padding:28px 20px 28px 24px;
+  box-sizing:border-box;
+}
+.course-label {
+  font-family:'DM Mono', monospace;
+  font-size:11px; color:rgba(240,235,222,0.65);
+  writing-mode:vertical-rl; text-orientation:mixed;
+  transform:rotate(180deg);
+  letter-spacing:0.08em; text-transform:uppercase;
+  line-height:1.4;
+}
+.slide-num {
+  font-family:'DM Mono', monospace;
+  font-size:13px; color:rgba(240,235,222,0.5);
+  letter-spacing:0.05em;
+}
+
+/* Hauptspalte */
+.main-col {
+  flex:1;
+  padding:52px 100px 70px 80px;
+  box-sizing:border-box;
+  position:relative;
+  display:flex; flex-direction:column;
+  justify-content:flex-start;
+}
+
+/* Info-Bar */
+.info-bar {
+  position:absolute; bottom:0; left:240px; right:0;
+  height:36px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 100px 0 80px;
+  border-top:1px solid var(--ink-faint2);
+  z-index:5;
+}
+.info-left, .info-right {
+  font-family:'DM Mono', monospace;
+  font-size:11px; color:var(--ink-soft);
+  letter-spacing:0.05em; opacity:0.7;
+}
+
+/* === TYPOGRAFIE === */
+h1 {
+  font-family:'Newsreader', serif;
+  font-size:100px; font-weight:400; line-height:1.0;
+  color:var(--ink); margin:0 0 24px 0;
+  letter-spacing:-0.02em;
+}
+h2 {
+  font-family:'Newsreader', serif;
+  font-size:72px; font-weight:400; line-height:1.08;
+  color:var(--ink); margin:0 0 20px 0;
+  letter-spacing:-0.015em;
+}
+h3 {
+  font-family:'Newsreader', serif;
+  font-size:44px; font-weight:400; line-height:1.15;
+  color:var(--ink); margin:0 0 16px 0;
+}
+.kicker {
+  font-family:'DM Mono', monospace;
+  font-size:14px; color:var(--ink); opacity:0.7;
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-bottom:18px;
+}
+.subtitle {
+  font-family:'Newsreader', serif;
+  font-size:44px; font-weight:400; font-style:italic;
+  color:var(--ink-soft); margin:0 0 32px 0; line-height:1.3;
+}
+.keywords {
+  font-family:'DM Mono', monospace;
+  font-size:14px; color:var(--ink); opacity:0.55;
+  letter-spacing:0.06em; margin-top:8px;
+}
+
+/* === KONZEPT-LISTE === */
+.concept-list {
+  display:flex; flex-direction:column; gap:0;
+  margin-top:8px;
+}
+.concept-item {
+  display:flex; align-items:flex-start; gap:36px;
+  padding:22px 0;
+  border-bottom:1px solid rgba(31,43,224,0.12);
+}
+.concept-item:first-child { border-top:1px solid rgba(31,43,224,0.12); }
+.concept-marker {
+  font-family:'DM Mono', monospace;
+  font-size:15px; color:var(--ink); opacity:0.85;
+  min-width:110px; padding-top:4px;
+  letter-spacing:0.04em; flex-shrink:0;
+}
+.concept-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:36px; color:var(--ink); line-height:1.3;
+}
+.concept-sub {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:22px; color:var(--ink-soft); line-height:1.5;
+  margin-top:6px; opacity:0.85;
+}
+
+/* === COMPARE GRID (2 Spalten) === */
+.compare-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:0; margin-top:16px;
+  border:1.5px solid var(--ink);
+}
+.compare-col {
+  padding:36px 44px;
+}
+.compare-col:first-child {
+  border-right:1.5px solid var(--ink);
+}
+.compare-label {
+  font-family:'DM Mono', monospace;
+  font-size:15px; color:var(--ink); opacity:0.85;
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-bottom:20px;
+}
+.compare-item {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:28px; color:var(--ink); line-height:1.5;
+  padding:12px 0;
+  border-bottom:1px solid rgba(31,43,224,0.1);
+}
+.compare-item:last-child { border-bottom:none; }
+
+/* === DREI BOXEN === */
+.three-col {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:20px; margin-top:16px;
+}
+.three-box {
+  background:var(--paper2);
+  border:1.5px solid var(--ink);
+  padding:24px 28px;
+}
+.three-box-flag {
+  font-size:32px; margin-bottom:10px;
+}
+.three-box-title {
+  font-family:'Newsreader', serif;
+  font-size:32px; font-weight:400; color:var(--ink);
+  margin-bottom:12px; line-height:1.2;
+}
+.three-box-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:23px; color:var(--ink); line-height:1.6;
+  opacity:0.85;
+}
+
+/* === ZITAT === */
+.quote-wrap {
+  position:relative; margin-top:8px;
+}
+.quote-mark {
+  font-family:'Newsreader', serif;
+  font-size:200px; line-height:0.7;
+  color:var(--ink-faint2);
+  position:absolute; top:0; left:-20px;
+  pointer-events:none; z-index:0;
+}
+.quote-block {
+  border-left:3px solid var(--ink);
+  padding:20px 0 20px 40px;
+  position:relative; z-index:1;
+  margin-top:40px;
+}
+.quote-text {
+  font-family:'Newsreader', serif;
+  font-size:58px; font-style:italic; font-weight:400;
+  color:var(--ink); line-height:1.3;
+}
+.quote-attr {
+  font-family:'DM Mono', monospace;
+  font-size:16px; color:var(--ink-soft);
+  margin-top:20px; letter-spacing:0.05em;
+}
+
+/* === WEEK BOXES === */
+.week-boxes {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:20px; margin-top:20px;
+}
+.week-box {
+  background:var(--paper2);
+  border:1.5px solid var(--ink);
+  padding:24px 28px;
+}
+.week-box-label {
+  font-family:'DM Mono', monospace;
+  font-size:12px; color:var(--ink); opacity:0.7;
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.week-box-title {
+  font-family:'Newsreader', serif;
+  font-size:30px; font-weight:400; color:var(--ink);
+  margin-bottom:12px; line-height:1.2;
+}
+.week-box-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:18px; color:var(--ink); line-height:1.5;
+  opacity:0.85;
+}
+
+/* === AUFTRAG-BOX === */
+.auftrag-box {
+  background:var(--ink);
+  padding:28px 36px;
+  margin-top:20px;
+}
+.auftrag-label {
+  font-family:'DM Mono', monospace;
+  font-size:12px; color:rgba(240,235,222,0.6);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:12px;
+}
+.auftrag-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:32px; color:var(--paper);
+  line-height:1.6;
+}
+
+/* === POSTER-GRID (4 Felder) === */
+.poster-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:16px; margin-top:16px;
+}
+.poster-field {
+  background:var(--paper2);
+  border:1.5px solid var(--ink);
+  padding:20px 24px;
+  min-height:140px;
+}
+.poster-field-num {
+  font-family:'DM Mono', monospace;
+  font-size:15px; color:var(--ink); opacity:0.7;
+  letter-spacing:0.06em; margin-bottom:10px;
+  display:block;
+}
+.poster-field-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:26px; color:var(--ink); line-height:1.5;
+}
+
+/* === WORLD CAFE TISCH === */
+.wc-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:16px; margin-top:14px;
+}
+.wc-box {
+  background:var(--paper2);
+  border:1.5px solid var(--ink);
+  padding:22px 24px;
+}
+.wc-nr {
+  font-family:'DM Mono', monospace;
+  font-size:12px; color:var(--ink); opacity:0.7;
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-bottom:10px; display:block;
+}
+.wc-frage {
+  font-family:'Newsreader', serif;
+  font-size:28px; font-weight:400; color:var(--ink);
+  line-height:1.35; margin-bottom:16px;
+}
+.wc-impulse {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:20px; color:var(--ink-soft);
+  line-height:1.6; opacity:0.9;
+}
+.wc-impulse li { margin-bottom:8px; }
+
+/* === BRIDGE COLS === */
+.bridge-cols {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:24px; margin-top:20px;
+}
+.bridge-box {
+  background:var(--paper2);
+  border:1.5px solid var(--ink);
+  padding:28px 32px;
+}
+.bridge-label {
+  font-family:'DM Mono', monospace;
+  font-size:12px; color:var(--ink); opacity:0.7;
+  letter-spacing:0.08em; text-transform:uppercase;
+  margin-bottom:12px; display:block;
+}
+.bridge-text {
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:32px; color:var(--ink); line-height:1.6;
+}
+
+/* === WEEK BADGE (chapter) === */
+.week-badge {
+  display:flex; align-items:baseline; gap:20px;
+  margin-bottom:28px;
+}
+.week-badge-num {
+  font-family:'Newsreader', serif;
+  font-size:120px; font-weight:400; color:var(--ink-faint2);
+  line-height:1; letter-spacing:-0.03em;
+}
+.week-badge-label {
+  font-family:'DM Mono', monospace;
+  font-size:16px; color:var(--ink-soft);
+  letter-spacing:0.08em; text-transform:uppercase;
+}
+
+/* === GLITCH DEKO === */
+.glitch-deco {
+  position:absolute; right:0; top:100px; bottom:100px;
+  width:36px; display:flex; flex-direction:column;
+  gap:0; opacity:0.15; overflow:hidden;
+}
+.glitch-deco span { display:block; background:var(--ink); height:3px; margin-bottom:7px; }
+.glitch-deco span:nth-child(odd)  { width:100%; }
+.glitch-deco span:nth-child(even) { width:55%; }
+.glitch-deco span:nth-child(3n)   { width:25%; }
+.glitch-deco span:nth-child(5n)   { width:80%; }
+
+/* === ANIMATION === */
+.reveal {
+  opacity:0; transform:translateY(20px);
+  transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+              transform 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.slide.active .reveal { opacity:1; transform:translateY(0); }
+.reveal:nth-child(1) { transition-delay:0.07s; }
+.reveal:nth-child(2) { transition-delay:0.17s; }
+.reveal:nth-child(3) { transition-delay:0.27s; }
+.reveal:nth-child(4) { transition-delay:0.36s; }
+.reveal:nth-child(5) { transition-delay:0.44s; }
+.reveal:nth-child(6) { transition-delay:0.52s; }
+.reveal:nth-child(7) { transition-delay:0.60s; }
+.left-col { opacity:1; transform:none; }
+
+/* Gruppen-Chips */
+.group-chips {
+  display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;
+}
+.chip {
+  font-family:'DM Mono', monospace;
+  font-size:13px; letter-spacing:0.06em;
+  padding:6px 16px;
+  border:1.5px solid var(--ink);
+  color:var(--ink); background:transparent;
+}
+.chip.filled { background:var(--ink); color:var(--paper); }
+
+/* Highlight-Zeile */
+.highlight-row {
+  background:var(--ink);
+  padding:20px 32px; margin-top:20px;
+  font-family:'Hanken Grotesk', sans-serif;
+  font-size:28px; color:var(--paper); line-height:1.5;
+}
+
+/* Rotation-Hinweis */
+.rotation-hint {
+  font-family:'DM Mono', monospace;
+  font-size:12px; color:var(--ink-soft);
+  letter-spacing:0.06em; opacity:0.7;
+  margin-top:14px;
+}
+
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<div id="stage">
+
+<!-- ============================================================
+     FOLIE 01 — TITELFOLIE
+     ============================================================ -->
+<div class="slide active" id="s1">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">01 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Keynote · 25. November 2026</div>
+      <h1 class="reveal">Geschichte<br>& Kultur&shy;orte</h1>
+      <div class="subtitle reveal">Erinnerungsorte · grenzüberschreitende Kulturarbeit</div>
+      <div class="keywords reveal">TK 2a — Erinnerungsorte &nbsp;·&nbsp; TK 2b — Kulturorte im Dreiländereck</div>
+      <div class="glitch-deco">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 02 — AGENDA
+     ============================================================ -->
+<div class="slide" id="s2">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">02 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Heute · 25. November 2026</div>
+      <h2 class="reveal">Zwei Blöcke,<br>eine Frage</h2>
+      <div class="concept-list reveal">
+        <div class="concept-item">
+          <span class="concept-marker">09:15</span>
+          <div>
+            <div class="concept-text">Block 1 — TK2a: Erinnerungsorte</div>
+            <div class="concept-sub">Referat · Kleingruppenarbeit · Postersession · Plenum</div>
+          </div>
+        </div>
+        <div class="concept-item">
+          <span class="concept-marker">10:45</span>
+          <div>
+            <div class="concept-text">Pause</div>
+          </div>
+        </div>
+        <div class="concept-item">
+          <span class="concept-marker">11:00</span>
+          <div>
+            <div class="concept-text">Block 2 — TK2b: Kulturorte</div>
+            <div class="concept-sub">Referat · World Café · Synthese · Ausblick</div>
+          </div>
+        </div>
+      </div>
+      <div class="highlight-row reveal">Leitfrage: Kann ein Ort Erinnerung und Zukunft zugleich sein?</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 03 — EINSTIEG BLITZLICHT
+     ============================================================ -->
+<div class="slide" id="s3">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">03 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Einstieg · Block 1</div>
+      <div class="quote-wrap reveal">
+        <div class="quote-mark">"</div>
+        <div class="quote-block">
+          <div class="quote-text">Welcher Ort fällt euch ein, wenn ihr an Geschichte im Dreiländereck denkt?</div>
+        </div>
+      </div>
+      <div class="concept-list reveal" style="margin-top:32px;">
+        <div class="concept-item">
+          <span class="concept-marker">Format</span>
+          <div class="concept-text">Blitzlicht · reihum · kein Kommentar · 5 Min.</div>
+        </div>
+      </div>
+      <div class="glitch-deco">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 04 — TK2a KERNBEGRIFFE
+     ============================================================ -->
+<div class="slide" id="s4">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">04 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">TK 2a · Referat</div>
+      <h2 class="reveal">Erinnerungsorte</h2>
+      <div class="concept-list reveal">
+        <div class="concept-item">
+          <span class="concept-marker">Nora</span>
+          <div>
+            <div class="concept-text">Lieu de mémoire</div>
+            <div class="concept-sub">Verdichteter Ort, an dem kollektive Erinnerung gebündelt & gedeutet wird — physisch oder symbolisch</div>
+          </div>
+        </div>
+        <div class="concept-item">
+          <span class="concept-marker">Assmann</span>
+          <div>
+            <div class="concept-text">Kulturelles Gedächtnis</div>
+            <div class="concept-sub">Institutionell gesicherte Erinnerung · überdauert individuelle Lebenszeit</div>
+          </div>
+        </div>
+        <div class="concept-item">
+          <span class="concept-marker">Problem</span>
+          <div>
+            <div class="concept-text">Konkurrierende Narrative</div>
+            <div class="concept-sub">Krieg, Holocaust, Vertreibung, Sozialismus — DE, PL, CZ erinnern unterschiedlich</div>
+          </div>
+        </div>
+        <div class="concept-item">
+          <span class="concept-marker">Potential</span>
+          <div>
+            <div class="concept-text">Gemeinsame Erinnerung</div>
+            <div class="concept-sub">Kann ein Ort transnationale Identität stiften?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 05 — BEISPIEL STALAG VIII A
+     ============================================================ -->
+<div class="slide" id="s5">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">05 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Beispiel · Erinnerungsort & Kulturort</div>
+      <h2 class="reveal">Stalag VIII A<br><span style="font-size:44px;opacity:0.7;">Görlitz / Zgorzelec</span></h2>
+      <div class="compare-grid reveal">
+        <div class="compare-col">
+          <div class="compare-label">Als Erinnerungsort</div>
+          <div class="compare-item">Kriegsgefangenenlager 1939–1945</div>
+          <div class="compare-item">Ort von Gewalt & Sterben</div>
+          <div class="compare-item">DE, PL, FR, SU — viele Erinnerungen</div>
+          <div class="compare-item">Messiaen komponiert hier „Quatuor"</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-label">Als Kulturort heute</div>
+          <div class="compare-item">Bildungsarbeit & Gedenkveranstaltungen</div>
+          <div class="compare-item">Musik als Brücke zur Erinnerung</div>
+          <div class="compare-item">Grenzüberschreitende Kooperation</div>
+          <div class="compare-item">Ein Ort, viele Narrative</div>
+        </div>
+      </div>
+      <div class="highlight-row reveal">Ein Ort kann zugleich Erinnerungsort und Kulturort sein — und wird dadurch politisch.</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 06 — ARBEITSAUFTRAG POSTERSESSION
+     ============================================================ -->
+<div class="slide" id="s6">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">06 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Kleingruppenarbeit · 30 Min. → Galerierundgang · 20 Min.</div>
+      <h2 class="reveal">Poster-Auftrag</h2>
+      <div class="poster-grid reveal">
+        <div class="poster-field">
+          <span class="poster-field-num">01 —</span>
+          <div class="poster-field-text">Welches Narrativ wird hier erzählt?</div>
+        </div>
+        <div class="poster-field">
+          <span class="poster-field-num">02 —</span>
+          <div class="poster-field-text">Für wen ist dieses Narrativ? <span style="opacity:0.6;font-size:18px;">(Zielgruppe, Nation, Generation)</span></div>
+        </div>
+        <div class="poster-field">
+          <span class="poster-field-num">03 —</span>
+          <div class="poster-field-text">Was fehlt — wessen Perspektive bleibt unsichtbar?</div>
+        </div>
+        <div class="poster-field">
+          <span class="poster-field-num">04 —</span>
+          <div class="poster-field-text">Unser Fazit in einem Satz.</div>
+        </div>
+      </div>
+      <div class="group-chips reveal">
+        <span class="chip filled">Gruppe A · Schlesisches Museum Görlitz (DE)</span>
+        <span class="chip filled">Gruppe B · Muzeum Gross-Rosen (PL)</span>
+        <span class="chip filled">Gruppe C · Gedenkstätte Terezín (CZ)</span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 07 — PLENUMSFRAGE BLOCK 1
+     ============================================================ -->
+<div class="slide" id="s7">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">07 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Plenum · 10 Min.</div>
+      <div class="quote-wrap reveal">
+        <div class="quote-mark">"</div>
+        <div class="quote-block">
+          <div class="quote-text">Kann es ein gemeinsames Erinnern geben — oder bleibt Erinnerung immer national?</div>
+        </div>
+      </div>
+      <div class="glitch-deco">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 08 — TK2b KULTURORTE
+     ============================================================ -->
+<div class="slide" id="s8">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">08 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">TK 2b · Referat</div>
+      <h2 class="reveal">Kulturorte im<br>Dreiländereck</h2>
+      <div class="three-col reveal">
+        <div class="three-box">
+          <div class="three-box-flag">🎬</div>
+          <div class="three-box-title">Neisse Filmfestival</div>
+          <div class="three-box-text">Spielorte in DE, PL & CZ — trinationaler Kulturraum seit 2004</div>
+        </div>
+        <div class="three-box">
+          <div class="three-box-flag">🎭</div>
+          <div class="three-box-title">ViaThea Görlitz</div>
+          <div class="three-box-text">Internationales Straßentheaterfestival · Görlitz / Zgorzelec</div>
+        </div>
+        <div class="three-box">
+          <div class="three-box-flag">🎵</div>
+          <div class="three-box-title">Konzerthalle Bogatynia</div>
+          <div class="three-box-text">Grenznahe Kulturinfrastruktur · Brücke zwischen PL & DE</div>
+        </div>
+      </div>
+      <div class="concept-list reveal" style="margin-top:16px;">
+        <div class="concept-item">
+          <span class="concept-marker">Frage</span>
+          <div class="concept-text">Was verbindet diese Orte — und was trennt sie von nationaler Kulturarbeit?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 09 — WORLD CAFÉ ÜBERBLICK
+     ============================================================ -->
+<div class="slide" id="s9">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">09 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">World Café · 40 Min. · 3 Runden à 10 Min.</div>
+      <h2 class="reveal">Drei Tische,<br>eine Rotation</h2>
+      <div class="wc-grid reveal">
+        <div class="wc-box">
+          <span class="wc-nr">Tisch 1</span>
+          <div class="wc-frage">Wer profitiert von grenzüberschreitender Kulturarbeit — und wer nicht?</div>
+          <div class="wc-impulse">Zielgruppen · Zugänglichkeit · Ausschluss</div>
+        </div>
+        <div class="wc-box">
+          <span class="wc-nr">Tisch 2</span>
+          <div class="wc-frage">Was macht ein Kulturprojekt zu einem „regionalen" Projekt?</div>
+          <div class="wc-impulse">Ort · Sprache · Träger · Thema</div>
+        </div>
+        <div class="wc-box">
+          <span class="wc-nr">Tisch 3</span>
+          <div class="wc-frage">Kann Kultur politische Grenzen ersetzen — oder braucht sie sie?</div>
+          <div class="wc-impulse">Förderung · Euroregion · Zivilgesellschaft</div>
+        </div>
+      </div>
+      <div class="rotation-hint reveal">Tisch 1 → Tisch 2 → Tisch 3 → Tisch 1 · Tischblatt bleibt liegen · Ergebnisse sammeln sich</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 10 — WORLD CAFÉ TISCHBLÄTTER (Vorlage)
+     ============================================================ -->
+<div class="slide" id="s10">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">10 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">World Café · Tischblätter ausgeteilt</div>
+      <h2 class="reveal" style="font-size:56px;">Jetzt arbeiten</h2>
+      <div class="auftrag-box reveal">
+        <div class="auftrag-label">Auftrag</div>
+        <div class="auftrag-text">
+          Notiert Stichworte, Thesen, Widersprüche auf dem Tischblatt.<br>
+          Nach 10 Min. rotiert ihr — das Blatt bleibt am Tisch.<br>
+          Lest zuerst, was die Gruppe vorher geschrieben hat.
+        </div>
+      </div>
+      <div class="concept-list reveal" style="margin-top:20px;">
+        <div class="concept-item">
+          <span class="concept-marker">Ende</span>
+          <div class="concept-text">Jeder Tisch nennt einen Satz, der hängen bleibt — René clustert live an der Tafel</div>
+        </div>
+      </div>
+      <div class="glitch-deco">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 11 — SYNTHESE
+     ============================================================ -->
+<div class="slide" id="s11">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">11 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Synthese · 15 Min.</div>
+      <h2 class="reveal">Was nehmen<br>wir mit?</h2>
+      <div class="compare-grid reveal">
+        <div class="compare-col">
+          <div class="compare-label">TK 2a — Erinnerungsorte</div>
+          <div class="compare-item">Erinnerung ist immer perspektivisch</div>
+          <div class="compare-item">Konkurrierende Narrative im Grenzraum</div>
+          <div class="compare-item">Gemeinsames Erinnern ist möglich — aber politisch</div>
+        </div>
+        <div class="compare-col">
+          <div class="compare-label">TK 2b — Kulturorte</div>
+          <div class="compare-item">Kulturarbeit schafft Begegnungsräume</div>
+          <div class="compare-item">Region ≠ Nation — aber braucht Strukturen</div>
+          <div class="compare-item">Zugänglichkeit entscheidet über Wirkung</div>
+        </div>
+      </div>
+      <div class="highlight-row reveal">Verbindung: Erinnerung braucht Orte — Orte brauchen Erinnerung.</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     FOLIE 12 — AUSBLICK KW50
+     ============================================================ -->
+<div class="slide" id="s12">
+  <div class="slide-inner">
+    <div class="left-col">
+      <span class="course-label">Kultur im Dreiländereck · KW 48</span>
+      <span class="slide-num">12 / 12</span>
+    </div>
+    <div class="main-col">
+      <div class="kicker reveal">Ausblick · Selbststudium bis KW 50</div>
+      <h2 class="reveal">Nächste<br>Station</h2>
+      <div class="bridge-cols reveal">
+        <div class="bridge-box">
+          <span class="bridge-label">KW 50 · TK 3</span>
+          <div class="bridge-text">Netzwerk & Politik — Euroregion, IBZ, Zivilgesellschaft, interkulturelle Politik im Grenzraum</div>
+        </div>
+        <div class="bridge-box">
+          <span class="bridge-label">Bis dahin</span>
+          <div class="bridge-text">Reader TK 3 lesen · Kulturatlas-Einträge ergänzen · Referate 3a/3b vorbereiten</div>
+        </div>
+      </div>
+      <div class="concept-list reveal" style="margin-top:20px;">
+        <div class="concept-item">
+          <span class="concept-marker">Frage</span>
+          <div class="concept-text">Welche Netzwerke halten den Grenzraum zusammen — und welche trennen ihn noch?</div>
+        </div>
+      </div>
+      <div class="glitch-deco">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <span class="info-left">René Seidel · IBZ St. Marienthal · HSZG Görlitz</span>
+    <span class="info-right">Studiengang IWK · WiSe 2026/27</span>
+  </div>
+</div>
+
+</div><!-- /stage -->
+</div><!-- /deck-viewport -->
+
+<script>
+/* === SCALE === */
+(function(){
+  var stage=document.getElementById('stage');
+  function scale(){
+    var vw=window.innerWidth,vh=window.innerHeight;
+    var sc=Math.min(vw/1920,vh/1080);
+    var ox=(vw-1920*sc)/2,oy=(vh-1080*sc)/2;
+    stage.style.transform='translate('+ox+'px,'+oy+'px) scale('+sc+')';
+  }
+  scale(); window.addEventListener('resize',scale);
+})();
+
+/* === NAVIGATION === */
+(function(){
+  var slides=Array.from(document.querySelectorAll('.slide'));
+  var cur=0,total=slides.length;
+  function goTo(n){
+    if(n<0||n>=total)return;
+    slides[cur].classList.remove('active');
+    cur=n;
+    slides[cur].classList.add('active');
+  }
+  function next(){goTo(cur+1);}
+  function prev(){goTo(cur-1);}
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();next();}
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();prev();}
+    if(e.key==='Home')goTo(0);
+    if(e.key==='End')goTo(total-1);
+  });
+  document.getElementById('stage').addEventListener('click',function(e){
+    if(e.clientX/window.innerWidth<0.15){prev();}else{next();}
+  });
+  var tx=0;
+  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>40){if(dx<0){next();}else{prev();}}
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
